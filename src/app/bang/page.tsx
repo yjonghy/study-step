@@ -45,7 +45,6 @@ function Bang() {
                 {/*
                     정중앙 카드 더미
                     버린 카드
-
                     아이템 효과 일러...? => 텍스트로 표현ㄴ
                 */}
                 <div className="w-[600px] h-[600px] opacity-10 bg-yellow010 border border-gray080 flex justify-center items-center">
