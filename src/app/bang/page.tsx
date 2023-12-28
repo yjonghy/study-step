@@ -49,9 +49,6 @@ function Bang() {
                     </div>
                 </div>
             </div>
-
-
-
         </div>)
 }
 
