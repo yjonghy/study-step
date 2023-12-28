@@ -31,9 +31,6 @@ function Bang() {
                 </div>
             </section>
 
-
-
-
             <p className="text-gray090 text-[40px] mt-20">뱅 닷지시티</p>
             <div className="text-gray090 mt-3.5">현재 차례 : 누구누구</div>
 
