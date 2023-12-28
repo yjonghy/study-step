@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-    basePath : "study-step",
+    basePath : "/study-step",
     reactStrictMode: false,
     assetPrefix: "https://yjonghy.github.io/study-step/",
     trailingSlash: true,
