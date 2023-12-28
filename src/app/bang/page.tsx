@@ -35,6 +35,7 @@ function Bang() {
             <div className="w-[900px] h-[900px] opacity-10 bg-yellow010 border border-gray080 flex justify-center items-center">
                 <div className="">
 
+
                 </div>
                 {/*
                     정중앙 카드 더미
