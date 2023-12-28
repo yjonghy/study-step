@@ -23,10 +23,10 @@ function Bang() {
 
             <section id="my_board" className="flex flex-col">
                 <div id="healthy_bar" className="flex gap-[4px]">
-                    {[0,0,0,0].map(() => (
-                        <div className="flex justify-center items-center w-[10px] h-[20px]">
-
-
+                    {[0,0,0,0].map((value, index) => (
+                        <div
+                            key={index}
+                            className="flex justify-center items-center w-[10px] h-[20px]">
                         </div>
                     ))}
                 </div>
