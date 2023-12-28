@@ -7,9 +7,7 @@ function Bang() {
         let answer = [];
         return answer;
     }
-    const connection = () => {
 
-    }
 
     return (
         <div className="flex flex-col justify-center items-center">
