@@ -2,6 +2,8 @@
 module.exports = {
     basePath : "study-step",
     reactStrictMode: false,
+    assetPrefix: "https://yjonghy.github.io/study-step/",
+    trailingSlash: true,
     experimental: {
         appDir: true,
         scrollRestoration: true,
