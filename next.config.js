@@ -2,7 +2,7 @@
 module.exports = {
     basePath: "/study-step",reactStrictMode: false,
 
-    assetPrefix: process.env.NODE_ENV === "production" ? "https://yjonghy.github.io/study-step" : "",
+    assetPrefix: process.env.NODE_ENV === "production" ? "https://study-step.vercel.app" : "",
 
     trailingSlash: true,
     experimental: {
