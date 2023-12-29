@@ -1,0 +1,43 @@
+{
+  "name": "devils-game",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://yjonghy.github.io/study-step/",
+  "scripts": {
+    "dev": "next dev -p ${PORT}",
+    "build": "next build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "node_modules/next/dist/bin/next start -p ${PORT}",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.89.0",
+    "@react-three/fiber": "^8.15.11",
+    "@types/three": "^0.159.0",
+    "axios": "^0.26.1",
+    "concurrently": "^8.0.1",
+    "eslint": "8.37.0",
+    "eslint-config-next": "13.2.4",
+    "gsap": "^3.12.3",
+    "mysql2": "^3.6.5",
+    "next": "13.4.16",
+    "pg-hstore": "^2.3.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "sequelize": "^6.35.2",
+    "three": "^0.159.0",
+    "typescript": "5.0.3"
+  },
+  "devDependencies": {
+    "@types/google.maps": "^3.53.4",
+    "@types/react": "18.2.28",
+    "autoprefixer": "^10.4.14",
+    "gh-pages": "^6.1.1",
+    "postcss": "^8.4.22",
+    "postcss-loader": "^6.2.1",
+    "tailwindcss": "^3.3.1",
+    "tailwindcss-font-inter": "^3.0.1",
+    "vite": "^5.0.4"
+  }
+}
