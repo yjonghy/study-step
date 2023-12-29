@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <mata charset="utf-8"/>
+    <title>js-ts</title>
+</head>
+
+<body>
+<p>javascript, typescript를 공부했던 내용 정리</p>
+
+
+<div>
+    자바스크립트 엔진(JavaScript engine)이란
+
+
+    1.자바스크립트 엔진
+
+
+    -자바스크립트 코드를 해석하여 실행해주는 프로그램 (*인터프리터 설명하면서 서술)
+    (HTML이 parsing될 때 script태그를 만나면 parsing이 일시중지되고 script를 해석, 실행)
+    ("JavaScipt Engine" !== "Rendering Engine" = true /
+    Rendering Engine 또는 Layout Engine은 HTML과 CSS로 작성된 코드를 컨텐츠로 사용하여 웹 페이지에 “rendering” 하는 역할)
+
+    예를 들면
+    웹브라우저, Node.js, Electron, React Native 등 에서 동작한다.
+
+    *웹브라우저 엔진이 다르다. -> 엔진의 종류는 다양하다
+    ex)스파이더 몽키, Chakra(Jscript9), Chakra(JavaScript), JavaScript Core, V8, Rhino 기타등등 종류별 차이에선 후술
+    https://velog.io/@godori/JavaScript-engine-1
+
+
+    크게 두가지
+
+    엔진의 동작과정과 엔징의 구성
+
+
+    @@@@@ 엔진의 동작과정 (v8 기준) @@@@@
+
+    소스코드 -> 토크나이저 -> 파서 -> AST -> Interpreter Ignition -> Bytecode
+    -> Compilter TurboFan -> Optimized Machine Code
+
+
+    1.토크나이저
+
+    토크나이징 - 작성한 코드를 최소 단위인 토큰으로 분해
+    ex) let a = "abc";
+    토큰 = [ { type : "keyword", value : "let"}, { type : "name(identifler)", value : "a"}, { type : "=", value : "="}, {
+    type : "a", value : "abc"}, { type : ";", value : ";"} ]
+    *이때 스코프가 결정
+
+    토큰 우선순위
+
+    키워드 2
+    식별자 0
+    operator 1
+    string(number) 0
+    semicoloun 0
+
+
+    2.파서 (원시프로그램을 읽어 들여 그 문장의 구조를 알아내는 구문분석을 행하는 프로그램)
+
+    pre-parser(나중에 필요한 코드, 이벤트 함수와 같은 페이지를 로드할때 필요하지않은 코드)와 parser(지금 바로 사용되는 코드) 두개
+
+    소스코드
+    토큰
+    -----아래에서부터가 파서가 동작(파싱)-----
+    토큰이 구문 규칙과 일치하는가 -> 아닐시 다른 토큰 요청
+    토큰 -> 노드
+    파싱 트리에 노드 추가 -> 새 토큰 요청 (기존에 쓴 토큰 우선순위 0)
+
+    3.AST - Abstract Syntax Tree (결과물)
+
+    ex) 이미지 참조
+
+    AST를 바이트 코드로 변환하는 것은 Ignition이라는 인터프리터이다. 인터프리터가 바이트코드로 해석하는것 -> 콜스택과 메모리 힙 이용
+
+    인터프리터 - 한 문서가 아닌 소스코드를 한줄씩 실행하여 번역ㅡ 번역과 실행이 동시에 빌드 X - 실행
+
+    컴파일러 - 특정언어로 쓰인 문서를 다른언어로 옮기는 번역 프로그램 - 번역을 한 후에 실행, 빌드 - 실행
+    High Level Language - (컴파일러) - Low Level Languag(0, 1)
+
+
+    javascript
+    초기 - 가벼운 인터프리터 언어
+    중기 - 웹에서 연산과정이 많아지고 복잡함 즉 기능이 늘어나고 성능상 무거워짐 ex)구글맵
+    현재 - jitc(Just-in-Time Compilation)를 혼용하여 쓰는 Adaptive JIT Compilation - jit를 javascript에서 사용하실의 단점
+
+    기본적으로 모든코드는 인터프리터(Ignition/v8)로 수행, 자주 반복되는 부분 (hotspot) 발견시에 JITC(TurboFan/v8)적용 하여 navtive code로 수행
+    *JITC의 단계
+    최소한의 최적화만 적용하는 JITC (baseline-JITC)로 컴파일 하여 수행
+    더 반복될경우
+    더 많은 최적화를 적용하는 JITC(Optimizing-JITC)로 컴파일
+
+    Optimizing-JITC 는 profiling을 수행하는 동안 특정 변수의 타입이 변하지 않았다면
+    그 이후에도 그 변수는 타입이 변하지 않을 가능성이 매우 높을 것이다 라는 가정을 하고 최적화를 한다.
+    그러나 이런 가정이 틀렸다는 것을 알게 될 경우, 즉 타입이 바뀌었을 경우에는 JIT는 가정이 잘못되었다고 판단하고 최적화된 코드를 버린다.
+    그러면 다시 인터프리터 혹은 기본 컴파일된 버전으로 돌아간다. 이 과정은 역최적화(deoptimization) 혹은 구제(bailing out) 라고 한다.
+
+
+
+
+
+    @@@@ 엔징의 구성 @@@@@
+
+    *javascript 변수 - 원시 혹은 찹조가 될수있다 (함수도 일종의 참조타입(object)으로 구성)
+    원시타입은 js 런타임 환경에서 해당 type의 object wrapper를 씌워 그 object 속성(메소드) 실행
+    일시적으로 씌워 실행하고 해당 object는 폐기 -> object wrapper를 수정하거나 저장하는게 의미없음
+
+
+
+    콜 스택과 힙(메모리), 큐 (태스크 큐, 이벤트 큐)
+
+    메모리
+    할당 - 사용 - 해제
+    생성한 객체에 필요한 메모리 할당 (javascript가 해줌)
+    코드에서 수행하는 작업 변수에서 읽거나 쓰는것을 말함
+
+    new space (semi space, semi space)
+    old space (old pointer space, old data space)
+    Large Object Space
+    Code Space
+    Cell Space
+    Property Space
+    Map Space
+
+    Map Space, Property Cell Space, Cell Space는 종류에 맞는 객체들을 분류해서 가지고있기 편하게 하는 역할을 하는 공간
+
+    Code Space 실행될 실제 코드가 들어가는 부분이라고 보면 된다. JIT컴파일된 코드가 들어가있으며, 유일하게 실행 가능한 메모리가 있는 영역
+
+    Large Object Space는 이름 그대로 좀 크기가 큰 객체가 들어가는 부분이다. 이 부분은 가비지컬렉션이 되지 않는다.
+
+    new space(young generation)
+    -새로 만들어진 모든 객체 우선 저장
+    -1~8mb
+    -짧은 생명주기를 가지는 새로 생성된 객체 두개의 semi space Minor GC가 관리(후술) old 영역에 비해 매우 작음
+
+    Old space(Old generation)
+    -마이너 GC가 두 번 발생한 뒤에 New space에서 남아있는 객체가 이동하는 곳이다. 이 영역은 Major GC가 관리
+    -pointer -> 다른 객체를 참조하는 객체
+    ->data -> 데이터만 있는 객체
+
+
+    Minor GC
+    V8의 New Space에서 일어나는 Minor GC는 체니의 알고리즘(Cheney's Algorithm)으로 구현
+    *객체들이 존재하는 space가 from이고 비어있는게 to -> to와 from이 역할을 바꿈
+
+    new space
+    semi(to) semi (from)
+
+    처음 객체가 할당되는곳 존재하는 from - >  새객체 할당시 여유공간이 없다 -> GC 실행
+    -> from 의 객체를 탐색하여 to로 옮김, to로 옮겨진 객체가 참조 하고이던 객체 또한 to로 옮김
+    -> 옮겨지지 못한 from의 객체들은 가비지로 취급 컬렉팅
+    -> to로 옮겨진 객체를 from으로 다시 옮김 (to 와 from을 바꿈 즉 옮긴걸 다시 옮기는게 아니고 to가 from이됨)
+    -> 위과정을 한번 더 실행했을때 (두번) 살아남은 객체는 old space로 ㄱㄱ
+
+    * Write Barriers라고 불리는 기능을 포함하고 있다. Old space에서 New space를 향하는 포인터의 리스트를 저장하고, 이를 이용해 New space의 참조 현황을 확인해 GC를 진행
+
+    Major GC
+    new -> old로 옮겨질때 old의 공간이 부족한 경우 실행
+
+    1.Marking
+    현재 사용되는 객체 파악
+    루트에서 시작하여 해당객체에 도달할수 있는지 살펴봄 (DFS 방식 알고리즘은 잘 이해가 안되요)
+    도달할수 있는 객체 (ex) 루트 - 부모 - 자식) 에 대하여 마킹을 한다
+
+    2.Sweeping
+    위 단게에서 마킹이 되지 못한 객체를 치우고 그객체가 사용하던 공간을 free-list에 저장,
+    탐색하기 쉽도룩 크기순 세분화 <- 새 메모리 할당할때에 여기서 찾음
+
+    3.Compacting
+    압축을 진행하지 않는 다른 메모리 페이지에 복사하여 압축
+
+    가비지 콜렉터가 메인 스레드를 블로킹하여 성능 저하가 발생
+    ->3가지 방식추가
+
+    병렬, 점진, 동시
+
+    병렬 -> 헬페스레드들이 비슷한의 작업 실행 헬퍼스레드 동기화 필요
+    점진 -> 메인스레드가 GC-JS_GC_JS 순서대로 실행
+    동시 -> 헬퍼스레드에서만 GC실행 -> 블로킹이 전혀없는대신에 동기화 처리를 꼭 해얗ㅁ
+
+    콜 스택 = 스택 메모리
+    코드가 실행되면서 스택 프레임이 쌓이는 장소
+
+
+
+
+    *엔진이 아니고 외부에서(런타임때) 제공 브라우저나 nodejs 등등
+    DOM API나 Console API는 동기적으로 처리되고, XMLHttpRequest나 Timer API는 비동기적으로 처리된다.
+
+    Microtask Queue :promise.then,process.nextTick,MutationObserver 와 같이 우선적으로 비동기로 처리되는 함수들의 콜백 함수가 들어가는 큐 (처리 우선순위가 높음)
+
+    Task Queue :setTimeout,setInterval,fetch,addEventListener와 같이 비동기로 처리되는 함수들의 콜백 함수가
+    들어가는 큐(macrotask queue 는 보통 task queue 라고 부른다)
+
+
+
+
+
+
+
+
+
+
+
+
+    *이하
+
+    TurboFan은 V8 엔진의 최적화 컴파일러로, 효율적인 머신 코드를 생성하기 위해 여러 최적화 기술을 사용
+
+    인라이닝 (Inlining)
+    루프 최적화 (Loop optimization)
+    타입 특수화 (Type specialization)
+    이스케이프 분석 (Escape analysis)
+    히든 클래스 (hidden class)
+    인라인 캐싱 (inline caching)
+    레지스터 할당 (Register allocation)
+
+
+    인라이닝은 함수 호출 명령을 실행하는 대신 호출되는 함수의 실제 코드로 함수 호출을 대체하는 작업입니다. 즉, 함수 호출 프레임의 오버헤드를 제거하고 메모리 액세스 수를 줄이는 것입니다.
+    인라이닝은 자주 호출되는 작은 함수에 효과적입니다. 함수 호출은 CPU는 반환 주소 및 기타 상태를 스택에 푸시하고 함수 코드 위치로 점프하는 등 CPU에서 함수호출에 필요한 일련의 과정들을 가지고 있습니다.
+    자주 호출하는 작은 함수를 인라이닝을 하는 것은 이 과정들을 생략하기 때문에 그만큼 최적화할 수 있는 것입니다.
+    그러나 인라이닝도 단점이 있습니다. 인라이닝은 결과 머신 코드의 크기를 증가시켜 프로그램의 메모리 사용량에 영향을 줄 수 있습니다. 또한 인라인된 코드는 사용될 때마다 다시 생성해야 하므로 인라인은 코드
+    캐싱의 효율성을 감소시킬 수 있습니다. 결과적으로 인라인은 이점과 비용의 균형을 맞추기 위해 신중하게 사용해야 합니다.
+
+
+    인라인 캐싱은 자주 접근하는 프로퍼티의 결과를 캐시하여 프로퍼티 접근 속도를 높입니다. 런타임에 수행해야 하는 조회 및 함수 호출 수를 줄여 JavaScript 코드의 성능을 크게 향상시킬 수 있습니다.
+    함수가 호출되거나 object.property나 object["property"]와 같은 프로퍼티에 접근할 때, 인라인 캐시를 확인하여 이전에 해당 코드를 실행했는지 확인합니다. 만약 확인했다면 이전에
+    실행했던 결과를 인라인 캐시에서 꺼내 사용합니다.
+    루프나 자주 사용하는 코드, 반복 함수 호출, 그리고 프로퍼티 접근을 수행하는 코드에 특히 효과적입니다.
+
+
+    히든 클래스
+    자바스크립트에서 새 객체를 만들면 V8 엔진은 이전 객체를 히든 클래스로 숨기고 새로운 객체에 이 히든 클래스의 정보와 구조를 가져가도록 할당합니다.
+    객체의 히든 클래스는 개발자에게 표시되지 않으며 객체 프로퍼티 접근을 최적화하기 위해 V8 엔진에서 사용됩니다. TurboFan은 히든 클래스 객체 프로퍼티 접근 패턴을 분석하고 런타임에 필요한 히든 클래스
+    전환 수를 줄입니다. 히든 클래스를 최적화하면서 TurboFan은 자바스크립트 코드의 전반적인 성능을 향상시키고 효율적인 머신 코드를 생성할 수 있습니다.
+
+
+    자바스크립트는 타입이 동적으로 결정된다. 이를 Dynamic Typing 언어라고 한다.
+    이는 Static Typing 언어에 비해 객체의 property에 접근하는 속도가 느리다.
+
+
+    컴퓨터 메모리는 세그먼트와 오프셋으로 관리되는데,
+    세그먼트는 현재 사용할 메모리 영역이고 그것을 더 잘게 쪼갠것이 오프셋이다.
+    코드를 동작시키려면 메모리를 사용해야 하므로, 항상 사용할 특정 오프셋을 정해둬야 한다
+
+    Static Typing언어는 type을 설정하는 순간 얼마만큼의 메모리가 할당되어야 하는지 정해지기 때문에 오프셋이 결정된다.(길이가 정해지지 않은 배열이나 객체는 예외)
+    그러나 Dynamic Typing 언어는 이를 미리 결정할 수 없다
+    따라서 특정 객체의 property에 접근할때마다, dynamic lookup을 통해 property를 스캔하고 찾아내야 한다.
+    이는 리소스 소모가 많이 드는 일이다.
+    (사실 이러한 부분은 Prototype언어와 Class언어의 차이기도 하다. Class언어라면 Class에 속한 객체들이 모두 같은 필드 구조를 가져 어떤 변수에 접근하고, 메모리는 어디인지 알 수 있다, 그러나 Prototype은 그것이 불가능하다)
+
+    이 탐색을 피하기 위해 V8이 쓰는 방식이 Hidden Class이다
+    객체를 만들때 Hidden Class라는 객체를 만들어 오프셋 정보를 저장하는것이다
+    따라서 다음과 같은 특징을 가지고 있다
+
+    1) 반드시 하나의 객체마다 부여되며,
+    2) 각 property에 대해 오프셋 정보를 가지고 있고,
+    3) 객체에 property가 추가,수정,삭제되면, 새로운 Hidden Class가 만들어지며, 이는 기존 Hidden Class정보에 추가로 업데이트된 정보를 가지고 있게 된다
+    4) 3의 과정에서 원래의 Hidden Class는 참조해야되는 Hidden Class 정보가 추가된다
+
+</div>
+
+
+</div>
+
+</body>
+</html>
