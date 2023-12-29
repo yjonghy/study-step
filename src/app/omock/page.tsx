@@ -79,7 +79,7 @@ function Omock() {
                 {lineArray.map((col, colIndex) => (
                     <div
                         onClick={() => { putOnStone(rowIndex, colIndex) }}
-                        key={colIndex} className={colStyle + " opacity-10"}>
+                        key={colIndex} className={colStyle}>
                         <div
                             className={`absolute top-0 right-0 left-0 bottom-0 border border-black flex justify-center items-center`}>
                             <div id={`grid_${rowIndex}_${colIndex}`}></div>
