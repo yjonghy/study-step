@@ -10,7 +10,7 @@ export default function Home() {
             <section className="flex flex-col items-start">
                 <p className="text-gray080 ">study list</p>
                 {studyList.map((value, index) => (
-                    <div className="w-full py-[14px] px-[16px] bg-yellow060">
+                    <div key={`${value}-${index}`} className="w-full py-[14px] px-[16px] bg-yellow060">
                         <Link href={`/${value}`} target={"_blank"}>
                             {value}
                         </Link>
