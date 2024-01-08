@@ -16,6 +16,7 @@
     "@react-three/fiber": "^8.15.11",
     "@types/three": "^0.159.0",
     "axios": "^0.26.1",
+    "bootstrap": "^3.4.1",
     "concurrently": "^8.0.1",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
