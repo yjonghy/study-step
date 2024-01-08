@@ -20,6 +20,45 @@ export default function HTML_CSS_STUDY() {
     return (
         <section className="flex flex-col gap-[20px] p-[40px]">
 
+            <ul className="btn-group" style={{display : "flex" ,gap : "20px" }}>
+
+                <div className="btn-group" role="group">
+                    <button style={{ borderRadius : "8px" }}  type="button" className="btn btn-default ">공단기</button>
+                </div>
+                <div className="btn-group" role="group">
+                    <button  style={{ borderRadius : "8px" }}  type="button" className="btn btn-default">세무관세단기</button>
+                </div>
+                <div className="btn-group" role="group">
+                    <button style={{ borderRadius : "8px" }}  type="button" className="btn btn-default">사복단기</button>
+                </div>
+
+                <div className="btn-group" role="group">
+                    <button style={{ borderRadius : "8px" }}  type="button" className="btn btn-default">기술계리단기</button>
+                </div>
+                <div className="btn-group" role="group">
+                    <button style={{ borderRadius : "8px" }}  type="button" className="btn btn-default">군단기</button>
+                </div>
+                <div className="btn-group" role="group">
+                    <button style={{ borderRadius : "8px" }}  type="button" className="btn btn-default">교행단기</button>
+                </div>
+
+                <div className="btn-group" role="group">
+                    <button style={{ borderRadius : "8px" }}  type="button" className="btn btn-default">고용노동직/직업상담직</button>
+                </div>
+                <div className="btn-group" role="group">
+                    <button style={{ borderRadius : "8px" }}  type="button" className="btn btn-default">간호보건단기</button>
+                </div>
+            </ul>
+
+
+            <div className="input-group">
+                <span className="input-group-addon" id="basic-addon1">@</span>
+                <input type="text"
+                       style={{ height : "100px", padding : "20px"}}
+                       className="form-control box-content" placeholder="높이 100 패딩 20" aria-describedby="basic-addon1"/>
+            </div>
+
+
 
             <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
 
