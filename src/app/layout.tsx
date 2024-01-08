@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Loader } from '@react-three/drei'
 const inter = Inter({ subsets: ['latin'] })
+import 'bootstrap/dist/css/bootstrap.css'
 
 
 export default function RootLayout({children}) {
