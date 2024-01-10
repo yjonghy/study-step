@@ -2,3 +2,119 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    background: #fff;
+    overscroll-behavior-x: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    background: #fff;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: clip;
+}
+
+
+#send_area:placeholder-shown {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-clamp: 1;
+}
+
+@layer components {
+    .main_text {
+        @apply text-[28px] leading-[36px] tracking-[-0.2px] font-bold
+    }
+
+    .mobile_main {
+        @apply text-[28px] leading-[34px] tracking-[-0.2px] font-bold
+    }
+
+    .heading-3xl {
+        @apply text-[60px] leading-[72px] mobile:text-[32px] mobile:leading-[40px] tracking-[-0.2px] font-bold
+    }
+
+    .heading-2xl {
+        @apply text-[40px] leading-[48px] mobile:text-[24px] mobile:leading-[32px] tracking-[-0.2px] font-bold
+    }
+
+    .heading-xl {
+        @apply text-[24px] leading-[32px] tracking-[-0.2px] font-bold
+    }
+
+    .heading-lg {
+        @apply text-[18px] leading-[26px] tracking-[-0.1px] font-bold
+    }
+
+    .heading-md {
+        @apply text-[16px] leading-[24px] tracking-[-0.1px] font-bold
+    }
+
+    .heading-sm {
+        @apply text-[14px] leading-[20px] tracking-[-0.1px] font-bold
+    }
+
+    .heading-xs {
+        @apply text-[12px] leading-[17px] tracking-[-0.2px] font-bold
+    }
+
+    .body-xl {
+        @apply text-[24px] leading-[32px] tracking-[-0.2px] font-normal
+    }
+
+    .body-lg {
+        @apply text-[18px] leading-[26px] mobile:text-[16px] mobile:leading-[24px] tracking-[-0.1px] font-normal
+    }
+
+    .body-md {
+        @apply text-[16px] leading-[24px] tracking-[-0.1px] font-normal
+    }
+
+    .body-sm {
+        @apply text-[14px] leading-[20px] tracking-[-0.1px] font-normal
+    }
+
+    .body-xs {
+        @apply text-[12px] leading-[17px] tracking-[0px] font-normal
+    }
+}
+
+.category_gradient_right {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+}
+
+.category_gradient_left {
+    background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+}
+
+.no-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.no-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.slick-initialized .slick-track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.slick-slider {
+    align-self: center;
+    margin: 0 auto;
+}
+.slick-list {
+    margin: 0 auto;
+}
