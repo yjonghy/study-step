@@ -13,7 +13,7 @@ import NavigationHeader from "@src/components/nav";
 export default function RootLayout({children}) {
     return (
         <html lang="en">
-            <body className="flex flex-col items-center relative h-screen">
+            <body className="flex flex-col items-center relative">
                 <main className={`
                 w-full bg-gray030 h-full
                 desktop:max-w-[2200px] 
