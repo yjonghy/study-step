@@ -1,0 +1,7 @@
+export const Heading_3xl = "h-[72px] pt-[5px] pb-[2px]"
+export const Heading_2xl = "h-[48px] pt-[2px]"
+export const Heading_Body_Xl = "h-[32px] pt-[3px] pb-[1px]"
+export const Heading_Body_Lg = "h-[26px] pt-[4px] pb-[1px]"
+export const Heading_Body_Md = "h-[24px] pt-[5px] pb-[3px]"
+export const Heading_Body_Sm = "h-[20px] pt-[2px] pb-[2px]"
+export const Heading_Body_Xs = "h-[17px] pt-[2px] pb-[1px]"
