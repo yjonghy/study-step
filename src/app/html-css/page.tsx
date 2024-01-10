@@ -17,8 +17,39 @@ export default function HTML_CSS_STUDY() {
     const dropTitle = ["btn-default", "btn-primary", "btn-success", "btn-info", "btn-warning", "btn-danger"]
 
 
+
+    const orangeColor = () => {
+        return (
+            <>
+                <div className="w-[50px] h-[50px] rounded-full bg-[#FFFFFF]"></div>
+                <div className="w-[50px] h-[50px] rounded-full bg-[#F2F2F7]"></div>
+                <div className="w-[50px] h-[50px] rounded-full bg-[#21252C]"></div>
+                <div className="w-[50px] h-[50px] rounded-full bg-[#DB6300]"></div>
+                <div className="w-[50px] h-[50px] rounded-full bg-[#FF7605]"></div>
+                <div className="w-[50px] h-[50px] rounded-full bg-[#FDD8B9]"></div>
+                <div className="w-[50px] h-[50px] rounded-full bg-[#B29077]"></div>
+            </>
+        )
+    }
+
     return (
         <section className="flex flex-col gap-[20px] p-[40px]">
+
+
+            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-r from-50% from-[#EFC9FD] to-50% to-[#B819F0] rotate-45"></div>
+            {/*<div className="w-[50px] h-[50px] rounded-full bg-[#B819F0] bg-[#EFC9FD]"></div>*/}
+            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-r from-50% from-[#C2D8FF] to-50% to-[#2773F7] rotate-45"></div>
+            {/*<div className="w-[50px] h-[50px] rounded-full bg-[#C2D8FF] bg-[#2773F7]"></div>*/}
+            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-r from-50% from-[#BBF5B2] to-50% to-[#1CC502] rotate-45"></div>
+            {/*<div className="w-[50px] h-[50px] rounded-full bg-[#BBF5B2] bg-[#1CC502]"></div>*/}
+            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-r from-50% from-[#FDD8B9] to-50% to-[#DB6300] rotate-45"></div>
+            {/*<div className="w-[50px] h-[50px] rounded-full bg-[#FDD8B9] bg-[#DB6300]"></div>*/}
+            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-r from-50% from-[#FDC3F0] to-50% to-[#E70DB8] rotate-45"></div>
+            {/*<div className="w-[50px] h-[50px] rounded-full bg-[#FDC3F0] bg-[#E70DB8]"></div>*/}
+
+            <div className="flex w-full gap-8 mt-[40px]">
+                {orangeColor()}
+            </div>
 
             <ul className="btn-group" style={{display : "flex" ,gap : "20px" }}>
 
