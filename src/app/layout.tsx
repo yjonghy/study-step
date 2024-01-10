@@ -15,7 +15,7 @@ export default function RootLayout({children}) {
         <html lang="en">
             <body className="flex flex-col items-center relative">
                 <main className={`
-                w-full bg-gray030 h-full
+                w-full bg-gray030 min-h-screen h-full
                 desktop:max-w-[2200px] 
                 desktop:px-[48px] desktop:py-[48px]
                 tablet:px-[32px] tablet:py-[32px] 
