@@ -23,6 +23,8 @@ export default function Message() {
 
     return (
         <article className={parentStyle}>
+
+            넥스트 공부
             {showDetail.state ?
                 <InfoListDetail data={showDetail.data} closeDetail={closeMessageDetail}/>
                 :
