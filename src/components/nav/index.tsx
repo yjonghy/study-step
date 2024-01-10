@@ -39,7 +39,7 @@ export default function NavigationHeader() {
                 {/*<div style={{height: `${headerBgHeight}px`}} className="bg-transparent w-full min-h-[54px]"></div>*/}
             </header>
 
-            <header className="mobile:hidden block pt-[25px] pb-[16px] px-[30px] bg-white w-[300px] min-w-[300px]">
+            <header className="mobile:hidden block pt-[25px] pb-[16px] px-[30px] bg-white w-[300px] min-w-[300px] h-full">
 
                 <div className="flex flex-col items-center justify-center">
                     <img src="/profile.jpeg" className="w-[110px] h-[110px] rounded-full object-cover"/>
