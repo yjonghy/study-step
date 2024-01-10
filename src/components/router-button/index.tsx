@@ -10,9 +10,6 @@ import {
     SmallBtnStyle
 } from "@src/types/ButtonType";
 
-const btnDefaultStyle = "flex justify-center items-center cursor-pointer py-[4px] px-[8px] rounded-[8px]"
-const activeBtnStyle = ""
-const noneActiveBtnStyle = ""
 export default function RouterButton() {
 
     const router = useRouter()
@@ -28,11 +25,6 @@ export default function RouterButton() {
     const changeBtnTextStyle = (value : string) => {
         return pathName.includes(value) ? "text-white" : "text-gray080"
     }
-
-    useEffect(() => {
-        console.log(pathName)
-    }, [pathName])
-
 
     return (
         <nav className="flex gap-[10px]">
