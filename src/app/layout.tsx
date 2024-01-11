@@ -5,7 +5,6 @@ import {Inter} from 'next/font/google'
 import {Loader} from '@react-three/drei'
 
 const inter = Inter({subsets: ['latin']})
-import 'bootstrap/dist/css/bootstrap.css'
 import RouterButton from "@src/components/router-button";
 import NavigationHeader from "@src/components/nav";
 
@@ -32,7 +31,6 @@ export default function RootLayout({children}) {
                         </div>
                     </section>
                 </main>
-                {/*<HourFooter/>*/}
             </body>
 
         </html>
