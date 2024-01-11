@@ -1,18 +1,24 @@
 import React, {useState} from "react";
 
 
-const flowStyle = "bg-gray020 py-[6px] px-[8px] rounded-[8px] cursor-pointer h-full text-center h-[52px] flex items-center"
+const flowStyle = "bg-gray020 py-[6px] px-[8px] rounded-[8px] cursor-pointer text-center h-[52px] flex items-center"
 const descBubbleStyle = "w-[200%] absolute top-[calc(100%_+_10px)] border border-gray040 bg-white  p-[8px] rounded-[8px] left-0 flex flex-col justify-center  body-xs"
 export default function JavascriptEngine (){
 
     const [tokenBubble, setTokenBubble] = useState(false)
+    const [parserBubble, setParserBubble] = useState(false)
 
     const changeVisibleBubble = (type : string) => {
         if (type === "token") {
             setTokenBubble(!tokenBubble)
-        } else {
-            setTokenBubble(false)
+            return
         }
+        if (type === "parser") {
+            setParserBubble(!parserBubble)
+            return;
+        }
+        setTokenBubble(false)
+        setParserBubble(false)
     }
 
     return (
@@ -48,14 +54,45 @@ export default function JavascriptEngine (){
                             <p className="body-sm text-gray080">토크나이저</p>
                         </div>
                         <div className={`${descBubbleStyle} ${tokenBubble ? "block" : "hidden"}`}>
-                            <p>작성한 코드르 최소 단위인 토큰으로 분해하는 프로그램 <br/>분해하는 과정을 토크나이징이라고 한다</p>
+                            <p className="text-gray080 body-sm">작성한 코드를 최소 단위인 토큰으로 분해하는 프로그램 <br/>분해하는 과정을 토크나이징이라고 한다</p>
+                            <p className="text-gray080 body-xs whitespace-pre-line">
+                                ex) {`
+                                    let a = "abc" 
+                                     
+                                    토큰 = [
+                                        { type : "keyword", value : "let" },
+                                        { type : "name(identifier)", value : "a" },
+                                        { type : "=(operator)", value : "=" }, 
+                                        { type : "a", value : "abc" }, 
+                                        { type : ";", value : ";" }, 
+                                    ]
+                                    *이때 스코프가 결정 
+                                    
+                                    우선순위
+                                    keyword 2,
+                                    identifier 0,
+                                    operator 1,
+                                    string or number (type) 0,
+                                    semicolon 0
+                                `}
+                            </p>
                         </div>
                     </div>
                     <div className="bg-gray040 w-[10px] h-[1px] self-center"></div>
-                    <div
-                        onClick={() => changeVisibleBubble("parser")}
-                        className={flowStyle}>
-                        <p className="body-sm text-gray080">파서</p>
+                    <div className="relative">
+                        <div
+                            onClick={() => changeVisibleBubble("parser")}
+                            className={flowStyle}>
+                            <p className="body-sm text-gray080">파서</p>
+                        </div>
+                        <div className={`${descBubbleStyle} ${parserBubble ? "block" : "hidden"}`}>
+                            <p className="text-gray080 body-sm">작성한 코드를 최소 단위인 토큰으로 분해하는 프로그램 <br/>분해하는 과정을 토크나이징이라고 한다</p>
+                            <p className="text-gray080 body-xs whitespace-pre-line">
+                                ex) {`
+                                    
+                                `}
+                            </p>
+                        </div>
                     </div>
                     <div className="bg-gray040 w-[10px] h-[1px] self-center"></div>
                     <div
