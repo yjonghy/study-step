@@ -345,7 +345,7 @@ export default function JavascriptEngine (){
 // *javascript 변수 - 원시 혹은 찹조가 될수있다 (함수도 일종의 참조타입(object)으로 구성)
 // 원시타입은 js 런타임 환경에서 해당 type의 object wrapper를 씌워 그 object 속성(메소드) 실행
 // 일시적으로 씌워 실행하고 해당 object는 폐기 -> object wrapper를 수정하거나 저장하는게 의미없음
-리
+
 
 //(HTML이 parsing될 때 script태그를 만나면 parsing이 일시중지되고 script를 해석, 실행)
 
