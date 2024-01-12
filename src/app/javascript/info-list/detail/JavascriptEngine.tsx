@@ -228,7 +228,7 @@ export default function JavascriptEngine (){
                         초기 - 가벼운 인터프리터 언어
                     </p>
                     <p className="text-gray060 body-xs mt-[2px]">
-                        중기 - 웹에서 연산과정이 많아지고 복잡함 -> 즉 기능이 늘어나고 성능상 무거워짐 ex)구글맵 -> 위 이슈로 컴파일 사용
+                        중기 - 웹에서 연산과정이 많아지고 복잡함 {`->`} 즉 기능이 늘어나고 성능상 무거워짐 ex)구글맵 {`->`} 위 이슈로 컴파일 사용
                     </p>
                     <p className="text-gray060 body-xs mt-[2px]">
                         현재 - jitc(Just-in-Time Compilation)를 혼용하여 쓰는 Adaptive JIT Compilation - jit를 javascript에서 사용할때의 단점으로 인함
@@ -345,15 +345,9 @@ export default function JavascriptEngine (){
 // *javascript 변수 - 원시 혹은 찹조가 될수있다 (함수도 일종의 참조타입(object)으로 구성)
 // 원시타입은 js 런타임 환경에서 해당 type의 object wrapper를 씌워 그 object 속성(메소드) 실행
 // 일시적으로 씌워 실행하고 해당 object는 폐기 -> object wrapper를 수정하거나 저장하는게 의미없음
-
+리
 
 //(HTML이 parsing될 때 script태그를 만나면 parsing이 일시중지되고 script를 해석, 실행)
 
 // ("JavaScipt Engine" !== "Rendering Engine" = true /
 // Rendering Engine 또는 Layout Engine은 HTML과 CSS로 작성된 코드를 컨텐츠로 사용하여 웹 페이지에 “rendering” 하는 역할)
-
-//                    이를테면 코드에서 이해를 돕기 위한 그룹핑을 위한 괄호까지 명시적으로 분리된 노드로 표현될 필요는 없다.
-//                     비슷하게, if-condition-then 구문은 3개의 브랜치를 가진 단일 노드로 표현될 수 있다. (위의 예제 그림에서 condition, assign (if-body), assign (else-body) 을 살펴볼 수 있다.)
-//                     이렇게 세세한 정보까진 표현하지 않는다는 것이 Concrete Syntax Trees 와 구분된다.
-//                     AST 가 만들어진 이후에는 Contextual Analysis 와 같은 과정을 통해 추가적인 정보가 AST 에 추가된다.
-//                     AST 는 프로그램 분석, 프로그램 변환 시스템에서 사용된다.
