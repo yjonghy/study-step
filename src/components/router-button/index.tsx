@@ -27,7 +27,7 @@ export default function RouterButton() {
     }
 
     return (
-        <nav className="flex gap-[10px]">
+        <nav className="flex gap-[10px] bg-white/70 w-full px-[12px] py-[6px] rounded-[8px] flex-wrap">
             <Button
                 onClick={() => goPage("/html-css")}
                 btnStyle={`${changeBtnActiveStyle("html-css")} ${SmallBtnStyle} px-[20px]`}

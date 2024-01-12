@@ -3,7 +3,7 @@ import {useState} from "react";
 import InfoListDetail from "@src/app/javascript/info-list/detail";
 import InfoList from "@src/app/javascript/info-list";
 
-const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white mt-[20px]"
+const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[8px]"
 
 
 const title_ = ["javascript 엔진"]
