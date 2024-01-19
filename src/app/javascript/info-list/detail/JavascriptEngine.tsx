@@ -13,6 +13,8 @@ export default function JavascriptEngine (){
     const interpreterRef = useRef(null)
     const compilerRef = useRef(null)
 
+    const [semispace, setSemispace] = useState(false)
+
     const changeVisibleBubble = (type : string) => {
         if (type === "token") {
             if (tokenRef.current) {
@@ -310,30 +312,103 @@ export default function JavascriptEngine (){
                 <div className="w-full bg-blue020 flex items-center justify-center py-[12px] mt-[12px]">
                     <p className="text-white heading-xs">Stack</p>
                 </div>
-
-
-                {/*<p className="text-gray060 body-xs mt-[10px]">*/}
-                {/*    new space (semi space, semi space)<br />*/}
-                {/*    old space (old pointer space, old data space)<br />*/}
-                {/*    Large Object Space<br />*/}
-                {/*    Code Space<br />*/}
-                {/*    Cell Space<br />*/}
-                {/*    Property Space<br />*/}
-                {/*    Map Space<br />*/}
-                {/*</p>*/}
                 <p className="text-gray060 body-xs mt-[10px]">
-                    Map Space, Property Cell Space, Cell Space는 종류에 맞는 객체들을 분류해서 가지고있기 편하게 하는 역할을 하는 공간<br />
+                    <strong>Map Space, Property Cell Space, Cell Space</strong>는 종류에 맞는 객체들을 분류해서 가지고있기 편하게 하는 역할을 하는 공간<br />
                     Code Space 실행될 실제 코드가 들어가는 부분이라고 보면 된다. JIT컴파일된 코드가 들어가있으며, 유일하게 실행 가능한 메모리가 있는 영역<br />
                     Large Object Space는 이름 그대로 좀 크기가 큰 객체가 들어가는 부분이다. 이 부분은 가비지컬렉션이 되지 않는다.<br />
+                </p>
 
+                <p className="text-gray060 body-xs mt-[10px]">
+                    <strong>New space(young generation)</strong><br />
+                    -새로 만들어진 모든 객체 우선 저장<br />
+                    -1~8mb<br />
+                    -짧은 생명주기를 가지는 새로 생성된 객체 두개의 semi space <strong>Minor GC</strong>가 관리(후술) old 영역에 비해 매우 작음
+                </p>
+
+                <p className="text-gray060 body-xs mt-[10px]">
+                    <strong>Old space(young generation)</strong><br />
+                    -마이너 GC가 두 번 발생한 뒤에 New space에서 남아있는 객체가 이동하는 곳이다. 이 영역은<strong>Major GC</strong>가 관리<br />
+                    -pointer {`->`} 다른 객체를 참조하는 객체<br />
+                    -data {`->`} 데이터만 있는 객체
                 </p>
 
 
 
 
 
+                <p className="text-gray060 body-xs mt-[10px]">
+                    <strong>Minor GC</strong><br />
+                    -V8의 New Space에서 일어나는 Minor GC는 체니의 알고리즘(Cheney{`'`}s Algorithm)으로 구현<br />
+                    *객체들이 존재하는 space가 from이고 비어있는게 to {`->`} to와 from이 역할을 바꿈<br />
+                </p>
+
+                <div className="mt-[4px] flex bg-red030 p-[20px] w-full justify-around rounded-[8px]">
+
+                    <div className="p-[10px] text-white body-xs bg-gray040 rounded-[8px]">
+                        object
+                    </div>
+
+                    <div className="p-[10px] text-white body-xs bg-green050 rounded-[8px]">
+                        semi space (from)
+                    </div>
+                    <div className="p-[10px] text-white body-xs bg-green050 rounded-[8px]">
+                        semi space (to)
+                    </div>
+                </div>
+
+                <p className="text-gray060 body-xs mt-[10px]">
+                    처음 객체가 할당되는곳 존재하는 from<br />
+                    {`->`} 새객체 할당시 여유공간이 없다 <br />
+                    {`->`}GC 실행<br />
+                    {`->`}from 의 객체를 탐색하여 to로 옮김, to로 옮겨진 객체가 참조 하고있던 객체 또한 to로 옮김<br />
+                    (스택 포인터 root부터 시작해서 도달가능한 객체들)<br />
+                    {`->`}옮겨지지 못한 from의 객체들은 가비지로 취급 컬렉팅<br />
+                    {`->`}to로 옮겨진 객체를 from으로 다시 옮김 (to 와 from을 바꿈 즉 옮긴걸 다시 옮기는게 아니고 to가 from이됨)<br />
+                    {`->`}위과정을 한번 더 실행했을때 (두번) 살아남은 객체는 old space로 ㄱㄱ<br />
+                    <br /><br />
+                    * Write Barriers라고 불리는 기능을 포함하고 있다. Old space에서 New space를 향하는 포인터의 리스트를 저장하고, 이를 이용해 New space의 참조 현황을 확인해 GC를 진행
+                </p>
+
+
+
+                <p className="text-gray060 body-xs mt-[10px]">
+                    <strong>Major GC</strong><br />
+                    new {`->`} old로 옮겨질때 old의 공간이 부족한 경우 실행
+                </p>
+
+                <p className="text-gray060 body-xs mt-[10px]">
+                    <strong>작동 방식</strong><br />
+                    1.Marking<br />
+                    현재 사용되는 객체 파악<br />
+                    루트에서 시작하여 해당객체에 도달할수 있는지 살펴봄 <br />
+                    도달할수 있는 객체 (ex) 루트 - 부모 - 자식) 에 대하여 마킹을 한다<br />
+                    <br /><br />
+                    2.Sweeping<br />
+                    위 단게에서 마킹이 되지 못한 객체를 치우고 그객체가 사용하던 공간을 free-list에 저장,<br />
+                    탐색하기 쉽도룩 크기순 세분화 {`<-`} 새 메모리 할당할때에 여기서 찾음<br />
+                    <br /><br />
+                    3.Compacting<br />
+                    압축을 진행하지 않는 다른 메모리 페이지에 복사하여 압축
+                </p>
+
+
+
+                <p className="text-gray060 body-xs mt-[10px]">
+                    가비지 콜렉터가 메인 스레드를 블로킹하여 성능 저하가 발생
+                    {`->`}3가지 방식추가
+                    <br /><br />
+                    병렬, 점진, 동시
+                    <br /><br />
+                    병렬 {`->`} 헬페스레드들이 비슷한의 작업 실행 헬퍼스레드 동기화 필요<br />
+                    점진 {`->`} 메인스레드가 GC-JS_GC_JS 순서대로 실행<br />
+                    동시 {`->`} 헬퍼스레드에서만 GC실행 {`->`} 블로킹이 전혀없는대신에 동기화 처리를 꼭 해야함<br />
+                </p>
+
+
 
             </article>
+
+
 
 
 

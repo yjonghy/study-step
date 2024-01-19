@@ -3,10 +3,10 @@ import {useState} from "react";
 import InfoListDetail from "@src/app/javascript/info-list/detail";
 import InfoList from "@src/app/javascript/info-list";
 
-const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[8px]"
+const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[12px]"
 
 
-const title_ = ["javascript 엔진"]
+const title_ = ["javascript 엔진", "adsasd", 'ADsdas']
 export default function Message() {
 
 
@@ -25,7 +25,7 @@ export default function Message() {
                 <InfoListDetail data={showDetail.data} closeDetail={closeMessageDetail}/>
                 :
                 <>
-                    <div className="w-full flex flex-col py-[20px] px-[16px] gap-[8px]">
+                    <div className="w-full grid grid-cols-2 py-[20px] px-[16px] gap-[8px]">
                         {title_.map((value, index) => (
                             <InfoList
                                 key={index}
