@@ -12,9 +12,9 @@ import NavigationHeader from "@src/components/nav";
 export default function RootLayout({children}) {
     return (
         <html lang="en">
-            <body className="flex flex-col items-center relative">
+            <body className="flex flex-col items-center relative bg-gray030">
                 <main className={`relative
-                w-full bg-gray030 min-h-screen h-full
+                w-full min-h-screen h-full
                 desktop:max-w-[2200px] 
                 desktop:px-[48px] desktop:py-[48px]
                 tablet:px-[32px] tablet:py-[32px] 
@@ -31,12 +31,10 @@ export default function RootLayout({children}) {
                             {children}
                         </div>
                     </section>
-
-
-                    <div className="w-full absolute top-0 left-0 h-[266px] blur-[8px]">
-                        <img src="/banner.jpg" className="w-full h-full"/>
-                    </div>
                 </main>
+                <div className="w-screen absolute top-0 left-0 h-[266px] blur-[8px]">
+                    <img src="/banner.jpg" className="w-full h-full object-center"/>
+                </div>
             </body>
 
         </html>
