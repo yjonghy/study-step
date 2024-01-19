@@ -338,7 +338,7 @@ export default function JavascriptEngine (){
 
                 <p className="text-gray060 body-xs mt-[10px]">
                     <strong>Minor GC</strong><br />
-                    -V8의 New Space에서 일어나는 Minor GC는 체니의 알고리즘(Cheney's Algorithm)으로 구현<br />
+                    -V8의 New Space에서 일어나는 Minor GC는 체니의 알고리즘(Cheney{`'`}s Algorithm)으로 구현<br />
                     *객체들이 존재하는 space가 from이고 비어있는게 to {`->`} to와 from이 역할을 바꿈<br />
                 </p>
 
