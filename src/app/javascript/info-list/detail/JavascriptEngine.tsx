@@ -328,8 +328,8 @@ export default function JavascriptEngine (){
                 <p className="text-gray060 body-xs mt-[10px]">
                     <strong>Old space(young generation)</strong><br />
                     -마이너 GC가 두 번 발생한 뒤에 New space에서 남아있는 객체가 이동하는 곳이다. 이 영역은<strong>Major GC</strong>가 관리<br />
-                    -pointer -> 다른 객체를 참조하는 객체<br />
-                    ->data -> 데이터만 있는 객체
+                    -pointer {`->`} 다른 객체를 참조하는 객체<br />
+                    -data {`->`} 데이터만 있는 객체
                 </p>
 
 
@@ -339,7 +339,7 @@ export default function JavascriptEngine (){
                 <p className="text-gray060 body-xs mt-[10px]">
                     <strong>Minor GC</strong><br />
                     -V8의 New Space에서 일어나는 Minor GC는 체니의 알고리즘(Cheney's Algorithm)으로 구현<br />
-                    *객체들이 존재하는 space가 from이고 비어있는게 to -> to와 from이 역할을 바꿈<br />
+                    *객체들이 존재하는 space가 from이고 비어있는게 to {`->`} to와 from이 역할을 바꿈<br />
                 </p>
 
                 <div className="mt-[4px] flex bg-red030 p-[20px] w-full justify-around rounded-[8px]">
@@ -358,13 +358,13 @@ export default function JavascriptEngine (){
 
                 <p className="text-gray060 body-xs mt-[10px]">
                     처음 객체가 할당되는곳 존재하는 from<br />
-                    -> 새객체 할당시 여유공간이 없다 <br />
-                    -> GC 실행<br />
-                    -> from 의 객체를 탐색하여 to로 옮김, to로 옮겨진 객체가 참조 하고있던 객체 또한 to로 옮김<br />
+                    {`->`} 새객체 할당시 여유공간이 없다 <br />
+                    {`->`}GC 실행<br />
+                    {`->`}from 의 객체를 탐색하여 to로 옮김, to로 옮겨진 객체가 참조 하고있던 객체 또한 to로 옮김<br />
                     (스택 포인터 root부터 시작해서 도달가능한 객체들)<br />
-                    -> 옮겨지지 못한 from의 객체들은 가비지로 취급 컬렉팅<br />
-                    -> to로 옮겨진 객체를 from으로 다시 옮김 (to 와 from을 바꿈 즉 옮긴걸 다시 옮기는게 아니고 to가 from이됨)<br />
-                    -> 위과정을 한번 더 실행했을때 (두번) 살아남은 객체는 old space로 ㄱㄱ<br />
+                    {`->`}옮겨지지 못한 from의 객체들은 가비지로 취급 컬렉팅<br />
+                    {`->`}to로 옮겨진 객체를 from으로 다시 옮김 (to 와 from을 바꿈 즉 옮긴걸 다시 옮기는게 아니고 to가 from이됨)<br />
+                    {`->`}위과정을 한번 더 실행했을때 (두번) 살아남은 객체는 old space로 ㄱㄱ<br />
                     <br /><br />
                     * Write Barriers라고 불리는 기능을 포함하고 있다. Old space에서 New space를 향하는 포인터의 리스트를 저장하고, 이를 이용해 New space의 참조 현황을 확인해 GC를 진행
                 </p>
@@ -373,7 +373,7 @@ export default function JavascriptEngine (){
 
                 <p className="text-gray060 body-xs mt-[10px]">
                     <strong>Major GC</strong><br />
-                    new -> old로 옮겨질때 old의 공간이 부족한 경우 실행
+                    new {`->`} old로 옮겨질때 old의 공간이 부족한 경우 실행
                 </p>
 
                 <p className="text-gray060 body-xs mt-[10px]">
@@ -395,13 +395,13 @@ export default function JavascriptEngine (){
 
                 <p className="text-gray060 body-xs mt-[10px]">
                     가비지 콜렉터가 메인 스레드를 블로킹하여 성능 저하가 발생
-                    ->3가지 방식추가
+                    {`->`}3가지 방식추가
                     <br /><br />
                     병렬, 점진, 동시
                     <br /><br />
-                    병렬 -> 헬페스레드들이 비슷한의 작업 실행 헬퍼스레드 동기화 필요<br />
-                    점진 -> 메인스레드가 GC-JS_GC_JS 순서대로 실행<br />
-                    동시 -> 헬퍼스레드에서만 GC실행 -> 블로킹이 전혀없는대신에 동기화 처리를 꼭 해야함<br />
+                    병렬 {`->`} 헬페스레드들이 비슷한의 작업 실행 헬퍼스레드 동기화 필요<br />
+                    점진 {`->`} 메인스레드가 GC-JS_GC_JS 순서대로 실행<br />
+                    동시 {`->`} 헬퍼스레드에서만 GC실행 {`->`} 블로킹이 전혀없는대신에 동기화 처리를 꼭 해야함<br />
                 </p>
 
 
