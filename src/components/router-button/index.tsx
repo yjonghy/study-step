@@ -44,6 +44,15 @@ export default function RouterButton() {
                 onClick={() => goPage("/next")}
                 btnStyle={`${changeBtnActiveStyle("next")} ${SmallBtnStyle} px-[20px]`}
                 text={{value: "Next", style: `heading-md ${changeBtnTextStyle("next")}`}}/>
+            <Button
+                onClick={() => goPage("/cs")}
+                btnStyle={`${changeBtnActiveStyle("cs")} ${SmallBtnStyle} px-[20px]`}
+                text={{value: "cs", style: `heading-md ${changeBtnTextStyle("cs")}`}}/>
+
+            <Button
+                onClick={() => goPage("/work-code")}
+                btnStyle={`${changeBtnActiveStyle("work-code")} ${SmallBtnStyle} px-[20px]`}
+                text={{value: "work-code", style: `heading-md ${changeBtnTextStyle("work-code")}`}}/>
         </nav>
     )
 }

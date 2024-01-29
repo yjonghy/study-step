@@ -1,7 +1,6 @@
 import {InputType} from "@src/types/InputType";
 import {useState, useRef} from "react";
 import {MotionFast} from "@src/types/ButtonType";
-import {placeholder} from "@babel/types";
 
 
 export default function Input({

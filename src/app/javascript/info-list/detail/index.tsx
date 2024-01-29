@@ -1,12 +1,7 @@
-import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
 import JavascriptEngine from "@src/app/javascript/info-list/detail/JavascriptEngine";
+import MouseEvent from "@src/app/javascript/info-list/detail/MouseEvent";
 
-const headerStyle = "body-sm text-gray040"
-const contentStyle = "body-sm text-gray080"
-
-export default function  InfoListDetail(props: any){
-
+export default function  JavaSciptList(props: any){
     return(
         <article className="w-full flex flex-col justify-center items-center ">
 
@@ -17,9 +12,7 @@ export default function  InfoListDetail(props: any){
             </div>
 
             {props.data === "javascript 엔진" && <JavascriptEngine/>}
-
-
-
+            {props.data === "mouse event" && <MouseEvent />}
         </article>
     )
 }
