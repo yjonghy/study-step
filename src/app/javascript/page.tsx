@@ -1,13 +1,13 @@
 "use client"
 import {useState} from "react";
-import InfoListDetail from "@src/app/javascript/info-list/detail";
+import JavaSciptList from "@src/app/javascript/info-list/detail";
 import InfoList from "@src/app/javascript/info-list";
 
 const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[12px]"
 
 
-const title_ = ["javascript 엔진", "adsasd", 'ADsdas']
-export default function Message() {
+const title_ = ["javascript 엔진", "mouse event"]
+export default function JavaScript() {
 
 
     const [showDetail, setShowDetail] = useState({state: false, data: {}})
@@ -22,7 +22,7 @@ export default function Message() {
     return (
         <article className={parentStyle}>
             {showDetail.state ?
-                <InfoListDetail data={showDetail.data} closeDetail={closeMessageDetail}/>
+                <JavaSciptList data={showDetail.data} closeDetail={closeMessageDetail}/>
                 :
                 <>
                     <div className="w-full grid grid-cols-2 py-[20px] px-[16px] gap-[8px]">
