@@ -10,6 +10,7 @@ import NavigationHeader from "@src/components/nav";
 import {useEffect} from "react";
 import {RecoilRoot} from "recoil";
 import Toast from "@src/components/common/toast";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 
 export default function RootLayout({children}) {
@@ -19,9 +20,10 @@ export default function RootLayout({children}) {
    useEffect(() => {
        console.log(pathName)
    }, [])
-
+    const queryClient = new QueryClient();
     return (
         <html lang="en">
+        <QueryClientProvider client={queryClient}>
         <RecoilRoot>
             <Toast/>
             <body className="flex flex-col items-center relative bg-gray030">
@@ -51,8 +53,8 @@ export default function RootLayout({children}) {
 
 
             </body>
-
         </RecoilRoot>
+        </QueryClientProvider>
         </html>
     )
 }

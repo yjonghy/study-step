@@ -14,6 +14,7 @@
   "dependencies": {
     "@react-three/drei": "^9.89.0",
     "@react-three/fiber": "^8.15.11",
+    "@tanstack/react-query": "^4.29.7",
     "@types/three": "^0.159.0",
     "axios": "^0.26.1",
     "bootstrap": "^3.4.1",
