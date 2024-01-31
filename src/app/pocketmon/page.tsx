@@ -18,7 +18,7 @@ export default function PocketMon() {
                                 <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${value.pokemon_species_id}.png`} className="w-[52px] h-[52px]"/>
                                 <div className="flex w-full justify-center items-center">
                                     <p className="heading-md text-gray090">No.</p>
-                                    <p className="body-md text-gray090">{value.local_language_id}</p>
+                                    <p className="body-md text-gray090">{value.pokemon_species_id}</p>
                                 </div>
                                 <div className="flex w-full justify-center items-center gap-[8px]">
                                     <p className="heading-md text-gray090">이름</p>
