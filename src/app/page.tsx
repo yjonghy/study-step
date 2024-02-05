@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from "next/link";
 
 
-const studyList = ["html-css", "javascript", "react", "next", "cs"]
+const studyList = ["html-css", "javascript", "react", "next", "computer-science"]
 export default function Home() {
     return (
         <main className="flex flex-col">

@@ -46,7 +46,7 @@ export default function RootLayout({children}) {
                         </section>
                     </main>
                     <div className="w-screen absolute top-0 left-0 h-[266px] blur-[8px]">
-                        <img src="/banner.jpg" className="w-full h-full object-center"/>
+                        <img src="/banner.jpg" className="w-full h-full object-cover"/>
                     </div>
                 </>
             }
