@@ -4,7 +4,7 @@ const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt
 
 
 const csData = [
-    {title_ : "http 버전 특징",  link : "/cs/http-version" }
+    {title_ : "http 버전 특징",  link : "/computer-science/http-version" }
 
 ]
 export default function Cs() {

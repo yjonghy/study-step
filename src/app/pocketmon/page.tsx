@@ -1,12 +1,13 @@
 "use client"
 import {pocketmonName} from "@src/app/pocketmon/model";
 import {GhostPrimaryButton, MotionFast} from "@src/types/ButtonType";
-
+import {useRouter} from "next/navigation";
 
 const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[12px]"
 
 export default function PocketMon() {
 
+    const router = useRouter()
 
     return (
         <article className={parentStyle}>
@@ -14,7 +15,9 @@ export default function PocketMon() {
                 {pocketmonName.map((value, index) => (
                     <>{
                         value.local_language_id === "3" ?
-                            <div className={`w-full py-[8px] flex flex-col justify-center items-center gap-[4px] rounded-[8px] ${MotionFast} ${GhostPrimaryButton} cursor-pointer`} key={index}>
+                            <div
+                                onClick={() => {router.push(`/pocketmon/${value.pokemon_species_id}`) }}
+                                className={`w-full py-[8px] flex flex-col justify-center items-center gap-[4px] rounded-[8px] ${MotionFast} ${GhostPrimaryButton} cursor-pointer`} key={index}>
                                 <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${value.pokemon_species_id}.png`} className="w-[52px] h-[52px]"/>
                                 <div className="flex w-full justify-center items-center">
                                     <p className="heading-md text-gray090">No.</p>

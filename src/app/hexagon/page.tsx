@@ -148,7 +148,7 @@ function Hexagon() {
             // a e c
             //console.log(myAnswer)
             const copyArray = [...answerArray]
-            //console.log(copyArray.filter(item => JSON.stringify(item) === JSON.stringify(myAnswer)))
+            //console.log(copyArray.filter([id] => JSON.stringify([id]) === JSON.stringify(myAnswer)))
             const verify = copyArray.filter(item => JSON.stringify(item) === JSON.stringify(myAnswer))
             if (verify.length === 0) {
                 alert("유효 하지않는 답입니다")
