@@ -10,7 +10,7 @@ export default function NavigationHeader() {
 
 
                 <div className="flex items-center justify-center mt-[12px] gap-[8px]">
-                    <img src="/profile.jpeg" className="w-[40px] h-[40px] rounded-full object-cover"/>
+                    <img src="/profile_v2.jpeg" className="w-[40px] h-[40px] rounded-full object-cover"/>
                     <p className="heading-sm text-gray080">유종현 /</p>
                     <p className="heading-xs text-gray080">whdgus9269@gmail.com /</p>
                     <p className="heading-xs text-gray080">01083889128 /</p>
