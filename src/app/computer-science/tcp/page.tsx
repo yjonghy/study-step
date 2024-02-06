@@ -64,9 +64,43 @@ export default function Tcp (){
                         ESTABLISHED / 연결 수립 완료, 데이터 교환가능<br/>
                     </p>
                 </div>
-                <div className="w-full flex flex-col items-center justify-center gap-[4px] mt-[12px]">
-                    <p className="body-sm">연결해제과정</p>
+                <div className="w-full flex flex-col justify-center gap-[4px] mt-[12px]">
+                    <p className="body-sm self-center ">연결해제과정</p>
                     <img src={"/tcp-4way.png"} className="w-full object-cover"/>
+                    <p className="body-sm mt-[8px]">
+                        #1-FIN <br/>
+                        요청을 닫을쪽(클라이언트라고 가정)은 FIN 메시지를 서버로 보내고 FIN_WAIT_1 상태로 변경. <br/>
+                        FIN_WAIT_1 상태에 있는 동안 서버로부터 ACK 응답을 기다린다.
+                    </p>
+                    <p className="body-sm mt-[4px]">
+                        #2-ACK<br/>
+                        서버가 클라이언트로부터 FIN 메시지를 수신, <br/>
+                        서버는 즉시 ACK 메시지를 클라이언트로 송신. <br/>
+                        클라이언트는 ACK 수신 후 FIN_WAIT_2 으로 상태변경 <br/>
+                        FIN_WAIT_2 상태에 있는 동안 클라이언트는 서버가 FIN 메시지를 보낼때까지 대기 <br/>
+
+                        전송할 데이터가 남아있다면 이어서 계속 전송  <br/>
+                        클라이언트 쪽에서도 아직 서버로부터 받지 못한 데이터가 있을 것을 대비해 일정 시간동안 세션을 남겨놓고 기다림 - TIME-WAIT
+                    </p>
+                    <p className="body-sm mt-[4px]">
+                        #1-FIN <br/>
+                        서버의 통신이 끝나면 연결을 닫을준비가 되었다는 FIN 메시지 전송 <br/>
+                    </p>
+                    <p className="body-sm mt-[4px]">
+                        #2-ACK <br/>
+                        클라이언트는 FIN 메시지 수신 후 ACK 몌시지 서버로 전송 <br/>
+                        서버는 ACK 메시지 수신 후 연결 해제
+                    </p>
+
+                    <p className="body-xs mt-[4px]">
+                        CLOSED / 연결 수립 전 기본 상태<br/>
+                        ESTABLISHED / 연결 수립 완료, 데이터 교환가능<br/>
+                        CLOSE-WAIT / 상대의 FIN 받은상태, 그에 대한 ACK 송신 후 애플리케이션 종료<br/>
+                        LAST-ACK / 종료 후 자신의 FIN 송신, 상대의 ACK 기다림<br/>
+                        FIN-WAIT-1 / FIN 송신 후 ACK, 혹은 FIN 수신 대기<br/>
+                        FIN-WAIT-2 / FIN 송신 후 ACK 받은 상태에서 FIN 수신 대기<br/>
+                        TIME-WAIT / 연결 종료가 완료된 상태, 새 연결과 겹치지 않게 일정 시간 대기 후 CLOSED 변경 <br/>
+                    </p>
                 </div>
             </div>
 
@@ -74,83 +108,50 @@ export default function Tcp (){
 
 
             <div className="mt-[24px] w-full text-gray090">
-                <h2 className="body-lg">특징</h2>
+                <h2 className="body-lg">특징 ( TCP Segment 구조, Segment Header 에서 상세히 서술 )</h2>
 
-                <div
-                    onClick={() => setFeature1(!feature1)}
-                    className={`mt-[4px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
+                <div className={`mt-[4px] relative ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
                     <p className="body-sm">1.신뢰성 있는 전송</p>
-                    {feature1 &&
-                        <div className="absolute top-[calc(100%_+_10px)] left-0 bg-white rounded-[8px] p-[10px] z-[1]">
-                            asdasd
-                        </div>
-                    }
+                    <div className="mt-[8px] ml-[8px] bg-white rounded-[8px] p-[10px] text-gray060 body-xs">
+                        수신자가 메시지를 오류없이 받았다면 ACK<br/>
+                        중간에 오류가 났다면 N(Negative 혹은 리셋)ACK 메시지를 송신자에게 전송 : 오류가 난 요청에 대해 재요청 가능<br/>
+                    </div>
                 </div>
 
-                <div
-                    onClick={() => setFeature2(!feature2)}
-                    className={`mt-[8px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
+                <div className={`mt-[8px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
                     <p className="body-sm">2.순서제어</p>
-                    {feature2 &&
-                        <div className="absolute top-[calc(100%_+_10px)] left-0 bg-white rounded-[8px] p-[10px]">
-                            asdasd
-                        </div>
-                    }
+                    <div className="mt-[8px] ml-[8px] bg-white rounded-[8px] p-[10px] text-gray060 body-xs">
+                        세그먼트 헤더에 시퀀스넘버가 있기 때문에 수신자 측에서 시퀀스 넘버대로 데이터 청크를 이어붙인다
+                    </div>
                 </div>
 
                 <div
-                    onClick={() => setFeature1(!feature3)}
                     className={`mt-[8px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
-                    <p className="body-sm">3.전이중</p>
-                    {feature3 &&
-                        <div className="absolute top-[calc(100%_+_10px)] left-0 bg-white rounded-[8px] p-[10px]">
-                        </div>
-                    }
+                    <p className="body-sm">3.에러제어</p>
+                    <div className="mt-[8px] ml-[8px] bg-white rounded-[8px] p-[10px] text-gray060 body-xs">
+                        세그먼트 헤더에 체크섬부분에서 에러디텍팅후에 에러 발견시 ACK 리셋으로 오류 사실 전송
+                    </div>
                 </div>
 
                 <div
-                    onClick={() => setFeature1(!feature4)}
                     className={`mt-[8px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
-                    <p className="body-sm">4.에러제어</p>
-                    {feature4 &&
-                        <div className="absolute top-[calc(100%_+_10px)] left-0 bg-white rounded-[8px] p-[10px]">
-                        </div>
-                    }
+                    <p className="body-sm">4.흐름제어</p>
+                    <div className="mt-[8px] ml-[8px] bg-white rounded-[8px] p-[10px] text-gray060 body-xs">
+                        1.stop and wait<br/>
+                        매번 전송한 세그먼트에 대하여 확인응답을 받아야 다음 세그먼트를 전송하는 방법<br/>
+                        2.Sliding Window
+                    </div>
                 </div>
 
                 <div
-                    onClick={() => setFeature1(!feature1)}
                     className={`mt-[8px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
-                    <p className="body-sm">5.흐름제어</p>
-                    {feature5 &&
-                        <div className="absolute top-[calc(100%_+_10px)] left-0 bg-white rounded-[8px] p-[10px]">
-                        </div>
-                    }
-                </div>
-
-                <div
-                    onClick={() => setFeature6(!feature6)}
-                    className={`mt-[8px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
-                    <p className="body-sm">6.혼잡제어</p>
-                    {feature6 &&
-                        <div className="absolute top-[calc(100%_+_10px)] left-0 bg-white rounded-[8px] p-[10px]">
-                        </div>
-                    }
+                    <p className="body-sm">5.혼잡제어</p>
+                    <div className="mt-[8px] ml-[8px] bg-white rounded-[8px] p-[10px] text-gray060 body-xs">
+                    </div>
                 </div>
 
             </div>
-            {/*1.tcp란*/}
-            {/*2.tcp특징*/}
-            {/*
-              2.순서제어
-                    3.전이중
-                    4.에러제어
-                    5.흐름제어
-                    6.혼잡제어
-            */}
-            {/*3.tcp 구조*/}
-            {/*4.3way handshake*/}
-            {/*5.4way handshake*/}
+
         </article>
 
     )
