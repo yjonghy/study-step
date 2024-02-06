@@ -35,7 +35,7 @@ export default function NavigationHeader() {
             </header>
             <header className="mobile:hidden block py-[40px] rounded-[8px] px-[30px] bg-white/70 w-[300px] min-w-[300px] h-full">
                 <div className="flex flex-col items-center justify-center">
-                    <img src="/profile.jpeg" className="w-[110px] h-[110px] rounded-full object-cover"/>
+                    <img src="/profile_v2.jpeg" className="w-[110px] h-[110px] rounded-full object-cover"/>
                     <p className="mt-[20px] heading-md text-gray080">유종현</p>
                     <p className="mt-[12px] heading-sm text-gray080">whdgus9269@gmail.com</p>
                     <p className="mt-[2px] heading-sm text-gray080">01083889128</p>
