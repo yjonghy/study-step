@@ -6,12 +6,6 @@ import {GhostPrimaryButton, MotionFast} from "@src/types/ButtonType";
 export default function Tcp (){
 
     const router = useRouter()
-    const [feature1, setFeature1] = useState(false)
-    const [feature2, setFeature2] = useState(false)
-    const [feature3, setFeature3] = useState(false)
-    const [feature4, setFeature4] = useState(false)
-    const [feature5, setFeature5] = useState(false)
-    const [feature6, setFeature6] = useState(false)
 
     return(
         <article className="w-full h-full flex flex-col justify-center  mt-[40px] bg-white/70 p-[10px] rounded-[8px]">
@@ -139,7 +133,18 @@ export default function Tcp (){
                     <div className="mt-[8px] ml-[8px] bg-white rounded-[8px] p-[10px] text-gray060 body-xs">
                         1.stop and wait<br/>
                         매번 전송한 세그먼트에 대하여 확인응답을 받아야 다음 세그먼트를 전송하는 방법<br/>
+                        구현이 단순하지만 전송지가 응답을 받을 때까지 다음 세그먼트를 전송할 수 없으므로 효율이 떨어짐<br/>
                         2.Sliding Window
+                        수신 측의 버퍼(메모리)에 여유가 없으면 그 뒤에 도착한 데이터는 폐기 처분 {`->`} 자원낭비 <br/>
+                        이런 데이터 전송 흐름을 제어해야 자원의 낭비가 없어짐<br/>
+                        수신측에서 설정한 window size (TCP 수신 버퍼-메모리)와 송신측 window size는 맨처음 연결과정에서 수립(3way-handshake)<br/>
+                        *버퍼크기는 또한 RTT(Round Trip Time, 세그먼트 왕복시간)를 고려하여 설정<br/>
+                        이 값이 너무 크다면 네트워크 상태가 불안정 할수도 있으므로 window size 줄임, <br/>
+                        통신하는 과정에서 동적으로 window size 조절<br/>
+                        <img src={"/sliding_window.png"} className="mt-[8px] w-full object-cover"/>
+                        송신측의 window size 가 3일경우, <br />
+                        초기에 0,1,2 전송 후 응답으로(ACK) window size 1을 받을경우 0은 처리되었고 남은 공간이 1이므로 3전송 후 응답대기 <br/>
+                        다 보낼때까지 위과정 반복
                     </div>
                 </div>
 
@@ -147,44 +152,27 @@ export default function Tcp (){
                     className={`mt-[8px] relative cursor-pointer ${MotionFast} ${GhostPrimaryButton} rounded-[8px] p-[10px]`}>
                     <p className="body-sm">5.혼잡제어</p>
                     <div className="mt-[8px] ml-[8px] bg-white rounded-[8px] p-[10px] text-gray060 body-xs">
+                        데이터 흐름을 제어하는게 흐름제어 였다면, 네트워크상에서 혼잡을 피하기 위한것이 혼잡제어<br/>
+                        1.혼잡제어 기법<br/>
+                        -AIMD(Additive Increase/Multiplicative Decrease)
+                        -느린 시작(Slow Start)
+                        -혼잡 회피(Congestion Avoidance)
+                        -빠른 재전송(Fast Retransmit)
                     </div>
                 </div>
 
             </div>
 
+
+            <div className="mt-[24px] w-full text-gray090">
+                <h2 className="body-lg">TCP Segment 구조</h2>
+
+
+            </div>
+
+
         </article>
 
     )
 }
-// 특징
-// 1. 연결 지향 프로토콜(Connection Oriented Protocol)
-//
-// 물리적으로 전용회선이 연결되어 있는 것처럼 가상의 연결통로를 설정하여 통신하는 방식으로 가상의 연결통로를 가상회선이라 한다.
-//     가상회선방식 : 물리적으로 전용회선이 연결되어 있는 것처럼 논리적으로 동작하는 방식
-// 논리적인 연결통로를 통해 데이터를 주고받음으로써 데이터의 전송순서를 보장해준다. 순서제어 라고도 한다.
-//     스트림 기반의 전송방식을 사용한다. 데이터를 임의의 크기로 나누어 연속해서 전송하는 방식을 사용한다.
-//
-// 2. 신뢰할 수 있는 프로토콜(Reliable Protocol)
-// 흐름제어
-// 상대방이 받을 수 있을 만큼만 데이터를 효율적으로 전송하는 것
-// 흐름제어를 위해 슬라이딩 윈도우(Sliding Window) 방식을 사용한다. 이는 상대방이 수신 가능한 크기(Window size) 내에서 데이터를 연속해서 전송하는 방식으로 매 세그먼트(Segment) 전송 시마다 수신확인응답(ACK)을 수신한 후 전송하게 되면 왕복시간(RTT : Round Trip Time)이 길 경우 단위 시간당 데이터 전송량이 매우 떨어지므로 효율적으로 전송하기 위해 상대방이 받을 수 있는 범위 내에서 연속적으로 전송한다.
-//     오류제어
-// 데이터의 오류나 누락없이 안전한 전송을 보장
-// 오류 또는 누락 발생 시 재전송을 수행하여 이를 보정
-// 혼잡제어
-// 네트워크의 혼잡 정도에 따라 송신자가 데이터 전송량을 제어하는 것을 말한다.
-//     혼잡정도에 대한 판단기준은 데이터의 손실 발생 유무로 판단한다. 전송한 데이터에 누락이 발생하면 네트워크가 혼잡한 상태로 판단하여 전송량을 조절한다.
 
-
-
-//
-// 전송 제어 프로토콜(Transmission Control Protocol, TCP, 문화어: 전송조종규약)은
-// 인터넷 프로토콜 스위트(IP)의 핵심 프로토콜 중 하나로, IP와 함께 TCP/IP라는 명칭으로도 널리 불린다.
-// TCP는 근거리 통신망이나 인트라넷, 인터넷에 연결된 컴퓨터에서 실행되는 프로그램 간에 일련의 옥텟을 안정적으로,
-// 순서대로, 에러없이 교환할 수 있게 한다. TCP는 전송 계층에 위치한다. 네트워크의 정보 전달을 통제하는 프로토콜이자 인터넷을 이루는 핵심 프로토콜의 하나로서 국제 인터넷 표준화 기구(IETF)의 RFC 793에 기술되어 있다.
-//
-//     TCP는 웹 브라우저들이 월드 와이드 웹에서 서버에 연결할 때 사용되며, 이메일 전송이나 파일 전송에도 사용된다.
-//
-//     TCP의 안정성을 필요로 하지 않는 애플리케이션의 경우 일반적으로
-//     TCP 대신 비접속형 사용자 데이터그램 프로토콜(User Datagram Protocol)을 사용한다. 이것은 전달 확인 및 순차 보장 기능이 없는 대신 오버헤드가 작고 지연시간이 짧다는 장점이 있다.
-//
