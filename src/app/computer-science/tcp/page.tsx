@@ -166,7 +166,32 @@ export default function Tcp (){
 
             <div className="mt-[24px] w-full text-gray090">
                 <h2 className="body-lg">TCP Segment 구조</h2>
+                <img src="/tcp_header.png" className="w-full object-cover mt-[4px]"/>
+                <p className="body-sm text-gray090 mt-[8px]">Source port (16 비트)</p>
+                <p className="text-gray060 body-xs"> 송신 포트</p>
 
+                <p className="body-sm text-gray090 mt-[4pxx]">Destination port (16 비트)</p>
+                <p className="text-gray060 body-xs"> 수신 포트</p>
+
+                <p className="body-sm text-gray090 mt-[4px]">Sequence number (32 비트)</p>
+                <p className="text-gray060 body-xs">
+
+                </p>
+                <p className="body-sm text-gray090 mt-[4px]">Acknowledgment number (32 비트)</p>
+                <p className="text-gray060 body-xs">
+
+                </p>
+
+
+                <p className="body-sm text-gray090 mt-[4px]">Data offset (4 비트)</p>
+
+
+                <p className="body-sm text-gray090 mt-[4px]">Flags (9 bits) (혹은 Control bits)</p>
+
+                <p className="body-sm text-gray090 mt-[4px]">Data offset (4 비트)</p>
+                <p className="body-sm text-gray090 mt-[4px]">window size (16 비트)</p>
+                <p className="body-sm text-gray090 mt-[4px]">Checksum (16 비트)</p>
+                <p className="body-sm text-gray090 mt-[4px]">Urgent pointer  (16 비트)</p>
 
             </div>
 
