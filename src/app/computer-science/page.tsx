@@ -12,6 +12,7 @@ export default function Cs() {
 
     const router = useRouter()
 
+
     return (
         <section className={parentStyle}>
             {csData.map((value, index) => (
