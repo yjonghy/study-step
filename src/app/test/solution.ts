@@ -4,7 +4,7 @@ function solution(score) {
     //평균을 담은 배열, 추후에 등급이 아닌 순서로 정렬하기 위한 index 또한 저장
     const average = score.map((value, index) => {
         return { average : (value[0] + value[1]) / 2, index : index + 1 }
-    })ㄷ
+    })
     //평균을 오름순으로 정렬한 배열
     const averageSort = average.sort((a, b) => b.average - a.average)
     //등수를 매기기 위한 코드
