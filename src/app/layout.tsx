@@ -21,6 +21,8 @@ export default function RootLayout({children}) {
     useEffect(() => {
         console.log(pathName)
     }, [])
+
+
     const queryClient = new QueryClient();
     return (
         <html lang="en">

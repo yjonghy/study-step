@@ -187,7 +187,6 @@ function solution9(spell, dic) {
 
 //문제 https://school.programmers.co.kr/learn/courses/30/lessons/12951
 
-
 function solution10(s) {
     let answer = '';
     s.split(" ").map((item, index) => {
