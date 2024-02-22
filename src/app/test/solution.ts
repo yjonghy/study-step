@@ -206,6 +206,31 @@ function solution10(s) {
 }
 
 
+//문제 https://school.programmers.co.kr/learn/courses/30/lessons/42628
+//이렇게 푸는게 아닌듯함
+function solution(operations) {
+    const answer = [];
+
+    operations.map((value) => {
+        if (value.split(" ")[0] === "I") {
+            answer.push(value.split(" ")[1])
+        }
+        if (value.split(" ")[0] === "D" && value.split(" ")[1] === "1") {
+            const max = Math.max.apply(null, answer)
+            const maxIndex = answer.indexOf(String(max))
+            answer.splice(maxIndex, 1)
+        }
+        if (value.split(" ")[0] === "D" && value.split(" ")[1] === "-1") {
+            const min = Math.min.apply(null, answer)
+            const minIndex = answer.indexOf(String(min))
+            answer.splice(minIndex, 1)
+        }
+    })
+
+
+    return answer.length === 0 ? [0,0] : [Math.max.apply(null, answer), Math.min.apply(null, answer)];
+}
+
 
 
 
