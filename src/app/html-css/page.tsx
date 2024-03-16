@@ -1,6 +1,7 @@
 "use client"
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {useRouter} from "next/navigation";
+import { PrimaryButton, SmallBtnStyle } from "@src/types/ButtonType";
 
 const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[12px]"
 
@@ -9,17 +10,36 @@ export default function HtmlCss() {
 
 
     const router = useRouter()
-    const [openDNS, setOpenDNS] = useState(false)
+    const renderRef = useRef(null)
+    const scriptTagRef = useRef(null)
 
+
+    const scollMove = (scrollY : number) => { window.scrollTo(0 ,scrollY) }
+
+
+    const [openDNS, setOpenDNS] = useState(false)
     const clickDNS = () => { setOpenDNS(!openDNS) }
 
 
     return (
         <section className={parentStyle}>
-            {/*브라우저 렌더링 과정을 설명해주세요.*/}
             <article className="w-full h-full">
-                <h1 className="text-gray090 heading-xl">브라우저 렌더링 과정</h1>
-                <div className="mt-[24px]">
+                <div className="w-full flex gap-[10px] flex-wrap">
+                    <div 
+                        onClick={() => { if (renderRef.current) scollMove(renderRef.current.getBoundingClientRect().top - 20) }}
+                        className={`${PrimaryButton} ${SmallBtnStyle} px-[8px] rounded-[8px]`}>
+                        <h1 className="text-white heading-xl">브라우저 렌더링 과정</h1>
+                    </div>
+                    <div 
+                        onClick={() => { if (scriptTagRef.current) scollMove(scriptTagRef.current.getBoundingClientRect().top - 20) }}
+                        className={`${PrimaryButton} ${SmallBtnStyle} px-[8px] rounded-[8px]`}>
+                        <h1 className="text-white heading-xl">script 태그 옵션</h1>
+                    </div>
+                </div> 
+
+
+
+                <div ref={renderRef} className="mt-[24px]">
                     <p className="text-gray090 body-xl">
                         1. 탐색
                     </p>
@@ -105,7 +125,34 @@ export default function HtmlCss() {
                         이 과정에서 브라우저는 투명도, 변환, 클리핑 등의 효과를 적용.
                         최종적으로 페이지의 모든 요소들을 하나의 이미지로 합친다
                     </p>
+                    <div className="mt-[40px] w-full h-[4px] bg-gray060"></div>
                 </div>
+
+
+                <div ref={scriptTagRef} className="mt-[40px]">
+                    <p className="text-gray090 body-xl">
+                        script 태그 option의 async 와 defer
+                    </p>
+                    <p className="text-gray090 body-xs mt-[12px]">
+                        <p className="body-md">-async</p>
+                        스크립트를 비동기적으로 로드, <br/>
+                        스크립트를 로드하는 동안 html의 파싱을 차단하지 않는다.<br/>
+                        다운로드 된 스크립트는 실행되며 실행중에도 html 파싱은 계속된다 <br/>
+                    </p>
+                    <p className="text-gray090 body-xs mt-[12px]">
+                        <p className="body-md">-defer</p>
+                        스크립트를 비동기적으로 로드하는건 같다. {"("}html 파싱을 차단하지않는다{")"} <br/>
+                        하지만 스크립트는 html 파싱이 완료된 후에 순타적으로 실행된다.<br/>
+                        문서가 완전히 로드된 후에 스크립트가 실행된다 <br/>
+                    </p>
+
+                    <p className="text-gray090 body-xs mt-[12px]">
+                        async와 defer 모두 비동기적으로 로드 하지만, 실행에 있어서 async는 비동기, defer은 문서 로딩 후에 실행되는 차이점이 있다.
+                    </p>
+                </div>
+
+
+
             </article>
 
 
