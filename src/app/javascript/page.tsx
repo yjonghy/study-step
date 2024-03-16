@@ -11,7 +11,7 @@ export default function JavaScript() {
 
 
     const [showDetail, setShowDetail] = useState({state: false, data: {}})
-    const showMessageDetail = (data) => {
+    const showMessageDetail = (data : any) => {
         setShowDetail({state: true, data: data})
     }
     const closeMessageDetail = () => {
