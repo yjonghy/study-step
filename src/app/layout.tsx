@@ -31,7 +31,9 @@ export default function RootLayout({children}) {
                     <Toast/>
                     <body className="flex flex-col items-center relative bg-gray030">
                     {pathName.includes("three") ?
-                        <main className="w-full h-full">{children}</main>
+                        <main className="w-full h-full">
+                            {children}
+                        </main>
                         :
                         <>
                             <main className={`relative
@@ -43,14 +45,14 @@ export default function RootLayout({children}) {
                                 <section className={`w-full h-full flex mobile:flex-col gap-[20px] z-[1] relative`}>
                                     <NavigationHeader/>
                                     <div className="w-full h-full">
-                                        <RouterButton/>
+                                        {!pathName.includes("template") && <RouterButton/>}
                                         {children}
                                     </div>
                                 </section>
                             </main>
-                            <div className="w-screen absolute top-0 left-0 h-[266px] blur-[8px]">
+                            {/* <div className="w-screen absolute top-0 left-0 h-[266px] blur-[8px]">
                                 <img src="/banner.jpg" className="w-full h-full object-cover"/>
-                            </div>
+                            </div> */}
                         </>
                     }
                     </body>
