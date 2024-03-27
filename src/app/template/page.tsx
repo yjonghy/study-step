@@ -6,7 +6,9 @@ export default function Template() {
 
     return (
         <section id="career_layout" className="w-full h-full flex flex-col">
-            <article className="py-[40px] rounded-[8px] px-[30px] bg-white/70 shadow-shadow15">
+            <article className="py-[40px] rounded-[8px] px-[30px] bg-white/70 shadow-shadow15 relative">
+                <a className="block absolute top-[20px] right-[20px] body-sm text-blue030 underline" href="https://study-step.vercel.app/template">원본링크</a>
+
                 <p className="heading-xl text-gray080">About me</p>
 
                 <p className="mt-[20px] heading-sm text-gray080">- 도전을 즐기며, 개발 중인 서비스를 심도 있게 생각하는 개발자입니다.</p>
@@ -24,6 +26,8 @@ export default function Template() {
                     흔한 변수명과 함수명 등 기본적인 것뿐만 아니라, recoil key, storage key 또한 규칙이 있어야 한다고 생각합니다
                     단순히 개발에서 그치지 않고, 웹 생태계의 흐름을 파악하려 노력합니다
                 </p>
+
+
             </article>
 
             <article className="mt-[20px] py-[40px] rounded-[8px] px-[30px] bg-white/70 shadow-shadow15">
