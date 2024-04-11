@@ -44,25 +44,25 @@ export default function Template() {
                     <p className="mt-[8px] heading-sm text-gray080">Stack</p>
 
                     <div className="mt-[2px] w-full flex flex-wrap gap-[4px]">
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 shadow-shadow15">
                             <p className="body-sm text-white">TypeScript</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 shadow-shadow15">
                             <p className="body-sm text-white">Next.js</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 shadow-shadow15">
                             <p className="body-sm text-white">Recoil</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 shadow-shadow15">
                             <p className="body-sm text-white">React Query</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 shadow-shadow15">
                             <p className="body-sm text-white">TailwindCSS</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 shadow-shadow15">
                             <p className="body-sm text-white">HTML</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-yellow070 shadow-shadow15">
                             <p className="body-sm text-white">CSS</p>
                         </div>
                     </div>
@@ -88,19 +88,19 @@ export default function Template() {
                     <p className="mt-[8px] heading-sm text-gray080">Stack</p>
 
                     <div className="mt-[2px] w-full flex flex-wrap gap-[4px]">
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 shadow-shadow15">
                             <p className="body-sm text-white">JavaScript</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 shadow-shadow15">
                             <p className="body-sm text-white">React</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 shadow-shadow15">
                             <p className="body-sm text-white">styled-components</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 shadow-shadow15">
                             <p className="body-sm text-white">HTML</p>
                         </div>
-                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 ">
+                        <div className="py-[4px] px-[8px] flex justify-center items-center rounded-full bg-green070 shadow-shadow15">
                             <p className="body-sm text-white">CSS</p>
                         </div>
                     </div>
