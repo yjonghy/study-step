@@ -3,13 +3,11 @@
 import {useGetPocketInfo, useGetPocketSpecies} from "@src/hook/query";
 import {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
-import {getPocketInfo} from "@src/api/get/route";
 const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[12px]"
 
 export default function PocketMonDetail(){
 
     const pathName = usePathname()
-    //console.log(pathName.replaceAll("/","").replace("pocketmon", ""))
     const getPocketMonSpecies = useGetPocketSpecies(pathName.replaceAll("/","").replace("pocketmon", ""))
     const getPocketInfoQuery = useGetPocketInfo(pathName.replaceAll("/","").replace("pocketmon", ""))
 
@@ -25,8 +23,6 @@ export default function PocketMonDetail(){
 
     useEffect(() => {
         if (sprites !== null) {
-            console.log(sprites)
-            console.log(Object.keys(sprites))
             setImageList(Object.keys(sprites))
         }
 
