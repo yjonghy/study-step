@@ -3,10 +3,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import Button from "@src/components/common/button";
 import {
     GhostPrimaryButton,
-    LargeBtnStyle,
-    MediumBtnStyle,
     PrimaryButton,
-    SecondaryButton,
     SmallBtnStyle
 } from "@src/types/ButtonType";
 
@@ -14,7 +11,6 @@ export default function RouterButton() {
 
     const router = useRouter()
     const pathName = usePathname()
-
 
     const goPage = (value : string) => { router.push(value) }
 
@@ -53,6 +49,11 @@ export default function RouterButton() {
                 onClick={() => goPage("/work-code")}
                 btnStyle={`${changeBtnActiveStyle("work-code")} ${SmallBtnStyle} px-[20px]`}
                 text={{value: "work-code", style: `heading-md ${changeBtnTextStyle("work-code")}`}}/>
+
+            <Button
+                onClick={() => goPage("/story")}
+                btnStyle={`${changeBtnActiveStyle("story")} ${SmallBtnStyle} px-[20px]`}
+                text={{value: "회고록", style: `heading-md ${changeBtnTextStyle("story")}`}}/>
         </nav>
     )
 }

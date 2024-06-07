@@ -38,6 +38,7 @@ export default function WorkCode() {
 
             <p className="text-gray060 heading-xl">각 컴포넌트</p>
             <div className="w-full flex flex-col gap-[10px] justify-center items-center">
+                <p className="text-gray080 body-md">framer 사용</p>
                 <Input
                     parentStyle={`mt-[24px] ${widthStyle}`}
                     label={{
@@ -64,8 +65,6 @@ export default function WorkCode() {
                         }
                     })}
                 />
-
-
                 <Button
                     onClick={() => setOpenToast()}
                     btnStyle={`${PrimaryButton} ${LargeBtnStyle} ${MotionFast} max-w-[200px] h-full w-full`}

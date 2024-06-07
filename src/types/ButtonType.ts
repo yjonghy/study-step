@@ -27,7 +27,7 @@ export interface ButtonType {
 
     btnStyle? : string
     onClick? : any
-    leftImage : {
+    leftImage? : {
         url? : string
         style? : string
     }
@@ -35,7 +35,7 @@ export interface ButtonType {
         value? : string
         style? : string
     }
-    rightImage : {
+    rightImage? : {
         url? : string
         style? : string
     }
