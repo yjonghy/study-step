@@ -1,5 +1,7 @@
 
 //문제 https://school.programmers.co.kr/learn/courses/30/lessons/120882
+import {useEffect} from "react";
+
 function solution1(score) {
     //평균을 담은 배열, 추후에 등급이 아닌 순서로 정렬하기 위한 index 또한 저장
     const average = score.map((value, index) => {
@@ -227,24 +229,39 @@ function solution(operations) {
         }
     })
 
-
     return answer.length === 0 ? [0,0] : [Math.max.apply(null, answer), Math.min.apply(null, answer)];
 }
+//문제: 모든 숫자의 등장 횟수 세기
+// 4: 2회
+// 3: 2회
+// 2: 2회
+// 1: 1회
+function solutionHash1(array :  number[]) {
+    const valueCount: {[key: number]: number} = {};
+    for (let num of array) {
+        if (valueCount[num] !== undefined) {
+            valueCount[num]++;
+        } else {
+            valueCount[num] = 1;
+        }
+    }
+    return valueCount
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//문제: 주어진 배열에서 중복 요소 제거하기
+//입력: [1, 2, 5, 2, 3, 5, 1, 2, 4]
+//출력: [1, 2, 5, 3, 4]
+const solutionHash2 = (array : number[]) => {
+    const valueCount: {[key: number]: boolean} = {};
+    const result = []
+    for (let num of array) {
+        if (valueCount[num] === undefined) {
+            valueCount[num] = true;
+            result.push(num);
+        }
+    }
+    return result
+}
 
 
 
