@@ -7,11 +7,11 @@ const descBubbleStyle = "mt-[24px] flex flex-col justify-center body-xs"
 export default function JavascriptEngine (){
 
 
-    const tokenRef = useRef(null)
-    const parserRef = useRef(null)
-    const astRef = useRef(null)
-    const interpreterRef = useRef(null)
-    const compilerRef = useRef(null)
+    const tokenRef = useRef<HTMLDivElement>(null)
+    const parserRef = useRef<HTMLDivElement>(null)
+    const astRef = useRef<HTMLDivElement>(null)
+    const interpreterRef = useRef<HTMLDivElement>(null)
+    const compilerRef = useRef<HTMLDivElement>(null)
 
     const [semispace, setSemispace] = useState(false)
 
@@ -204,7 +204,7 @@ export default function JavascriptEngine (){
                     <br/>소스 코드의 추상 구문 구조의 트리이다.
                     추상적이라는 이유는 실제 구문에서 나타나는 모든 세세한 정보를 표현하지 않는다는 것을 의미한다.
                     <br/>파서가 토큰을 구문분석하여 우선순위에 따라 노드에 추가하여 만든 트리이다 (이미지 참조)
-                    <img src="/ast.png" className="object-cover mt-[8px]"/>
+                    <img src="/ast.png" className="object-cover mt-[8px]" alt="ast"/>
                 </div>
 
 

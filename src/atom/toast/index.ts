@@ -7,9 +7,9 @@ export interface Toast {
     btnText?: string;
     isBtn?: boolean;
     onClick? : any;
-    damping: number,
-    mass: number,
-    stiffness: number
+    damping? : number;
+    mass? : number;
+    stiffness? : number;
 }
 export const HourToast = atom<Toast[]>({
     key : "HourToast",

@@ -25,7 +25,7 @@ export default function  ToastItem(toast: any) {
     })
 
     useEffect(() => {
-        let toastElem : any= window.document.getElementById(`toast-${toast.id}`)
+        let toastElem : any = window.document.getElementById(`toast-${toast.id}`)
         toastElem.addEventListener("transitionend", catchEndTransition)
         return () => {
             setIsBounce(false)
