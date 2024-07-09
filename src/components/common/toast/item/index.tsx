@@ -11,7 +11,7 @@ const btnText = "cursor-pointer heading-sm text-white shrink-0 self-center"
 const transitionStyle = ""
 
 //transition-transform duration-150 translate-y-[140px] mobile:translate-y-[116px]
-export default function ToastItem(toast: any) {
+export default function  ToastItem(toast: any) {
     const [isClosing, setIsClosing] = useState(false)
     const [isFadeOut, setIsFadeOut] = useState(false)
     const [isBounce, setIsBounce] = useState(false)
@@ -25,7 +25,7 @@ export default function ToastItem(toast: any) {
     })
 
     useEffect(() => {
-        let toastElem = window.document.getElementById(`toast-${toast.id}`)
+        let toastElem : any= window.document.getElementById(`toast-${toast.id}`)
         toastElem.addEventListener("transitionend", catchEndTransition)
         return () => {
             setIsBounce(false)
@@ -42,7 +42,7 @@ export default function ToastItem(toast: any) {
                 animate={{ translateY : "140px" }}
                 className={`${parentStyle} ${transitionStyle} mobile:hidden`}
                 //whileHover={{ scale: 1.3 }}
-                transition={{ type: "spring", damping: 20, mass: 1, stiffness : 300 }}
+                transition={{ type: "spring", damping: toast.damping, mass: toast.mass, stiffness : toast.stiffness }}
             >
                 <div
                     className={`${toastBgStyle} transition-opacity ${isFadeOut && "duration-150 opacity-0"}
@@ -65,7 +65,7 @@ export default function ToastItem(toast: any) {
                 animate={{ translateY : "116px" }}
                 className={`${parentStyle} ${transitionStyle} desktop:hidden tablet:hidden`}
                 //whileHover={{ scale: 1.3 }}
-                transition={{ type: "spring", damping: 20, mass: 1, stiffness : 300 }}
+                transition={{ type: "spring", damping: toast.damping, mass: toast.mass, stiffness : toast.stiffness }}
             >
                 <div
                     className={`${toastBgStyle} transition-opacity ${isFadeOut && "duration-150 opacity-0"}
