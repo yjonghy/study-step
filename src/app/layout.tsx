@@ -17,6 +17,9 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 export default function RootLayout({children}: any) {
     const pathName = usePathname()
+
+
+
     const queryClient = new QueryClient();
     return (
         <html lang="en">

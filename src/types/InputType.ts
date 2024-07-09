@@ -3,14 +3,14 @@ export interface InputType {
     parentStyle? : string
     disable? : boolean;
     // label(왼쪽 상단) 관련 props
-    label : {
+    label? : {
         labelText? : string;
         labelStyle? : string;
         requiredMark? : boolean
         labelImage? : string;
     }
     //오른쪽 관련 상단 props => ex)!Verify email
-    guide : {
+    guide? : {
         onGuideClick? : any
         guideImage? : string;
         guideText? : string;
@@ -36,19 +36,19 @@ export interface InputType {
         placeholderStyle? : string;
     }
     //input text 초기화 버튼 관련 props
-    reset : {
+    reset? : {
         onReset? : any
         resetBtnStyle? : string
     }
     //submit 버튼 관련 props
-    submit : {
+    submit? : {
         submitText? : string
         onSubmit? : any
         submitStyle? : string
         submitImage? : string
     }
     //input box 하단 텍스트 ex)유효성 검사 => 비밀번호가 형식에 맞지않습니다
-    verify : {
+    verify? : {
         verifyText? : string;
         verifyImage? : string;
         verifyTextStyle? : string;

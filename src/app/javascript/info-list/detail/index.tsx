@@ -7,7 +7,7 @@ export default function  JavaSciptList(props: any){
 
             <div
                 onClick={() => {props.closeDetail()}}
-                className="py-[12px] self-start flex justify-center items-center cursor-pointer bg-hourblue rounded-[8px] h-[45px] w-[120px]">
+                className="px-[8px] py-[4px] flex self-end justify-center items-center cursor-pointer bg-hourblue rounded-[4px]">
                 <p className="text-white body-sm">뒤로가기</p>
             </div>
 
