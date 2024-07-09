@@ -14,7 +14,6 @@ import Toast from "@src/components/common/toast";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 
-export default function RootLayout({children} : any) {
 
 export default function RootLayout({children}: any) {
     const pathName = usePathname()
