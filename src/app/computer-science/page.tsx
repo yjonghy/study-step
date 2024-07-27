@@ -7,6 +7,7 @@ const csData = [
     {title_ : "http 버전 특징",  link : "/computer-science/http-version" },
     {title_ : "osi 7계층",  link : "/computer-science/osi" },
     {title_ : "tcp",  link : "/computer-science/tcp" },
+    {title_ : "브라우저 저장소" , link : "/computer-science/storage"}
 ]
 export default function Cs() {
 

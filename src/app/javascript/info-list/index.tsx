@@ -29,7 +29,7 @@ export default function  InfoList(props: any){
                 <div className="my-[24px] bg-gray025 h-[1px] w-full"></div>
 
 
-                <div className="w-full flex pb-[20px] gap-[16px]">
+                {/* <div className="w-full flex pb-[20px] gap-[16px]">
                     <div className="flex flex-col w-[140px]">
                         <p className={`py-[8px] ${headerStyle}`}>문서 작성날짜</p>
                     </div>
@@ -39,7 +39,7 @@ export default function  InfoList(props: any){
                         <p className={`py-[8px] ${contentStyle}`}>2023-01-10</p>
 
                     </div>
-                </div>
+                </div> */}
 
                 <Button
                     onClick={() => { props.showMessageDetail(props.title) }}
