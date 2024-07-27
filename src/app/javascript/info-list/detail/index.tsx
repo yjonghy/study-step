@@ -1,5 +1,6 @@
 import JavascriptEngine from "@src/app/javascript/info-list/detail/JavascriptEngine";
 import MouseEvent from "@src/app/javascript/info-list/detail/MouseEvent";
+import JavaScriptThis from "./JavaScriptThis";
 
 export default function  JavaSciptList(props: any){
     return(
@@ -13,6 +14,7 @@ export default function  JavaSciptList(props: any){
 
             {props.data === "javascript 엔진" && <JavascriptEngine/>}
             {props.data === "mouse event" && <MouseEvent />}
+            {props.data === "자바스크립트 this" && <JavaScriptThis />}
         </article>
     )
 }
