@@ -5,8 +5,7 @@ import React from "react";
 const headerStyle = "body-sm text-gray040"
 const contentStyle = "body-sm text-gray080"
 
-export default function  InfoList(props: any){
-
+export default function InfoList(props: any){
     return(
         <article className="w-full flex flex-col justify-center items-center  py-[8px] px-[4px] rounded-[12px]">
 

@@ -4,7 +4,7 @@ import {GhostPrimaryButton} from "@src/types/ButtonType";
 
 const flowStyle = "bg-gray020 px-[8px] rounded-[8px] cursor-pointer text-center h-[52px] flex items-center" + GhostPrimaryButton
 const descBubbleStyle = "mt-[24px] flex flex-col justify-center body-xs"
-export default function JavascriptEngine (){
+export default function JavaScriptEngine (){
 
 
     const tokenRef = useRef<HTMLDivElement>(null)

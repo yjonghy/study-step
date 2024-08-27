@@ -6,7 +6,7 @@ import InfoList from "@src/app/javascript/info-list";
 const parentStyle = "flex flex-col items-start p-[20px] pb-[40px] bg-white/70 mt-[20px] rounded-[12px]"
 
 
-const title_ = ["javascript 엔진", "mouse event", "자바스크립트 this"]
+const title_ = ["javascript 엔진", "mouse event", "자바스크립트 this", "제너레이터/이터러블(지연평가)"]
 export default function JavaScript() {
 
 
