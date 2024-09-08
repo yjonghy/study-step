@@ -3,6 +3,7 @@ import JavaScriptThis from "./JavaScriptThis";
 import JavaScriptEngine from "./JavaScriptEngine";
 import JavaScriptLazyEvaluation from "./JavaScriptLazyEvaluation";
 import EventLoop from "./EventLoop";
+import JavaSciptArrayMethod from "./JavaScriptArrayMethod";
 
 export default function  JavaSciptList(props: any){
     return(
@@ -12,12 +13,14 @@ export default function  JavaSciptList(props: any){
                 className="px-[8px] py-[4px] flex self-end justify-center items-center cursor-pointer bg-hourblue rounded-[4px]">
                 <p className="text-white body-sm">뒤로가기</p>
             </div>
-
+            {/* javascript array method */}
             {props.data === "javascript 엔진" && <JavaScriptEngine/>}
             {props.data === "mouse event" && <MouseEvent />}
             {props.data === "자바스크립트 this" && <JavaScriptThis />}
             {props.data === "제너레이터/이터러블(지연평가)" && <JavaScriptLazyEvaluation />}
             {props.data === "이벤트 루프" && <EventLoop />}
+            {props.data === "javascript array method" && <JavaSciptArrayMethod/>}
+            {/* JavaSciptArrayMethod */}
         </article>
     )
 }

@@ -13,7 +13,6 @@ export default function JavaScriptEngine (){
     const interpreterRef = useRef<HTMLDivElement>(null)
     const compilerRef = useRef<HTMLDivElement>(null)
 
-    const [semispace, setSemispace] = useState(false)
 
     const changeVisibleBubble = (type : string) => {
         if (type === "token") {
