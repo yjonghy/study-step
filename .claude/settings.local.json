@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk 'NR>=4 && NR<=8 {printf \"%d: %s\\\\n\", NR, $0}' /Users/indeep-jh/Desktop/side/study-step/src/app/hexagon/page.tsx)",
+      "Bash(npx --no-install next build)",
+      "Bash(awk 'NR==131 || NR==148' /Users/indeep-jh/Desktop/side/study-step/src/app/javascript/info-list/detail/TypeScriptBasic.tsx)"
+    ]
+  }
+}
