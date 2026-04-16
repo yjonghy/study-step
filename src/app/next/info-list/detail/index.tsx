@@ -3,6 +3,7 @@ import RenderingStrategy from "./RenderingStrategy"
 import ServerClientComponent from "./ServerClientComponent"
 import NextMetadata from "./NextMetadata"
 import NextImageFont from "./NextImageFont"
+import Middleware from "./Middleware"
 
 export default function NextDetailList(props: any) {
     return (
@@ -22,6 +23,7 @@ export default function NextDetailList(props: any) {
             {props.data === "서버 컴포넌트 vs 클라이언트 컴포넌트"       && <ServerClientComponent />}
             {props.data === "메타데이터 & SEO"                          && <NextMetadata />}
             {props.data === "next/image & next/font"                   && <NextImageFont />}
+            {props.data === "Middleware"                               && <Middleware />}
         </article>
     )
 }

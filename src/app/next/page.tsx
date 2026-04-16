@@ -11,6 +11,7 @@ const title_ = [
     "서버 컴포넌트 vs 클라이언트 컴포넌트",
     "메타데이터 & SEO",
     "next/image & next/font",
+    "Middleware",
 ]
 
 export default function NextPage() {

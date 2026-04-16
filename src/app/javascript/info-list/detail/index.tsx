@@ -7,6 +7,9 @@ import JavaSciptArrayMethod from "./JavaScriptArrayMethod";
 import TypeScriptBasic from "./TypeScriptBasic";
 import TypeScriptGenerics from "./TypeScriptGenerics";
 import TypeScriptUtility from "./TypeScriptUtility";
+import Closure from "./Closure";
+import Prototype from "./Prototype";
+import PromiseAsync from "./Promise";
 
 export default function JavaSciptList(props: any) {
     return (
@@ -30,6 +33,9 @@ export default function JavaSciptList(props: any) {
             {props.data === "TypeScript 기초 & 타입 시스템"     && <TypeScriptBasic />}
             {props.data === "TypeScript 제네릭"                 && <TypeScriptGenerics />}
             {props.data === "TypeScript 유틸리티 타입"           && <TypeScriptUtility />}
+            {props.data === "클로저 (Closure)"                   && <Closure />}
+            {props.data === "프로토타입 (Prototype)"              && <Prototype />}
+            {props.data === "Promise / async·await"             && <PromiseAsync />}
         </article>
     )
 }
