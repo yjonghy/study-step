@@ -4,7 +4,7 @@ export default function ReactRendering() {
 
             <p className="text-gray060 heading-xl">React 렌더링 원리</p>
             <p className="text-gray060 body-sm mt-[16px]">
-                React에서 "렌더링"이란 컴포넌트 함수를 호출해 React가 화면에 무엇을 그려야 할지 파악하는 과정이다.<br />
+                React에서 &quot;렌더링&quot;이란 컴포넌트 함수를 호출해 React가 화면에 무엇을 그려야 할지 파악하는 과정이다.<br />
                 DOM을 직접 업데이트하는 것과 다르다.
             </p>
 

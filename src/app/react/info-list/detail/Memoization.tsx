@@ -5,7 +5,7 @@ export default function Memoization() {
             <p className="text-gray060 heading-xl">useMemo / useCallback / React.memo</p>
             <p className="text-gray060 body-sm mt-[16px]">
                 JavaScript에서 함수와 객체는 매 렌더링마다 새로운 참조(reference)를 가진다.<br />
-                React의 얕은 비교(shallow comparison)는 값이 같아도 참조가 다르면 "변경됨"으로 판단한다.<br />
+                React의 얕은 비교(shallow comparison)는 값이 같아도 참조가 다르면 &quot;변경됨&quot;으로 판단한다.<br />
                 메모이제이션은 이 참조를 안정시켜 불필요한 리렌더링을 방지한다.
             </p>
 

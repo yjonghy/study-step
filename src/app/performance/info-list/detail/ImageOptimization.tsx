@@ -69,7 +69,7 @@ export default function ImageOptimization() {
                 <p className="text-blue030 body-md">Lazy Loading & Preload</p>
                 <div className="mt-[6px] flex flex-col gap-[6px]">
                     <div className="bg-gray010 rounded-[8px] p-[12px]">
-                        <p className="body-xs text-gray080 font-bold mb-[4px]">loading="lazy" — 뷰포트 진입 시 로드</p>
+                        <p className="body-xs text-gray080 font-bold mb-[4px]">loading=&quot;lazy&quot; — 뷰포트 진입 시 로드</p>
                         <p className="body-xs text-gray060 whitespace-pre-line">
                             {`<!-- 뷰포트 아래 이미지는 나중에 로드 -->
 <img src="below-fold.jpg" loading="lazy" alt="..." />
@@ -79,7 +79,7 @@ export default function ImageOptimization() {
                         </p>
                     </div>
                     <div className="bg-gray010 rounded-[8px] p-[12px]">
-                        <p className="body-xs text-gray080 font-bold mb-[4px]">fetchpriority="high" — LCP 이미지 우선 로드</p>
+                        <p className="body-xs text-gray080 font-bold mb-[4px]">fetchpriority=&quot;high&quot; — LCP 이미지 우선 로드</p>
                         <p className="body-xs text-gray060 whitespace-pre-line">
                             {`<!-- 히어로 이미지는 빠르게 로드해야 LCP 개선 -->
 <img src="hero.jpg" fetchpriority="high" alt="..." />
@@ -91,7 +91,7 @@ export default function ImageOptimization() {
                     <div className="bg-red005 border border-red020 rounded-[8px] p-[10px]">
                         <p className="body-xs text-red050 font-bold mb-[2px]">주의 — LCP 이미지에 lazy 금지</p>
                         <p className="body-xs text-gray060">
-                            첫 화면에 보이는 이미지(히어로, 배너)에 loading="lazy"를 쓰면 LCP가 크게 나빠진다.
+                            첫 화면에 보이는 이미지(히어로, 배너)에 loading=&quot;lazy&quot;를 쓰면 LCP가 크게 나빠진다.
                         </p>
                     </div>
                 </div>

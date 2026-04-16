@@ -24,7 +24,7 @@ export default function CoreWebVitals() {
                         </div>
                     </div>
                     <p className="body-xs text-gray060 mb-[8px]">
-                        뷰포트에서 가장 큰 콘텐츠(이미지, 텍스트 블록)가 렌더링되는 시간. 사용자가 "페이지가 로드됐다"고 느끼는 시점.
+                        뷰포트에서 가장 큰 콘텐츠(이미지, 텍스트 블록)가 렌더링되는 시간. 사용자가 &quot;페이지가 로드됐다&quot;고 느끼는 시점.
                     </p>
                     <div className="bg-white rounded-[8px] p-[10px]">
                         <p className="body-xs text-gray080 font-bold mb-[4px]">개선 방법</p>

@@ -112,7 +112,7 @@ export default function HttpsAndTls() {
             <div className="mt-[32px] flex flex-col gap-[6px]">
                 <p className="text-blue030 body-md">HSTS (HTTP Strict Transport Security)</p>
                 <p className="text-gray060 body-sm">
-                    서버가 응답 헤더로 "항상 HTTPS로만 접속하라"고 브라우저에 지시.<br />
+                    서버가 응답 헤더로 &quot;항상 HTTPS로만 접속하라&quot;고 브라우저에 지시.<br />
                     첫 접속 이후 HTTP 요청을 브라우저가 자동으로 HTTPS로 업그레이드.
                 </p>
                 <div className="bg-gray010 rounded-[8px] p-[12px] mt-[4px]">

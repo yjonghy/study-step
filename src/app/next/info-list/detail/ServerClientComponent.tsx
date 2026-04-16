@@ -4,7 +4,7 @@ export default function ServerClientComponent() {
 
             <p className="text-gray060 heading-xl">서버 컴포넌트 vs 클라이언트 컴포넌트</p>
             <p className="text-gray060 body-sm mt-[16px]">
-                App Router의 핵심 개념. 기본값이 서버 컴포넌트이며, <code>'use client'</code>를 선언해야 클라이언트 컴포넌트가 된다.
+                App Router의 핵심 개념. 기본값이 서버 컴포넌트이며, <code>&apos;use client&apos;</code>를 선언해야 클라이언트 컴포넌트가 된다.
             </p>
 
             {/* 비교표 */}

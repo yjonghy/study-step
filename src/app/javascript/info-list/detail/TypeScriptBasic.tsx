@@ -128,7 +128,7 @@ function isString(val: unknown): val is string {
                 <p className="text-blue030 body-md">유니온(|) & 인터섹션(&)</p>
                 <div className="flex gap-[8px] mt-[6px]">
                     <div className="flex-1 bg-gray010 rounded-[8px] p-[12px]">
-                        <p className="body-xs text-gray080 font-bold mb-[4px]">유니온 | — "또는"</p>
+                        <p className="body-xs text-gray080 font-bold mb-[4px]">유니온 | — &quot;또는&quot;</p>
                         <p className="body-xs text-gray060 whitespace-pre-line">
                             {`type Result = 'success' | 'error'
 type ID = string | number
@@ -145,7 +145,7 @@ function area(s: Shape) {
                         </p>
                     </div>
                     <div className="flex-1 bg-gray010 rounded-[8px] p-[12px]">
-                        <p className="body-xs text-gray080 font-bold mb-[4px]">인터섹션 & — "그리고"</p>
+                        <p className="body-xs text-gray080 font-bold mb-[4px]">인터섹션 & — &quot;그리고&quot;</p>
                         <p className="body-xs text-gray060 whitespace-pre-line">
                             {`type Serializable = { toJSON: () => string }
 type Loggable = { log: () => void }

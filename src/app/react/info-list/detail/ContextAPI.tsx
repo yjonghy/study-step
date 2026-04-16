@@ -5,7 +5,7 @@ export default function ContextAPI() {
             <p className="text-gray060 heading-xl">Context API</p>
             <p className="text-gray060 body-sm mt-[16px]">
                 Context는 컴포넌트 트리 전체에 데이터를 직접 전달하는 방법이다.<br />
-                props를 통해 여러 단계를 거쳐 전달해야 하는 "props drilling" 문제를 해결한다.
+                props를 통해 여러 단계를 거쳐 전달해야 하는 &quot;props drilling&quot; 문제를 해결한다.
             </p>
 
             {/* props drilling */}

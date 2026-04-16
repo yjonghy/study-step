@@ -2,8 +2,8 @@
 import {useEffect, useRef, useState} from "react";
 
 const tileStyle = `w-[100px] h-[55px] relative text-hourblue text-center text-[20px] flex items-center justify-center
-                        before:content-[""] before:absolute before:top-[-25px] before:left-0 before:w-0 before:h-0 before:border-l-[50px] before:border-l-transparent before:border-r-[50px] before:border-r-transparent before:border-b-[25px]
-                        after:content-[""] after:absolute after:bottom-[-25px] after:left-0 after:w-0 after:h-0 after:border-l-[50px] after:border-l-transparent after:border-r-[50px] after:border-r-transparent after:border-t-[25px]`
+                        before:content-[''] before:absolute before:top-[-25px] before:left-0 before:w-0 before:h-0 before:border-l-[50px] before:border-l-transparent before:border-r-[50px] before:border-r-transparent before:border-b-[25px]
+                        after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-0 after:h-0 after:border-l-[50px] after:border-l-transparent after:border-r-[50px] after:border-r-transparent after:border-t-[25px]`
 
 
 const verticalArray = [
