@@ -3,7 +3,7 @@ export default function Suspense() {
         <article className="w-full h-full flex flex-col justify-center mt-[40px]">
             <p className="text-gray060 heading-xl">Suspense & Concurrent Mode</p>
             <p className="text-gray060 body-sm mt-[16px]">
-                Suspense는 컴포넌트가 렌더링되기 전에 무언가를 "기다리는" 동안 폴백 UI를 선언적으로 표시하는 메커니즘이다.<br />
+                Suspense는 컴포넌트가 렌더링되기 전에 무언가를 &ldquo;기다리는&rdquo; 동안 폴백 UI를 선언적으로 표시하는 메커니즘이다.<br />
                 React 18의 Concurrent Mode와 함께 데이터 페칭, 코드 스플리팅 등 비동기 경험을 크게 개선한다.
             </p>
 

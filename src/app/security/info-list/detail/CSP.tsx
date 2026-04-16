@@ -47,7 +47,7 @@ Content-Security-Policy:
             {/* nonce 방식 */}
             <div className="mt-[32px] flex flex-col gap-[6px]">
                 <p className="text-blue030 body-md">nonce 방식 — 인라인 스크립트 허용</p>
-                <p className="text-gray060 body-sm">요청마다 랜덤 nonce를 생성하여, 해당 nonce를 가진 인라인 스크립트만 실행 허용. 'unsafe-inline' 없이도 인라인 스크립트 사용 가능.</p>
+                <p className="text-gray060 body-sm">요청마다 랜덤 nonce를 생성하여, 해당 nonce를 가진 인라인 스크립트만 실행 허용. &apos;unsafe-inline&apos; 없이도 인라인 스크립트 사용 가능.</p>
                 <div className="mt-[8px] bg-gray010 rounded-[8px] p-[12px]">
                     <p className="body-xs text-gray060 whitespace-pre-line">{`// 서버 (Next.js Middleware)
 const nonce = crypto.randomUUID();
