@@ -11,6 +11,9 @@
     "start": "node_modules/next/dist/bin/next start -p ${PORT}",
     "test": "jest"
   },
+  "engines": {
+    "node": ">=20.x"
+  },
   "dependencies": {
     "@react-three/drei": "^9.89.0",
     "@react-three/fiber": "^8.15.11",
