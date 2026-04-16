@@ -3,6 +3,8 @@ import RenderOptimization from "./RenderOptimization"
 import ImageOptimization from "./ImageOptimization"
 import BundleOptimization from "./BundleOptimization"
 import Monitoring from "./Monitoring"
+import CriticalRenderingPath from "./CriticalRenderingPath"
+import SEOOptimization from "./SEOOptimization"
 
 export default function PerformanceDetailList(props: any) {
     return (
@@ -22,6 +24,8 @@ export default function PerformanceDetailList(props: any) {
             {props.data === "이미지 최적화"                 && <ImageOptimization />}
             {props.data === "번들 최적화"                   && <BundleOptimization />}
             {props.data === "모니터링 (Datadog / Sentry)"   && <Monitoring />}
+            {props.data === "크리티컬 렌더링 패스 (CRP)"      && <CriticalRenderingPath />}
+            {props.data === "SEO 최적화"                    && <SEOOptimization />}
         </article>
     )
 }

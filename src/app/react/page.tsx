@@ -11,6 +11,9 @@ const title_ = [
     "React Hooks 기초",
     "useMemo / useCallback / React.memo",
     "Context API",
+    "Error Boundary",
+    "Suspense & Concurrent Mode",
+    "React Profiler & 성능 측정",
 ]
 
 export default function ReactPage() {

@@ -3,6 +3,9 @@ import ReactRendering from "./ReactRendering";
 import ReactHooks from "./ReactHooks";
 import Memoization from "./Memoization";
 import ContextAPI from "./ContextAPI";
+import ErrorBoundary from "./ErrorBoundary";
+import Suspense from "./Suspense";
+import ReactProfiler from "./ReactProfiler";
 
 export default function ReactDetailList(props: any) {
     return (
@@ -22,6 +25,9 @@ export default function ReactDetailList(props: any) {
             {props.data === "React Hooks 기초"                   && <ReactHooks />}
             {props.data === "useMemo / useCallback / React.memo" && <Memoization />}
             {props.data === "Context API"                        && <ContextAPI />}
+            {props.data === "Error Boundary"                     && <ErrorBoundary />}
+            {props.data === "Suspense & Concurrent Mode"         && <Suspense />}
+            {props.data === "React Profiler & 성능 측정"          && <ReactProfiler />}
         </article>
     )
 }

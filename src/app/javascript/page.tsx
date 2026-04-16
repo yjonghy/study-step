@@ -16,6 +16,9 @@ const title_ = [
     "TypeScript 기초 & 타입 시스템",
     "TypeScript 제네릭",
     "TypeScript 유틸리티 타입",
+    "클로저 (Closure)",
+    "프로토타입 (Prototype)",
+    "Promise / async·await",
 ]
 export default function JavaScript() {
 
