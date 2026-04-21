@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const navItems = [
@@ -13,14 +14,82 @@ const navItems = [
     { label: "회고록",               path: "/story",             tag: "Story" },
 ]
 
+const LENS_SIZE = 160
+const ZOOM = 3
+const IMG_DISPLAY_SIZE = 320
+
+type MagnifierState = {
+    show: boolean
+    clientX: number
+    clientY: number
+    imgX: number
+    imgY: number
+}
+
 export default function NavigationHeader() {
     const pathName = usePathname()
     const router = useRouter()
+    const [imgOpen, setImgOpen] = useState(false)
+    const [magnifier, setMagnifier] = useState<MagnifierState>({
+        show: false, clientX: 0, clientY: 0, imgX: 0, imgY: 0,
+    })
 
     const isActive = (path: string) => pathName.startsWith(path)
 
+    const handleMouseMove = (e: React.MouseEvent<HTMLImageElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        setMagnifier({
+            show: true,
+            clientX: e.clientX,
+            clientY: e.clientY,
+            imgX: e.clientX - rect.left,
+            imgY: e.clientY - rect.top,
+        })
+    }
+
+    const bgX = -(magnifier.imgX * ZOOM - LENS_SIZE / 2)
+    const bgY = -(magnifier.imgY * ZOOM - LENS_SIZE / 2)
+
     return (
         <>
+            {/* Image lightbox */}
+            {imgOpen && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-gray090/60"
+                    onClick={() => { setImgOpen(false); setMagnifier((s) => ({ ...s, show: false })) }}
+                >
+                    <div className="relative" onClick={(e) => e.stopPropagation()}>
+                        <img
+                            src="/IMG_4286.png"
+                            className="max-w-[320px] max-h-[320px] w-[80vw] h-[80vw] rounded-full object-cover shadow-shadow16_15 cursor-crosshair"
+                            alt="profile"
+                            onMouseMove={handleMouseMove}
+                            onMouseLeave={() => setMagnifier((s) => ({ ...s, show: false }))}
+                        />
+                        {magnifier.show && (
+                            <div
+                                style={{
+                                    position: "fixed",
+                                    left: magnifier.clientX + 20,
+                                    top: magnifier.clientY - LENS_SIZE / 2,
+                                    width: LENS_SIZE,
+                                    height: LENS_SIZE,
+                                    borderRadius: "50%",
+                                    border: "2px solid white",
+                                    boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
+                                    backgroundImage: "url(/IMG_4286.png)",
+                                    backgroundSize: `${IMG_DISPLAY_SIZE * ZOOM}px ${IMG_DISPLAY_SIZE * ZOOM}px`,
+                                    backgroundPosition: `${bgX}px ${bgY}px`,
+                                    backgroundRepeat: "no-repeat",
+                                    pointerEvents: "none",
+                                    zIndex: 100,
+                                }}
+                            />
+                        )}
+                    </div>
+                </div>
+            )}
+
             {/* Mobile header */}
             <header className="hidden mobile:block bg-white/70 rounded-[8px] sticky top-[20px] shadow-shadow15 px-[16px] py-[12px]">
                 <div className="flex items-center gap-[8px]">
@@ -34,9 +103,10 @@ export default function NavigationHeader() {
                 {/* Profile */}
                 <div className="flex items-center gap-[12px]">
                     <img
-                        src="/profile_v2.jpeg"
-                        className="w-[44px] h-[44px] min-w-[44px] rounded-full object-cover"
+                        src="/IMG_4286.png"
+                        className="w-[44px] h-[44px] min-w-[44px] rounded-full object-cover cursor-zoom-in hover:opacity-80 transition-opacity duration-150"
                         alt="profile"
+                        onClick={() => setImgOpen(true)}
                     />
                     <div>
                         <p className="heading-md text-gray080">유종현</p>
