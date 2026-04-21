@@ -3,6 +3,16 @@ import { useRouter } from "next/navigation"
 
 const categories = [
     {
+        title: "포트폴리오",
+        href: "/portfolio",
+        desc: "참여 프로젝트의 개요 · 기술 스택 · 선택 이유",
+        count: 3,
+        tag: "Portfolio",
+        borderColor: "border-blue040",
+        tagColor: "text-blue040",
+        dotColor: "bg-blue040",
+    },
+    {
         title: "HTML / CSS",
         href: "/html-css",
         desc: "마크업 구조, 레이아웃, 선택자, 박스 모델",

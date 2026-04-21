@@ -90,6 +90,11 @@ module.exports = {
       red050 : "#F0462F",
       red060 : "#E22E21",
       red070 : "#D10E00",
+      purple005 : "#F3EFFE",
+      purple010 : "#E6DFFE",
+      purple020 : "#C9BCFC",
+      purple040 : "#7C5CF8",
+      purple060 : "#5B3FD4",
       hourblue : "#0056FF",
       gold : "#C19F63"
     },

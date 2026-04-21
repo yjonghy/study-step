@@ -2,6 +2,7 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const navItems = [
+    { label: "포트폴리오",           path: "/portfolio",         tag: "Portfolio" },
     { label: "HTML / CSS",          path: "/html-css",          tag: "Markup" },
     { label: "JavaScript / TS",     path: "/javascript",        tag: "Language" },
     { label: "React",               path: "/react",             tag: "Framework" },
