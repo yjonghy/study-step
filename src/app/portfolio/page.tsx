@@ -556,9 +556,16 @@ function LayerStack({ layers }: { layers: Layer[] }) {
                                 <p className={`body-xs font-bold mb-[7px] ${s.label}`}>{layer.name}</p>
                                 <div className="flex flex-wrap gap-[4px]">
                                     {layer.items.map((item) => (
-                                        <span key={item.name} className={`body-xs px-[7px] py-[2px] rounded-full font-medium ${s.badge}`}>
-                                            {item.name}{item.note ? ` · ${item.note}` : ""}
-                                        </span>
+                                        item.note ? (
+                                            <div key={item.name} className={`body-xs px-[8px] py-[4px] rounded-[8px] font-medium ${s.badge}`}>
+                                                <p className="leading-tight">{item.name}</p>
+                                                <p className="opacity-60 font-normal leading-tight">{item.note}</p>
+                                            </div>
+                                        ) : (
+                                            <div key={item.name} className={`body-xs px-[8px] py-[4px] rounded-[8px] font-medium flex items-center ${s.badge}`}>
+                                                {item.name}
+                                            </div>
+                                        )
                                     ))}
                                 </div>
                             </div>
