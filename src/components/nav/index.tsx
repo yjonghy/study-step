@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-const navItems = [
-    { label: "포트폴리오",           path: "/portfolio",         tag: "Portfolio" },
+const studyItems = [
     { label: "HTML / CSS",          path: "/html-css",          tag: "Markup" },
     { label: "JavaScript / TS",     path: "/javascript",        tag: "Language" },
     { label: "React",               path: "/react",             tag: "Framework" },
@@ -30,11 +29,13 @@ export default function NavigationHeader() {
     const pathName = usePathname()
     const router = useRouter()
     const [imgOpen, setImgOpen] = useState(false)
+    const [studyOpen, setStudyOpen] = useState(true)
     const [magnifier, setMagnifier] = useState<MagnifierState>({
         show: false, clientX: 0, clientY: 0, imgX: 0, imgY: 0,
     })
 
     const isActive = (path: string) => pathName.startsWith(path)
+    const isStudyActive = studyItems.some(({ path }) => pathName.startsWith(path))
 
     const handleMouseMove = (e: React.MouseEvent<HTMLImageElement>) => {
         const rect = e.currentTarget.getBoundingClientRect()
@@ -133,22 +134,60 @@ export default function NavigationHeader() {
                 {/* Category nav */}
                 <p className="body-xs text-gray035 font-bold mb-[8px] tracking-wider uppercase">카테고리</p>
                 <div className="flex flex-col gap-[2px]">
-                    {navItems.map(({ label, path, tag }) => (
-                        <button
-                            key={path}
-                            onClick={() => router.push(path)}
-                            className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
-                                        text-left ease-out duration-[100ms] cursor-pointer
-                                        ${isActive(path) ? "bg-gray090" : "hover:bg-gray015"}`}
-                        >
-                            <span className={`body-sm ${isActive(path) ? "text-white font-bold" : "text-gray060"}`}>
-                                {label}
-                            </span>
-                            <span className={`body-xs ${isActive(path) ? "text-gray030" : "text-gray035"}`}>
-                                {tag}
-                            </span>
-                        </button>
-                    ))}
+
+                    {/* 포트폴리오 */}
+                    <button
+                        onClick={() => router.push("/portfolio")}
+                        className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
+                                    text-left ease-out duration-[100ms] cursor-pointer
+                                    ${isActive("/portfolio") ? "bg-gray090" : "hover:bg-gray015"}`}
+                    >
+                        <span className={`body-sm ${isActive("/portfolio") ? "text-white font-bold" : "text-gray060"}`}>
+                            포트폴리오
+                        </span>
+                        <span className={`body-xs ${isActive("/portfolio") ? "text-gray030" : "text-gray035"}`}>
+                            Portfolio
+                        </span>
+                    </button>
+
+                    {/* 스터디내용 토글 */}
+                    <button
+                        onClick={() => setStudyOpen((v) => !v)}
+                        className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
+                                    text-left ease-out duration-[100ms] cursor-pointer
+                                    ${isStudyActive && !studyOpen ? "bg-gray090" : "hover:bg-gray015"}`}
+                    >
+                        <span className={`body-sm ${isStudyActive && !studyOpen ? "text-white font-bold" : "text-gray060"}`}>
+                            스터디내용
+                        </span>
+                        <span className={`body-xs text-gray035 transition-transform duration-150 ${studyOpen ? "rotate-180" : ""}`}>
+                            ▾
+                        </span>
+                    </button>
+
+                    {/* 스터디 서브 메뉴 */}
+                    {studyOpen && (
+                        <div className="flex flex-col gap-[2px] mt-[2px] pl-[6px]">
+                            <div className="border-l-[2px] border-gray020 pl-[8px] flex flex-col gap-[2px]">
+                                {studyItems.map(({ label, path, tag }) => (
+                                    <button
+                                        key={path}
+                                        onClick={() => router.push(path)}
+                                        className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
+                                                    text-left ease-out duration-[100ms] cursor-pointer
+                                                    ${isActive(path) ? "bg-blue040" : "hover:bg-gray015"}`}
+                                    >
+                                        <span className={`body-sm ${isActive(path) ? "text-white font-bold" : "text-gray060"}`}>
+                                            {label}
+                                        </span>
+                                        <span className={`body-xs ${isActive(path) ? "text-blue010" : "text-gray035"}`}>
+                                            {tag}
+                                        </span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </header>
         </>
