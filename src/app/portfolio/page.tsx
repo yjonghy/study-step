@@ -67,14 +67,14 @@ type Project = {
 // ─── Style maps ──────────────────────────────────────────────────────────────
 
 const nodeStyles: Record<NodeType, string> = {
-    external:   "bg-yellow005 border border-yellow020 text-yellow060",
-    server:     "bg-blue005 border border-blue020 text-blue040",
-    client:     "bg-green005 border border-green020 text-green060",
-    storage:    "bg-gray015 border border-gray025 text-gray060",
-    output:     "bg-gray010 border border-gray025 text-gray060",
-    mobile:     "bg-gray015 border border-gray030 text-gray070",
-    monitoring: "bg-red005 border border-red020 text-red050",
-    infra:      "bg-purple005 border border-purple020 text-purple040",
+    external:   "bg-yellow010 border border-yellow020 text-yellow060",
+    server:     "bg-blue010 border border-blue020 text-blue040",
+    client:     "bg-green010 border border-green020 text-green060",
+    storage:    "bg-gray020 border border-gray025 text-gray070",
+    output:     "bg-gray020 border border-gray025 text-gray070",
+    mobile:     "bg-gray020 border border-gray025 text-gray070",
+    monitoring: "bg-red010 border border-red020 text-red050",
+    infra:      "bg-purple010 border border-purple020 text-purple040",
 }
 
 const layerStyles: Record<LayerType, { bg: string; border: string; label: string; badge: string }> = {
@@ -286,9 +286,9 @@ const projects: Project[] = [
         period: "2023.01 — 2024.07",
         domain: "장소 대여 플랫폼 (미국 타겟) · PHP → Next.js 마이그레이션",
         role: "프론트엔드 초기 구조 설계 및 서비스 개선 주도",
-        accentColor: "border-green050",
-        tagBg: "bg-green005",
-        tagText: "text-green060",
+        accentColor: "border-blue040",
+        tagBg: "bg-blue005",
+        tagText: "text-blue040",
         subProjects: [
             {
                 name: "미국 타겟 플랫폼",
@@ -396,9 +396,9 @@ const projects: Project[] = [
         period: "2019.09 — 2023.01",
         domain: "간판 중개 플랫폼",
         role: "레거시 프론트엔드 구조 개선 · React 전환 · WebView 앱 개발 참여",
-        accentColor: "border-yellow040",
-        tagBg: "bg-yellow005",
-        tagText: "text-yellow060",
+        accentColor: "border-blue040",
+        tagBg: "bg-blue005",
+        tagText: "text-blue040",
         subProjects: [
             {
                 name: "React SPA 전환",
@@ -588,7 +588,19 @@ function LayerStack({ layers }: { layers: Layer[] }) {
     )
 }
 
-function InterviewProcessFlow({ steps }: { steps: ProcessStep[] }) {
+function InterviewProcessFlow({ steps, layers }: { steps: ProcessStep[]; layers: Layer[] }) {
+    const techTypeMap: Record<string, LayerType> = {}
+    layers.forEach((layer) => {
+        layer.items.forEach((item) => {
+            techTypeMap[item.name] = layer.type
+        })
+    })
+
+    const techBadge = (tech: string): string => {
+        const type = techTypeMap[tech]
+        return type ? layerStyles[type].badge : "bg-gray020 text-gray060"
+    }
+
     return (
         <div>
             <p className="body-xs font-bold text-gray040 mb-[16px] tracking-widest uppercase">면접 플로우</p>
@@ -617,7 +629,7 @@ function InterviewProcessFlow({ steps }: { steps: ProcessStep[] }) {
                                             {ev.techs && ev.techs.length > 0 && (
                                                 <div className="flex gap-[4px] flex-wrap pl-[12px]">
                                                     {ev.techs.map((t) => (
-                                                        <span key={t} className="body-xs px-[6px] py-[1px] rounded-full bg-blue005 text-blue040 font-medium whitespace-nowrap">{t}</span>
+                                                        <span key={t} className={`body-xs px-[6px] py-[1px] rounded-full font-medium whitespace-nowrap ${techBadge(t)}`}>{t}</span>
                                                     ))}
                                                 </div>
                                             )}
@@ -653,7 +665,7 @@ function SubProjectDetail({ sub, tagText }: { sub: SubProject; tagText: string }
             <div className="flex gap-[16px] mobile:flex-col">
                 <div className="flex-1 bg-gray010 rounded-[12px] p-[16px] min-w-0">
                     {sub.processFlow
-                        ? <InterviewProcessFlow steps={sub.processFlow} />
+                        ? <InterviewProcessFlow steps={sub.processFlow} layers={sub.layers} />
                         : sub.flow && <FlowDiagram steps={sub.flow} />
                     }
                 </div>
@@ -736,7 +748,7 @@ function ProjectCard({ project }: { project: Project }) {
                                     <button
                                         key={sub.name}
                                         onClick={() => setActiveTab(i)}
-                                        className={`px-[16px] py-[10px] body-xs font-bold whitespace-nowrap border-b-[2px] transition-colors duration-150 flex-shrink-0
+                                        className={`px-[16px] py-[10px] body-sm font-bold whitespace-nowrap border-b-[2px] transition-colors duration-150 flex-shrink-0
                                             ${activeTab === i
                                                 ? `${project.tagText} border-current`
                                                 : "text-gray040 border-transparent hover:text-gray060"
