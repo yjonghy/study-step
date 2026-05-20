@@ -17,6 +17,10 @@ const studyItems = [
     { label: "Git & CI/CD",          path: "/git-cicd",          tag: "DevOps" },
     { label: "Canvas 드로잉",         path: "/canvas-draw",       tag: "Demo" },
     { label: "성능 최적화 비교",       path: "/perf-compare",      tag: "Demo" },
+    { label: "실시간 통신",            path: "/real-time",          tag: "Real-time" },
+    { label: "보안",                  path: "/security",           tag: "Security" },
+    { label: "브라우저",               path: "/browser",            tag: "Browser" },
+    { label: "아키텍처 패턴",          path: "/architecture",       tag: "Architecture" },
 ]
 
 const LENS_SIZE = 160

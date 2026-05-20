@@ -26,8 +26,8 @@ const studyCategories = [
     {
         title: "JavaScript / TypeScript",
         href: "/javascript",
-        desc: "엔진 동작, 이벤트 루프, 클로저, 프로토타입, Promise, 스코프, Proxy, WeakMap, 타입 시스템",
-        count: 15,
+        desc: "엔진 동작, 이벤트 루프, 클로저, 프로토타입, Promise, 스코프, Proxy, WeakMap, 타입 시스템, Axios 인터셉터",
+        count: 16,
         tag: "Language",
         tagColor: "text-yellow060",
         tagBg: "bg-yellow005",
@@ -36,8 +36,8 @@ const studyCategories = [
     {
         title: "React",
         href: "/react",
-        desc: "가상 DOM, 렌더링 원리, Hooks, 메모이제이션, Error Boundary, Suspense, React 19 신기능",
-        count: 9,
+        desc: "가상 DOM, 렌더링 원리, Hooks, 메모이제이션, Error Boundary, Suspense, React 19 신기능, TanStack Router",
+        count: 10,
         tag: "Framework",
         tagColor: "text-blue030",
         tagBg: "bg-blue005",
@@ -156,8 +156,8 @@ const studyCategories = [
     {
         title: "Git & CI/CD",
         href: "/git-cicd",
-        desc: "Git Flow / GitHub Flow / Trunk-Based, Conventional Commits, GitHub Actions",
-        count: 2,
+        desc: "Git Flow / GitHub Flow / Trunk-Based, Conventional Commits, GitHub Actions, AWS S3/CloudFront & OIDC",
+        count: 3,
         tag: "DevOps",
         tagColor: "text-gray060",
         tagBg: "bg-gray015",
@@ -182,6 +182,16 @@ const studyCategories = [
         tagColor: "text-red050",
         tagBg: "bg-red005",
         accentColor: "border-red050",
+    },
+    {
+        title: "아키텍처 패턴",
+        href: "/architecture",
+        desc: "멀티테넌트 (hostname 기반 런타임 분기), Atomic Design — 실무 설계 전략",
+        count: 2,
+        tag: "Architecture",
+        tagColor: "text-blue040",
+        tagBg: "bg-blue005",
+        accentColor: "border-blue030",
     },
 ]
 

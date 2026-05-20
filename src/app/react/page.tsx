@@ -16,6 +16,7 @@ const title_ = [
     "Suspense & Concurrent Mode",
     "React Profiler & 성능 측정",
     "React 19 신기능",
+    "TanStack Router",
 ]
 
 export default function ReactPage() {

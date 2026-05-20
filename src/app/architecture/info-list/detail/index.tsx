@@ -1,8 +1,7 @@
-import GitFlow from "./GitFlow";
-import GitHubActions from "./GitHubActions";
-import CloudFrontOIDC from "./CloudFrontOIDC";
+import Multitenant from "./Multitenant";
+import AtomicDesign from "./AtomicDesign";
 
-export default function GitCicdDetailList(props: any) {
+export default function ArchitectureDetailList(props: any) {
     return (
         <article className="w-full flex flex-col justify-center items-center">
             <button
@@ -15,9 +14,8 @@ export default function GitCicdDetailList(props: any) {
                 <span className="body-sm">목록으로</span>
             </button>
             <div className="w-full h-[1px] bg-gray015 mt-[16px]" />
-            {props.data === "Git 브랜치 전략"                   && <GitFlow />}
-            {props.data === "GitHub Actions & CI/CD"         && <GitHubActions />}
-            {props.data === "AWS S3/CloudFront & OIDC 배포"   && <CloudFrontOIDC />}
+            {props.data === "멀티테넌트 아키텍처"    && <Multitenant />}
+            {props.data === "Atomic Design"       && <AtomicDesign />}
         </article>
     )
 }
