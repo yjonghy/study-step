@@ -11,6 +11,7 @@ const title_ = [
     "Web Worker",
     "Server-Sent Events (SSE)",
     "MediaStream API & VAD",
+    "WebSocket 재연결 & 상태머신",
 ]
 
 export default function RealTimePage() {
@@ -31,7 +32,7 @@ export default function RealTimePage() {
                     </Link>
                     <div className="flex flex-col gap-[4px] px-[4px]">
                         <p className="heading-xl text-gray080">실시간 통신</p>
-                        <p className="body-sm text-gray040">WebSocket, Web Worker, SSE, MediaStream & VAD</p>
+                        <p className="body-sm text-gray040">WebSocket, Web Worker, SSE, MediaStream & VAD, 재연결 상태머신</p>
                     </div>
                     <div className="w-full grid grid-cols-2 mobile:grid-cols-1 pt-[20px] gap-[8px]">
                         {title_.map((value, index) => (

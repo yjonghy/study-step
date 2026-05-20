@@ -13,6 +13,7 @@ import PromiseAsync from "./Promise";
 import ScopeHoisting from "./ScopeHoisting";
 import ProxyReflect from "./ProxyReflect";
 import WeakMapRef from "./WeakMapRef";
+import AxiosInterceptor from "./AxiosInterceptor";
 
 export default function JavaSciptList(props: any) {
     return (
@@ -42,6 +43,7 @@ export default function JavaSciptList(props: any) {
             {props.data === "스코프 & 호이스팅"                   && <ScopeHoisting />}
             {props.data === "Proxy & Reflect"                    && <ProxyReflect />}
             {props.data === "WeakMap & WeakRef"                  && <WeakMapRef />}
+            {props.data === "Axios 인터셉터 패턴"                  && <AxiosInterceptor />}
         </article>
     )
 }

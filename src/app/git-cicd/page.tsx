@@ -9,6 +9,7 @@ const parentStyle = "flex flex-col items-start p-[24px] pb-[48px] bg-white/70 mt
 const title_ = [
     "Git 브랜치 전략",
     "GitHub Actions & CI/CD",
+    "AWS S3/CloudFront & OIDC 배포",
 ]
 
 export default function GitCicdPage() {

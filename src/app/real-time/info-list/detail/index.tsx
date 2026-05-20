@@ -2,6 +2,7 @@ import WebSocket from "./WebSocket"
 import WebWorker from "./WebWorker"
 import ServerSentEvents from "./ServerSentEvents"
 import MediaStream from "./MediaStream"
+import WebSocketStateMachine from "./WebSocketStateMachine"
 
 export default function RealTimeDetailList(props: any) {
     return (
@@ -20,6 +21,7 @@ export default function RealTimeDetailList(props: any) {
             {props.data === "Web Worker"                     && <WebWorker />}
             {props.data === "Server-Sent Events (SSE)"       && <ServerSentEvents />}
             {props.data === "MediaStream API & VAD"          && <MediaStream />}
+            {props.data === "WebSocket 재연결 & 상태머신"      && <WebSocketStateMachine />}
         </article>
     )
 }

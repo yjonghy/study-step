@@ -109,7 +109,7 @@ const projects: Project[] = [
             {
                 name: "면접 솔루션",
                 description: "지원자 음성 인터뷰와 면접관 점수 입력을 실시간으로 처리하는 B2B 면접 운영 플랫폼. 음성 데이터는 STT 변환 후 AI 스크립트·근거로 생성되고, 점수는 Socket으로 관리자에게 실시간 전파.",
-                stack: ["React", "Next.js", "NestJS", "Socket.io", "Web Worker", "VAD", "Azure STT SDK", "Redis", "MongoDB", "TanStack Query", "Zustand", "Framer Motion", "TypeScript"],
+                stack: ["React", "Next.js", "NestJS", "Socket.io", "Web Worker", "VAD", "Azure STT SDK", "Redis", "MongoDB", "TanStack Query", "Zustand", "Framer Motion", "TypeScript", "Datadog RUM", "AWS S3/CloudFront"],
                 processFlow: [
                     {
                         label: "면접 시작",
@@ -165,13 +165,25 @@ const projects: Project[] = [
                             { name: "Framer Motion" }, { name: "Tailwind CSS" }, { name: "TypeScript" },
                         ],
                     },
+                    {
+                        name: "Monitoring & Infra",
+                        type: "monitoring",
+                        items: [
+                            { name: "Datadog RUM", note: "실서비스 에러·성능 추적" },
+                            { name: "AWS S3 + CloudFront", note: "정적 배포 · CDN" },
+                            { name: "GitHub Actions OIDC", note: "액세스 키 없는 배포" },
+                        ],
+                    },
                 ],
                 techReasons: [
-                    { tech: "Socket.io", reason: "면접 시작·종료 이벤트와 점수 데이터를 관리자 대시보드에 실시간 전파. 재연결 로직이 내장되어 있어 네트워크 불안정 상황을 자연스럽게 처리했습니다." },
+                    { tech: "Socket.io & 재연결 상태머신", reason: "idle → bootstrapping → ready → reconnecting 5단계 상태머신으로 소켓 생명주기를 관리. connectionGeneration으로 stale ack를 방지하고, Room Registry로 재연결 시 룸 자동 복구를 구현했습니다." },
                     { tech: "Web Worker", reason: "음성 처리 중 통신 실패 시 메인 스레드를 차단하지 않고 재시도·임시저장 처리. 인터뷰 UX 흐름이 끊기지 않는 것이 핵심 요구사항이었습니다." },
                     { tech: "VAD", reason: "발화 시작·종료를 정밀하게 감지하여 Azure STT 요청을 구간 단위로 분리. 무음 구간까지 전송하는 낭비를 줄이고 인식 정확도를 높였습니다." },
                     { tech: "Azure STT SDK", reason: "한국어 인식 정확도와 스트리밍 방식 연동 안정성을 비교 검토 후 선택. 변환된 텍스트를 AI API에 전달하여 스크립트·근거를 생성했습니다." },
+                    { tech: "멀티테넌트 아키텍처", reason: "단일 빌드물이 hostname 기반으로 KB·코레일·한국남부발전 등 기관별로 다른 평가 UI·로직을 런타임에 자동 선택. DomainConfig 패턴으로 분기를 한 곳에서 관리해 기관 추가 시 컴포넌트 수정 없이 설정 파일만 추가합니다." },
                     { tech: "Zustand", reason: "인터뷰 세션 상태처럼 여러 컴포넌트에 걸친 클라이언트 상태를 가볍게 관리. TanStack Query와 역할을 명확히 나눠 코드 가독성을 높였습니다." },
+                    { tech: "Datadog RUM", reason: "실서비스 사용자 세션·에러·성능 지표를 실시간 수집. 면접 중 오류 발생 시 사용자 컨텍스트와 스택 트레이스를 즉시 파악해 CS 대응 속도를 높였습니다." },
+                    { tech: "AWS S3/CloudFront & OIDC 배포", reason: "GitHub Actions OIDC로 액세스 키 없이 임시 자격증명을 발급받아 S3 업로드 및 CloudFront 캐시 무효화를 자동화. index.html은 no-cache, 해시 파일은 immutable로 캐시 전략을 분리했습니다." },
                 ],
             },
             {
