@@ -6,6 +6,7 @@ import ContextAPI from "./ContextAPI";
 import ErrorBoundary from "./ErrorBoundary";
 import Suspense from "./Suspense";
 import ReactProfiler from "./ReactProfiler";
+import React19Features from "./React19Features";
 
 export default function ReactDetailList(props: any) {
     return (
@@ -28,6 +29,7 @@ export default function ReactDetailList(props: any) {
             {props.data === "Error Boundary"                     && <ErrorBoundary />}
             {props.data === "Suspense & Concurrent Mode"         && <Suspense />}
             {props.data === "React Profiler & 성능 측정"          && <ReactProfiler />}
+            {props.data === "React 19 신기능"                     && <React19Features />}
         </article>
     )
 }

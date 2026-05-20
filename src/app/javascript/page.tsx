@@ -1,5 +1,6 @@
 "use client"
-import {useState} from "react";
+import { useState } from "react";
+import Link from "next/link";
 import JavaSciptList from "@src/app/javascript/info-list/detail";
 import InfoList from "@src/app/javascript/info-list";
 
@@ -19,6 +20,9 @@ const title_ = [
     "클로저 (Closure)",
     "프로토타입 (Prototype)",
     "Promise / async·await",
+    "스코프 & 호이스팅",
+    "Proxy & Reflect",
+    "WeakMap & WeakRef",
 ]
 export default function JavaScript() {
 
@@ -38,6 +42,10 @@ export default function JavaScript() {
                 <JavaSciptList data={showDetail.data} closeDetail={closeMessageDetail}/>
                 :
                 <>
+                    <Link href="/" className="flex items-center gap-[6px] text-gray040 hover:text-gray080 ease-out duration-[150ms] group mb-[12px]">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:-translate-x-[2px] ease-out duration-[150ms]"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <span className="body-sm">스터디 목록</span>
+                    </Link>
                     <div className="flex flex-col gap-[4px] px-[4px]">
                         <p className="heading-xl text-gray080">JavaScript / TypeScript</p>
                         <p className="body-sm text-gray040">엔진 동작, 이벤트 루프, this, 배열 메서드, 제너레이터, 타입 시스템</p>

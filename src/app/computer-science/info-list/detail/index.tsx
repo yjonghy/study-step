@@ -4,6 +4,8 @@ import TcpHandshake from "./TcpHandshake"
 import BrowserStorage from "./BrowserStorage"
 import HttpsAndTls from "./HttpsAndTls"
 import CorsAndSecurity from "./CorsAndSecurity"
+import DNS from "./DNS"
+import CachingCDN from "./CachingCDN"
 
 export default function CsDetailList(props: any) {
     return (
@@ -24,6 +26,8 @@ export default function CsDetailList(props: any) {
             {props.data === "브라우저 저장소"          && <BrowserStorage />}
             {props.data === "HTTPS & TLS"             && <HttpsAndTls />}
             {props.data === "CORS & 웹 보안"          && <CorsAndSecurity />}
+            {props.data === "DNS 동작 방식"           && <DNS />}
+            {props.data === "브라우저 캐싱 & CDN"     && <CachingCDN />}
         </article>
     )
 }

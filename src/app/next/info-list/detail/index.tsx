@@ -4,6 +4,8 @@ import ServerClientComponent from "./ServerClientComponent"
 import NextMetadata from "./NextMetadata"
 import NextImageFont from "./NextImageFont"
 import Middleware from "./Middleware"
+import RouteHandler from "./RouteHandler"
+import ParallelRoutes from "./ParallelRoutes"
 
 export default function NextDetailList(props: any) {
     return (
@@ -24,6 +26,8 @@ export default function NextDetailList(props: any) {
             {props.data === "메타데이터 & SEO"                          && <NextMetadata />}
             {props.data === "next/image & next/font"                   && <NextImageFont />}
             {props.data === "Middleware"                               && <Middleware />}
+            {props.data === "Route Handler"                            && <RouteHandler />}
+            {props.data === "Parallel & Intercepting Routes"          && <ParallelRoutes />}
         </article>
     )
 }

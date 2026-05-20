@@ -1,32 +1,26 @@
 "use client"
-import { useState } from "react"
-import Link from "next/link"
-import InfoList from "@src/app/javascript/info-list"
-import CsDetailList from "@src/app/computer-science/info-list/detail"
+import { useState } from "react";
+import Link from "next/link";
+import InfoList from "@src/app/javascript/info-list";
+import GitCicdDetailList from "@src/app/git-cicd/info-list/detail";
 
 const parentStyle = "flex flex-col items-start p-[24px] pb-[48px] bg-white/70 mt-[20px] rounded-[12px] shadow-shadow15"
 
 const title_ = [
-    "HTTP 버전 특징",
-    "OSI 7계층",
-    "TCP & 3-way Handshake",
-    "브라우저 저장소",
-    "HTTPS & TLS",
-    "CORS & 웹 보안",
-    "DNS 동작 방식",
-    "브라우저 캐싱 & CDN",
+    "Git 브랜치 전략",
+    "GitHub Actions & CI/CD",
 ]
 
-export default function Cs() {
+export default function GitCicdPage() {
     const [showDetail, setShowDetail] = useState({ state: false, data: {} })
 
     const showMessageDetail = (data: any) => setShowDetail({ state: true, data })
     const closeMessageDetail = () => setShowDetail({ state: false, data: {} })
 
     return (
-        <section className={parentStyle}>
+        <article className={parentStyle}>
             {showDetail.state ? (
-                <CsDetailList data={showDetail.data} closeDetail={closeMessageDetail} />
+                <GitCicdDetailList data={showDetail.data} closeDetail={closeMessageDetail} />
             ) : (
                 <>
                     <Link href="/" className="flex items-center gap-[6px] text-gray040 hover:text-gray080 ease-out duration-[150ms] group mb-[12px]">
@@ -34,8 +28,8 @@ export default function Cs() {
                         <span className="body-sm">스터디 목록</span>
                     </Link>
                     <div className="flex flex-col gap-[4px] px-[4px]">
-                        <p className="heading-xl text-gray080">Computer Science</p>
-                        <p className="body-sm text-gray040">HTTP 버전, OSI 7계층, TCP, 브라우저 저장소, HTTPS, CORS</p>
+                        <p className="heading-xl text-gray080">Git & CI/CD</p>
+                        <p className="body-sm text-gray040">브랜치 전략, Conventional Commits, GitHub Actions, 자동화 배포</p>
                     </div>
                     <div className="w-full grid grid-cols-2 mobile:grid-cols-1 pt-[20px] gap-[8px]">
                         {title_.map((value, index) => (
@@ -49,6 +43,6 @@ export default function Cs() {
                     </div>
                 </>
             )}
-        </section>
+        </article>
     )
 }
