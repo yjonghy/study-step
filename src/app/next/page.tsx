@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import Link from "next/link"
 import InfoList from "@src/app/javascript/info-list"
 import NextDetailList from "@src/app/next/info-list/detail"
 
@@ -12,6 +13,8 @@ const title_ = [
     "메타데이터 & SEO",
     "next/image & next/font",
     "Middleware",
+    "Route Handler",
+    "Parallel & Intercepting Routes",
 ]
 
 export default function NextPage() {
@@ -26,6 +29,10 @@ export default function NextPage() {
                 <NextDetailList data={showDetail.data} closeDetail={closeMessageDetail} />
             ) : (
                 <>
+                    <Link href="/" className="flex items-center gap-[6px] text-gray040 hover:text-gray080 ease-out duration-[150ms] group mb-[12px]">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:-translate-x-[2px] ease-out duration-[150ms]"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <span className="body-sm">스터디 목록</span>
+                    </Link>
                     <div className="flex flex-col gap-[4px] px-[4px]">
                         <p className="heading-xl text-gray080">Next.js</p>
                         <p className="body-sm text-gray040">App Router, SSR / SSG / ISR, 서버 컴포넌트, 메타데이터</p>

@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import Link from "next/link";
 import InfoList from "@src/app/javascript/info-list";
 import ReactDetailList from "@src/app/react/info-list/detail";
 
@@ -14,6 +15,7 @@ const title_ = [
     "Error Boundary",
     "Suspense & Concurrent Mode",
     "React Profiler & 성능 측정",
+    "React 19 신기능",
 ]
 
 export default function ReactPage() {
@@ -28,6 +30,10 @@ export default function ReactPage() {
                 <ReactDetailList data={showDetail.data} closeDetail={closeMessageDetail} />
             ) : (
                 <>
+                    <Link href="/" className="flex items-center gap-[6px] text-gray040 hover:text-gray080 ease-out duration-[150ms] group mb-[12px]">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:-translate-x-[2px] ease-out duration-[150ms]"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <span className="body-sm">스터디 목록</span>
+                    </Link>
                     <div className="flex flex-col gap-[4px] px-[4px]">
                         <p className="heading-xl text-gray080">React</p>
                         <p className="body-sm text-gray040">가상 DOM, 렌더링 원리, Hooks, 메모이제이션, Context API</p>

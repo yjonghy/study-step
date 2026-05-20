@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import Link from "next/link"
 import InfoList from "@src/app/javascript/info-list"
 import RealTimeDetailList from "@src/app/real-time/info-list/detail"
 
@@ -24,6 +25,10 @@ export default function RealTimePage() {
                 <RealTimeDetailList data={showDetail.data} closeDetail={closeMessageDetail} />
             ) : (
                 <>
+                    <Link href="/" className="flex items-center gap-[6px] text-gray040 hover:text-gray080 ease-out duration-[150ms] group mb-[12px]">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:-translate-x-[2px] ease-out duration-[150ms]"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <span className="body-sm">스터디 목록</span>
+                    </Link>
                     <div className="flex flex-col gap-[4px] px-[4px]">
                         <p className="heading-xl text-gray080">실시간 통신</p>
                         <p className="body-sm text-gray040">WebSocket, Web Worker, SSE, MediaStream & VAD</p>

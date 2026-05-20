@@ -10,6 +10,9 @@ import TypeScriptUtility from "./TypeScriptUtility";
 import Closure from "./Closure";
 import Prototype from "./Prototype";
 import PromiseAsync from "./Promise";
+import ScopeHoisting from "./ScopeHoisting";
+import ProxyReflect from "./ProxyReflect";
+import WeakMapRef from "./WeakMapRef";
 
 export default function JavaSciptList(props: any) {
     return (
@@ -36,6 +39,9 @@ export default function JavaSciptList(props: any) {
             {props.data === "클로저 (Closure)"                   && <Closure />}
             {props.data === "프로토타입 (Prototype)"              && <Prototype />}
             {props.data === "Promise / async·await"             && <PromiseAsync />}
+            {props.data === "스코프 & 호이스팅"                   && <ScopeHoisting />}
+            {props.data === "Proxy & Reflect"                    && <ProxyReflect />}
+            {props.data === "WeakMap & WeakRef"                  && <WeakMapRef />}
         </article>
     )
 }

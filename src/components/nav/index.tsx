@@ -11,6 +11,12 @@ const studyItems = [
     { label: "Computer Science",    path: "/computer-science",  tag: "CS" },
     { label: "성능 최적화",          path: "/performance",       tag: "Performance" },
     { label: "회고록",               path: "/story",             tag: "Story" },
+    { label: "자리 배치도",           path: "/seat-layout",       tag: "Tool" },
+    { label: "가상 스크롤",           path: "/virtual-scroll",    tag: "Demo" },
+    { label: "접근성 (a11y)",         path: "/accessibility",     tag: "a11y" },
+    { label: "Git & CI/CD",          path: "/git-cicd",          tag: "DevOps" },
+    { label: "Canvas 드로잉",         path: "/canvas-draw",       tag: "Demo" },
+    { label: "성능 최적화 비교",       path: "/perf-compare",      tag: "Demo" },
 ]
 
 const LENS_SIZE = 160
