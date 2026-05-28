@@ -13,6 +13,7 @@ const studyItems = [
     { label: "회고록",               path: "/story",             tag: "Story" },
     { label: "자리 배치도",           path: "/seat-layout",       tag: "Tool" },
     { label: "가상 스크롤",           path: "/virtual-scroll",    tag: "Demo" },
+    { label: "포켓몬 도감",           path: "/pokemon",           tag: "SSG/ISR" },
     { label: "접근성 (a11y)",         path: "/accessibility",     tag: "a11y" },
     { label: "Git & CI/CD",          path: "/git-cicd",          tag: "DevOps" },
     { label: "Canvas 드로잉",         path: "/canvas-draw",       tag: "Demo" },
@@ -129,14 +130,14 @@ export default function NavigationHeader() {
                 {/* Contact */}
                 <div className="mt-[12px] flex flex-col gap-[3px]">
                     <p className="body-xs text-gray040">whdgus9269@gmail.com</p>
-                    <a
+                    {/* <a
                         className="body-xs text-blue030 underline w-fit"
                         href="https://github.com/yjonghy/study-step"
                         target="_blank"
                         rel="noreferrer"
                     >
                         GitHub
-                    </a>
+                    </a> */}
                 </div>
 
                 <div className="my-[18px] h-[1px] bg-gray020 w-full" />

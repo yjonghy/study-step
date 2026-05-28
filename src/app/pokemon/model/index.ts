@@ -1,4 +1,4 @@
-export const pocketmonName = [
+export const pokemonName = [
     {
         "pokemon_species_id": "1",
         "local_language_id": "1",
