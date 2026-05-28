@@ -151,6 +151,11 @@ const projects: Project[] = [
                         solution: "DomainConfig 패턴 도입 — hostname 기반으로 기관 설정을 런타임에 로드하고, 모든 분기 로직을 단일 설정 파일에서 관리. 기관 추가 시 컴포넌트 수정 없이 설정만 추가.",
                         techs: ["Next.js"],
                     },
+                    {
+                        problem: "다중 화자 인터뷰에서 STT 텍스트가 발화자 구분 없이 합쳐져, 면접 레포트에서 질문·답변 분리가 불가능하고 AI 근거 생성 품질이 저하되는 문제",
+                        solution: "Azure Speech SDK의 Speaker Diarization 기능을 활성화하여 발화 구간마다 화자 ID를 부여. LLM 서버로 전달하는 인터뷰 데이터에 화자 레이블을 포함해 질문자·답변자를 구조적으로 분리하고 AI 평가 근거 품질을 개선.",
+                        techs: ["Azure STT SDK", "AI API"],
+                    },
                 ],
                 processFlow: [
                     {
@@ -225,6 +230,45 @@ const projects: Project[] = [
                     { tech: "멀티테넌트 아키텍처", reason: "단일 빌드물이 hostname 기반으로 기관별 평가 UI·로직을 런타임에 자동 선택. DomainConfig 패턴으로 분기를 한 곳에서 관리해 기관 추가 시 설정 파일만 추가하면 됩니다." },
                     { tech: "Datadog RUM", reason: "면접 중 오류 발생 시 사용자 세션·스택 트레이스·성능 지표를 즉시 파악. 재현이 어려운 실서비스 버그의 원인 분석 시간을 크게 단축했습니다." },
                     { tech: "AWS S3/CloudFront & OIDC 배포", reason: "GitHub Actions OIDC로 장기 액세스 키 없이 임시 자격증명만으로 배포 자동화. index.html은 no-cache, 해시 파일은 immutable로 캐시 전략을 분리해 배포 즉시 반영을 보장했습니다." },
+                ],
+            },
+            {
+                name: "AI 도구 연동 · 개발 자동화",
+                description: "Figma MCP(Model Context Protocol) 연동으로 디자인 컨텍스트를 LLM에 직결해 컴포넌트 구조를 자동 제안하고, AI 기반 테스트 자동화 파이프라인을 도입하여 반복 QA 공수를 줄인 개발 생산성 개선 작업.",
+                stack: ["Figma", "MCP", "Claude API", "Playwright", "GitHub Actions", "TypeScript"],
+                metrics: [
+                    { label: "디자인 → 코드 구조 제안", value: "자동화", note: "Figma MCP로 LLM에 컨텍스트 직접 전달" },
+                    { label: "반복 UI 회귀 테스트", value: "자동화", note: "AI 시나리오 생성 + Playwright 실행" },
+                    { label: "디자인-개발 피드백 루프", value: "단축", note: "컴포넌트 명칭·구조 공유 비용 감소" },
+                ],
+                flow: [
+                    { nodes: [{ label: "Figma 디자인", note: "컴포넌트·토큰", type: "external" }] },
+                    { nodes: [{ label: "MCP 서버", note: "디자인 컨텍스트 추출", type: "server" }], arrowLabel: "컨텍스트" },
+                    { nodes: [{ label: "LLM (Claude)", note: "컴포넌트 구조 제안", type: "external" }], arrowLabel: "프롬프트" },
+                    { nodes: [{ label: "개발자 검토 · 적용", note: "코드 생성", type: "client" }], arrowLabel: "제안 반영" },
+                ],
+                layers: [
+                    {
+                        name: "External",
+                        type: "external",
+                        items: [{ name: "Figma", note: "디자인 소스" }, { name: "Claude API", note: "LLM 추론" }],
+                        arrowLabel: "MCP 통신",
+                    },
+                    {
+                        name: "Server",
+                        type: "server",
+                        items: [{ name: "MCP Server", note: "Figma 컨텍스트 브릿지" }, { name: "GitHub Actions", note: "테스트 자동화 CI" }],
+                        arrowLabel: "파이프라인",
+                    },
+                    {
+                        name: "Client",
+                        type: "client",
+                        items: [{ name: "Playwright", note: "E2E 자동 생성·실행" }, { name: "TypeScript" }],
+                    },
+                ],
+                techReasons: [
+                    { tech: "Figma MCP", reason: "Model Context Protocol을 통해 Figma 디자인 컨텍스트를 LLM에 직접 연결. 컴포넌트 명칭·구조·토큰 정보를 프롬프트에 포함시켜 구현 제안의 정확도를 높이고 디자인-개발 간 커뮤니케이션 비용을 줄였습니다." },
+                    { tech: "AI 기반 테스트 자동화", reason: "반복적인 UI 회귀 시나리오를 LLM으로 생성하고 Playwright로 실행. GitHub Actions CI에 통합해 PR마다 자동 검증이 돌도록 구성하여 QA 공수를 줄이고 릴리즈 안정성을 높였습니다." },
                 ],
             },
             {
@@ -384,6 +428,7 @@ const projects: Project[] = [
                 metrics: [
                     { label: "다국어 라우팅 구조", value: "초기 설계 반영", note: "글로벌 확장 대비 i18n 구조 선 구축" },
                     { label: "SEO 메타데이터", value: "페이지별 동적 생성", note: "SSR generateMetadata + hreflang" },
+                    { label: "장소 목록·상세 렌더링", value: "SSG + ISR", note: "빌드 캐시 + revalidate로 SEO·성능 동시 확보" },
                     { label: "에러 감지 및 CS 대응", value: "Sentry 실시간 추적", note: "스택 트레이스 + 사용자 컨텍스트" },
                 ],
                 troubleshooting: [
@@ -429,7 +474,7 @@ const projects: Project[] = [
                     {
                         name: "Server",
                         type: "server",
-                        items: [{ name: "Next.js SSR / SSG" }, { name: "i18n (next-intl)", note: "다국어 라우팅" }, { name: "SEO Metadata API" }],
+                        items: [{ name: "Next.js SSR / SSG / ISR", note: "페이지별 전략 분리" }, { name: "i18n (next-intl)", note: "다국어 라우팅" }, { name: "SEO Metadata API" }],
                         arrowLabel: "서버 → 클라이언트",
                     },
                     {
@@ -445,7 +490,7 @@ const projects: Project[] = [
                     },
                 ],
                 techReasons: [
-                    { tech: "Next.js", reason: "미국 시장 SEO가 핵심이었습니다. SSR/SSG 기반 메타데이터 제어와 i18n 라우팅 구조가 검색 엔진 최적화와 글로벌 확장 모두에 유리했습니다." },
+                    { tech: "Next.js (SSR / SSG / ISR / CSR)", reason: "미국 시장 SEO가 핵심이었습니다. 장소 목록·상세는 SSG + ISR로 빌드 캐시를 활용하면서 최신성을 유지하고, 실시간 예약 가용성은 SSR로 항상 최신 상태를 보장했습니다. 검색·필터 등 사용자 상태 의존 인터랙션은 CSR로 명시적으로 분리해 불필요한 서버 렌더링 비용을 제거했습니다." },
                     { tech: "i18n (next-intl)", reason: "초기 구조부터 글로벌 확장을 고려해 설계. App Router와 통합이 자연스럽고 locale 기반 URL 구조가 hreflang SEO에도 유리했습니다." },
                     { tech: "Sentry", reason: "운영 환경 에러를 실시간 추적하고 스택 트레이스·사용자 컨텍스트를 함께 파악. 재현이 어려운 프로덕션 버그의 원인 분석 속도를 크게 높였습니다." },
                 ],
@@ -505,7 +550,7 @@ const projects: Project[] = [
                     },
                 ],
                 techReasons: [
-                    { tech: "Next.js", reason: "PHP의 서버 렌더링 방식을 유지하면서 컴포넌트 기반 구조로 전환 가능. SSR/SSG 선택 적용으로 기존 SEO 구조를 손상 없이 이어받으면서 개발 생산성을 높였습니다." },
+                    { tech: "Next.js (SSR / SSG / ISR)", reason: "PHP의 서버 렌더링 방식을 유지하면서 컴포넌트 기반 구조로 전환 가능. 정적 콘텐츠는 SSG, 자주 바뀌는 데이터는 ISR, 실시간 데이터는 SSR로 페이지별 전략을 명시적으로 분리해 기존 SEO 구조를 손상 없이 이어받으면서 성능과 개발 생산성을 함께 높였습니다." },
                     { tech: "점진적 마이그레이션", reason: "전체를 한 번에 전환하면 QA 비용과 서비스 리스크가 높아집니다. PHP와 Next.js를 병행 운영하며 페이지 단위로 검증 후 교체하는 방식으로 다운타임 없이 완료했습니다." },
                 ],
             },
