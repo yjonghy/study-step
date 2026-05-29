@@ -1,5 +1,5 @@
-import Link from "next/link"
 import { pokemonName } from "@src/app/pokemon/model"
+import PokemonGrid from "@src/app/pokemon/PokemonGrid"
 
 const koreanPokemon = pokemonName.filter((p) => p.local_language_id === "3")
 
@@ -23,23 +23,7 @@ export default function PocketMon() {
             </div>
 
             {/* 포켓몬 그리드 */}
-            <div className="w-full h-full grid grid-cols-3 gap-[12px]">
-                {koreanPokemon.map((pokemon) => (
-                    <Link
-                        key={pokemon.pokemon_species_id}
-                        href={`/pokemon/${pokemon.pokemon_species_id}`}
-                        className="w-full py-[10px] flex flex-col justify-center items-center gap-[4px] rounded-[8px] border border-gray020 hover:border-blue030 hover:bg-blue005 ease-out duration-[100ms] cursor-pointer"
-                    >
-                        <img
-                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemon_species_id}.png`}
-                            className="w-[52px] h-[52px]"
-                            alt={pokemon.name}
-                        />
-                        <p className="body-xs text-gray040">No.{pokemon.pokemon_species_id}</p>
-                        <p className="body-sm text-gray080 font-bold">{pokemon.name}</p>
-                    </Link>
-                ))}
-            </div>
+            <PokemonGrid pokemons={koreanPokemon} />
         </article>
     )
 }
