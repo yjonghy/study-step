@@ -627,7 +627,7 @@ const projects: Project[] = [
             {
                 name: "앱 개발",
                 description: "초기에는 Android · iOS 네이티브 앱을 직접 개발했고, 이후 WebView 방식으로 전환하며 양방향 브릿지 구조를 설계했습니다. 네이티브와 웹 양쪽을 경험하며 앱-웹 통신 구조 전반을 다뤘습니다.",
-                stack: ["Android", "iOS", "Java", "Swift", "WebView", "JavaScript", "React"],
+                stack: ["Android", "iOS", "Java", "Kotlin", "Swift", "WebView", "JavaScript", "React"],
                 metrics: [
                     { label: "코드베이스 통합", value: "Android + iOS 단일화", note: "WebView 전환 후 웹 코드 1벌로 양 플랫폼 대응" },
                     { label: "앱 배포 주기", value: "단축", note: "웹 업데이트는 스토어 심사 없이 즉시 반영" },
@@ -652,7 +652,7 @@ const projects: Project[] = [
                         ],
                     },
                     {
-                        nodes: [{ label: "Native 화면", note: "Java · Swift", type: "mobile" }],
+                        nodes: [{ label: "Native 화면", note: "Java · Kotlin · Swift", type: "mobile" }],
                         arrowLabel: "네이티브",
                     },
                     {
@@ -672,7 +672,7 @@ const projects: Project[] = [
                     {
                         name: "Native App",
                         type: "mobile",
-                        items: [{ name: "Android (Java)" }, { name: "iOS (Swift)" }],
+                        items: [{ name: "Android (Java · Kotlin)" }, { name: "iOS (Swift)" }],
                         arrowLabel: "WebView 전환",
                     },
                     {
