@@ -21,6 +21,8 @@ const studyItems = [
     { label: "실시간 통신",            path: "/real-time",          tag: "Real-time" },
     { label: "보안",                  path: "/security",           tag: "Security" },
     { label: "브라우저",               path: "/browser",            tag: "Browser" },
+    { label: "Web API Lab",           path: "/web-api-lab",        tag: "Lab" },
+    { label: "Frontend Patterns",     path: "/frontend-patterns",  tag: "Patterns" },
     { label: "아키텍처 패턴",          path: "/architecture",       tag: "Architecture" },
 ]
 
@@ -106,7 +108,7 @@ export default function NavigationHeader() {
             <header className="hidden mobile:block bg-white/70 rounded-[8px] sticky top-[20px] shadow-shadow15 px-[16px] py-[12px]">
                 <div className="flex items-center gap-[8px]">
                     <p className="heading-sm text-gray080">유종현</p>
-                    <p className="body-xs text-gray040">웹 프론트엔드 엔지니어 · 경력 6년</p>
+                    <p className="body-xs text-gray040">웹 프론트엔드 엔지니어 · 경력 6년+</p>
                 </div>
             </header>
 
@@ -123,7 +125,7 @@ export default function NavigationHeader() {
                     <div>
                         <p className="heading-md text-gray080">유종현</p>
                         <p className="body-xs text-gray050 mt-[2px]">웹 프론트엔드 엔지니어</p>
-                        <p className="body-xs text-gray040">경력 6년</p>
+                        <p className="body-xs text-gray040">경력 6년+</p>
                     </div>
                 </div>
 

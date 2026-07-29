@@ -114,6 +114,26 @@ const studyCategories = [
         accentColor: "border-green040",
     },
     {
+        title: "Web API Lab",
+        href: "/web-api-lab",
+        desc: "BroadcastChannel, Page Visibility API 등 브라우저 API 실험",
+        count: 2,
+        tag: "Lab",
+        tagColor: "text-purple040",
+        tagBg: "bg-purple005",
+        accentColor: "border-purple040",
+    },
+    {
+        title: "Frontend Patterns",
+        href: "/frontend-patterns",
+        desc: "Adapter, Compound Component 등 실무 React 설계 패턴",
+        count: 2,
+        tag: "Patterns",
+        tagColor: "text-blue040",
+        tagBg: "bg-blue005",
+        accentColor: "border-blue040",
+    },
+    {
         title: "회고록",
         href: "/story",
         desc: "Tailwind CSS, Recoil 사용 후기 및 기술 메모",
@@ -204,11 +224,35 @@ function SectionLabel({ label }: { label: string }) {
     )
 }
 
+function HeroCard() {
+    const router = useRouter()
+    return (
+        <div className="bg-white rounded-[14px] px-[28px] py-[28px] shadow-shadow15 flex items-center justify-between gap-[24px] mobile:flex-col mobile:items-start mobile:gap-[20px]">
+            <div className="flex flex-col gap-[10px]">
+                <span className="body-xs font-bold text-blue040 tracking-wider uppercase">Frontend Engineer · 6년+</span>
+                <p className="heading-xl text-gray080">유종현</p>
+                <p className="body-sm text-gray050 leading-relaxed">
+                    실시간 통신과 AI 제품을 다뤄온 프론트엔드 엔지니어입니다.<br />
+                    React · Next.js · TypeScript 기반으로 서비스 초기 설계부터 운영까지 주도합니다.
+                </p>
+            </div>
+            <button
+                onClick={() => router.push("/portfolio")}
+                className="flex-shrink-0 bg-gray090 hover:bg-gray080 text-white px-[24px] py-[12px] rounded-[10px] body-sm font-bold transition-colors duration-150 mobile:w-full"
+            >
+                포트폴리오 보기 →
+            </button>
+        </div>
+    )
+}
+
 export default function Home() {
     const router = useRouter()
 
     return (
         <main className="flex flex-col mt-[20px] gap-[32px]">
+
+            <HeroCard />
 
             {/* 포트폴리오 */}
             <section>
