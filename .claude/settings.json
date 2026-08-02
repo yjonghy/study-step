@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(curl -s \"https://www.wanted.co.kr/wd/364319\")",
+      "Bash(python3 -c 'import sys; from html.parser import HTMLParser; *)",
+      "WebFetch(domain:millie.career.greetinghr.com)",
+      "WebSearch",
+      "WebFetch(domain:www.millie.co.kr)"
+    ]
+  }
+}

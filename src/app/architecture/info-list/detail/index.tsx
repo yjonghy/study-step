@@ -1,5 +1,6 @@
 import Multitenant from "./Multitenant";
 import AtomicDesign from "./AtomicDesign";
+import BedrockRag from "./BedrockRag";
 
 export default function ArchitectureDetailList(props: any) {
     return (
@@ -16,6 +17,7 @@ export default function ArchitectureDetailList(props: any) {
             <div className="w-full h-[1px] bg-gray015 mt-[16px]" />
             {props.data === "멀티테넌트 아키텍처"    && <Multitenant />}
             {props.data === "Atomic Design"       && <AtomicDesign />}
+            {props.data === "AWS Bedrock & RAG"   && <BedrockRag />}
             <div className="mt-[48px] pt-[24px] border-t border-gray015">
                 <button
                     onClick={() => props.closeDetail()}

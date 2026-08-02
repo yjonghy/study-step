@@ -9,6 +9,7 @@ const parentStyle = "flex flex-col items-start p-[24px] pb-[48px] bg-white/70 mt
 const title_ = [
     "멀티테넌트 아키텍처",
     "Atomic Design",
+    "AWS Bedrock & RAG",
 ]
 
 export default function ArchitecturePage() {
@@ -29,7 +30,7 @@ export default function ArchitecturePage() {
                     </Link>
                     <div className="flex flex-col gap-[4px] px-[4px]">
                         <p className="heading-xl text-gray080">아키텍처 패턴</p>
-                        <p className="body-sm text-gray040">멀티테넌트, Atomic Design — 실무에서 쓰는 설계 전략</p>
+                        <p className="body-sm text-gray040">멀티테넌트, Atomic Design, Bedrock & RAG — 실무에서 쓰는 설계 전략</p>
                     </div>
                     <div className="w-full grid grid-cols-2 mobile:grid-cols-1 pt-[20px] gap-[8px]">
                         {title_.map((value, index) => (
