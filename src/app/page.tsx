@@ -206,8 +206,8 @@ const studyCategories = [
     {
         title: "아키텍처 패턴",
         href: "/architecture",
-        desc: "멀티테넌트 (hostname 기반 런타임 분기), Atomic Design — 실무 설계 전략",
-        count: 2,
+        desc: "멀티테넌트, Atomic Design, AWS Bedrock & RAG — 실무 설계 전략",
+        count: 3,
         tag: "Architecture",
         tagColor: "text-blue040",
         tagBg: "bg-blue005",
