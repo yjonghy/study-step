@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import SpriteGallery from "./SpriteGallery"
 
 export const revalidate = 3600
+export const dynamicParams = false
 
 const POKE_API = "https://pokeapi.co/api/v2"
 

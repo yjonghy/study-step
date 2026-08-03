@@ -114,7 +114,7 @@ export default function NavigationHeader() {
             </header>
 
             {/* Desktop sidebar */}
-            <header className="mobile:hidden block py-[32px] rounded-[12px] px-[24px] bg-white/70 min-w-[260px] max-w-[260px] h-fit sticky top-[48px] shadow-shadow15">
+            <header className="mobile:hidden flex flex-col py-[32px] rounded-[12px] px-[24px] bg-white/70 min-w-[260px] max-w-[260px] h-[calc(100vh-96px)] sticky top-[48px] shadow-shadow15">
                 {/* Profile */}
                 <div className="flex items-center gap-[12px]">
                     <img
@@ -146,62 +146,64 @@ export default function NavigationHeader() {
                 <div className="my-[18px] h-[1px] bg-gray020 w-full" />
 
                 {/* Category nav */}
-                <p className="body-xs text-gray035 font-bold mb-[8px] tracking-wider uppercase">카테고리</p>
-                <div className="flex flex-col gap-[2px]">
+                <div className="min-h-0 overflow-y-auto">
+                    <p className="body-xs text-gray035 font-bold mb-[8px] tracking-wider uppercase">카테고리</p>
+                    <div className="flex flex-col gap-[2px]">
 
-                    {/* 포트폴리오 */}
-                    <button
-                        onClick={() => router.push("/portfolio")}
-                        className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
-                                    text-left ease-out duration-[100ms] cursor-pointer
-                                    ${isActive("/portfolio") ? "bg-gray090" : "hover:bg-gray015"}`}
-                    >
-                        <span className={`body-sm ${isActive("/portfolio") ? "text-white font-bold" : "text-gray060"}`}>
-                            포트폴리오
-                        </span>
-                        <span className={`body-xs ${isActive("/portfolio") ? "text-gray030" : "text-gray035"}`}>
-                            Portfolio
-                        </span>
-                    </button>
+                        {/* 포트폴리오 */}
+                        <button
+                            onClick={() => router.push("/portfolio")}
+                            className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
+                                        text-left ease-out duration-[100ms] cursor-pointer
+                                        ${isActive("/portfolio") ? "bg-gray090" : "hover:bg-gray015"}`}
+                        >
+                            <span className={`body-sm ${isActive("/portfolio") ? "text-white font-bold" : "text-gray060"}`}>
+                                포트폴리오
+                            </span>
+                            <span className={`body-xs ${isActive("/portfolio") ? "text-gray030" : "text-gray035"}`}>
+                                Portfolio
+                            </span>
+                        </button>
 
-                    {/* 스터디내용 토글 */}
-                    <button
-                        onClick={() => setStudyOpen((v) => !v)}
-                        className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
-                                    text-left ease-out duration-[100ms] cursor-pointer
-                                    ${isStudyActive && !studyOpen ? "bg-gray090" : "hover:bg-gray015"}`}
-                    >
-                        <span className={`body-sm ${isStudyActive && !studyOpen ? "text-white font-bold" : "text-gray060"}`}>
-                            스터디내용
-                        </span>
-                        <span className={`body-xs text-gray035 transition-transform duration-150 ${studyOpen ? "rotate-180" : ""}`}>
-                            ▾
-                        </span>
-                    </button>
+                        {/* 스터디내용 토글 */}
+                        <button
+                            onClick={() => setStudyOpen((v) => !v)}
+                            className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
+                                        text-left ease-out duration-[100ms] cursor-pointer
+                                        ${isStudyActive && !studyOpen ? "bg-gray090" : "hover:bg-gray015"}`}
+                        >
+                            <span className={`body-sm ${isStudyActive && !studyOpen ? "text-white font-bold" : "text-gray060"}`}>
+                                스터디내용
+                            </span>
+                            <span className={`body-xs text-gray035 transition-transform duration-150 ${studyOpen ? "rotate-180" : ""}`}>
+                                ▾
+                            </span>
+                        </button>
 
-                    {/* 스터디 서브 메뉴 */}
-                    {studyOpen && (
-                        <div className="flex flex-col gap-[2px] mt-[2px] pl-[6px]">
-                            <div className="border-l-[2px] border-gray020 pl-[8px] flex flex-col gap-[2px]">
-                                {studyItems.map(({ label, path, tag }) => (
-                                    <button
-                                        key={path}
-                                        onClick={() => router.push(path)}
-                                        className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
-                                                    text-left ease-out duration-[100ms] cursor-pointer
-                                                    ${isActive(path) ? "bg-blue040" : "hover:bg-gray015"}`}
-                                    >
-                                        <span className={`body-sm ${isActive(path) ? "text-white font-bold" : "text-gray060"}`}>
-                                            {label}
-                                        </span>
-                                        <span className={`body-xs ${isActive(path) ? "text-blue010" : "text-gray035"}`}>
-                                            {tag}
-                                        </span>
-                                    </button>
-                                ))}
+                        {/* 스터디 서브 메뉴 */}
+                        {studyOpen && (
+                            <div className="flex flex-col gap-[2px] mt-[2px] pl-[6px]">
+                                <div className="border-l-[2px] border-gray020 pl-[8px] flex flex-col gap-[2px]">
+                                    {studyItems.map(({ label, path, tag }) => (
+                                        <button
+                                            key={path}
+                                            onClick={() => router.push(path)}
+                                            className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
+                                                        text-left ease-out duration-[100ms] cursor-pointer
+                                                        ${isActive(path) ? "bg-blue040" : "hover:bg-gray015"}`}
+                                        >
+                                            <span className={`body-sm ${isActive(path) ? "text-white font-bold" : "text-gray060"}`}>
+                                                {label}
+                                            </span>
+                                            <span className={`body-xs ${isActive(path) ? "text-blue010" : "text-gray035"}`}>
+                                                {tag}
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </header>
         </>

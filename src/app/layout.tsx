@@ -23,13 +23,14 @@ export default function RootLayout({children}: any) {
                         <>
                             <main className={`relative
                                               w-full min-h-screen h-full
+                                              desktop:h-screen desktop:min-h-0 desktop:overflow-hidden
                                               desktop:max-w-[2200px]
                                               desktop:px-[48px] desktop:py-[48px]
                                               tablet:px-[32px] tablet:py-[32px]
                                               mobile:px-[20px] mobile:py-[20px]`}>
-                                <section className={`w-full h-full flex mobile:flex-col gap-[20px] z-[1] relative`}>
+                                <section className={`w-full h-full desktop:min-h-0 flex mobile:flex-col gap-[20px] z-[1] relative`}>
                                     <NavigationHeader/>
-                                    <div className="w-full h-full">
+                                    <div className="w-full h-full desktop:min-h-0 desktop:overflow-y-auto">
                                         {children}
                                     </div>
                                 </section>
