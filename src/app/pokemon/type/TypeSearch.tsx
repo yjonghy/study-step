@@ -53,28 +53,27 @@ type TypeReason = {
 }
 
 const TYPE_META: Record<string, TypeMeta> = {
-    normal: { icon: "N", bg: "#F4F4F3", text: "#5F6359", border: "#DADDD2" },
-    fire: { icon: "불", bg: "#FFF0E8", text: "#C6421A", border: "#FFC3A8" },
-    water: { icon: "물", bg: "#EAF4FF", text: "#1769D2", border: "#A9D4FF" },
-    electric: { icon: "전", bg: "#FFF8D7", text: "#A36B00", border: "#FFE27A" },
-    grass: { icon: "풀", bg: "#ECF8E7", text: "#2E7D32", border: "#B7E1A1" },
-    ice: { icon: "얼", bg: "#E7FAFF", text: "#0E7991", border: "#A7E7F2" },
-    fighting: { icon: "격", bg: "#FFECEA", text: "#B52E2A", border: "#F7B1AC" },
-    poison: { icon: "독", bg: "#F4E9FF", text: "#7C3FB0", border: "#D6B4F1" },
-    ground: { icon: "땅", bg: "#FFF1D8", text: "#93631B", border: "#E8C279" },
-    flying: { icon: "비", bg: "#EEF2FF", text: "#536DC6", border: "#C4CEF8" },
-    psychic: { icon: "초", bg: "#FFEAF3", text: "#C43D76", border: "#F6B2CD" },
-    bug: { icon: "벌", bg: "#F0F7D8", text: "#647A13", border: "#CBDD72" },
-    rock: { icon: "암", bg: "#F4EED8", text: "#78651F", border: "#D8C77C" },
-    ghost: { icon: "고", bg: "#EEEAF8", text: "#604D93", border: "#C6B9E2" },
-    dragon: { icon: "용", bg: "#EDEBFF", text: "#4B45B8", border: "#BDB8FF" },
-    dark: { icon: "악", bg: "#ECE9E6", text: "#463D39", border: "#C8BFB9" },
-    steel: { icon: "강", bg: "#EDF4F6", text: "#4F717A", border: "#B9CCD1" },
-    fairy: { icon: "페", bg: "#FFEAF7", text: "#B94891", border: "#F4B7DE" },
+    normal: { icon: "●", bg: "#F4F4F3", text: "#5F6359", border: "#DADDD2" },
+    fire: { icon: "▲", bg: "#FFF0E8", text: "#C6421A", border: "#FFC3A8" },
+    water: { icon: "◆", bg: "#EAF4FF", text: "#1769D2", border: "#A9D4FF" },
+    electric: { icon: "ϟ", bg: "#FFF8D7", text: "#A36B00", border: "#FFE27A" },
+    grass: { icon: "✦", bg: "#ECF8E7", text: "#2E7D32", border: "#B7E1A1" },
+    ice: { icon: "✣", bg: "#E7FAFF", text: "#0E7991", border: "#A7E7F2" },
+    fighting: { icon: "◆", bg: "#FFECEA", text: "#B52E2A", border: "#F7B1AC" },
+    poison: { icon: "✚", bg: "#F4E9FF", text: "#7C3FB0", border: "#D6B4F1" },
+    ground: { icon: "▰", bg: "#FFF1D8", text: "#93631B", border: "#E8C279" },
+    flying: { icon: "⌁", bg: "#EEF2FF", text: "#536DC6", border: "#C4CEF8" },
+    psychic: { icon: "◎", bg: "#FFEAF3", text: "#C43D76", border: "#F6B2CD" },
+    bug: { icon: "✶", bg: "#F0F7D8", text: "#647A13", border: "#CBDD72" },
+    rock: { icon: "⬟", bg: "#F4EED8", text: "#78651F", border: "#D8C77C" },
+    ghost: { icon: "◐", bg: "#EEEAF8", text: "#604D93", border: "#C6B9E2" },
+    dragon: { icon: "✦", bg: "#EDEBFF", text: "#4B45B8", border: "#BDB8FF" },
+    dark: { icon: "◑", bg: "#ECE9E6", text: "#463D39", border: "#C8BFB9" },
+    steel: { icon: "⬢", bg: "#EDF4F6", text: "#4F717A", border: "#B9CCD1" },
+    fairy: { icon: "✧", bg: "#FFEAF7", text: "#B94891", border: "#F4B7DE" },
 }
 
 const POKE_API = "https://pokeapi.co/api/v2"
-const CANDIDATE_LIMIT = 120
 
 const hasType = (list: NamedResource[], typeName: string) => list.some((type) => type.name === typeName)
 
@@ -108,10 +107,10 @@ function TypeBadge({ typeName, label, muted = false }: { typeName: string; label
 
     return (
         <span
-            className={`body-xs font-bold px-[10px] py-[4px] rounded-full border inline-flex items-center gap-[5px] ${muted ? "opacity-75" : ""}`}
+            className={`type-badge body-xs font-bold px-[10px] py-[4px] rounded-full border inline-flex items-center gap-[5px] ${muted ? "opacity-75" : ""}`}
             style={getTypeStyle(typeName)}
         >
-            <span className="w-[16px] h-[16px] rounded-full bg-white/70 flex items-center justify-center text-[10px] leading-none shrink-0">
+            <span className="type-icon w-[16px] h-[16px] rounded-full bg-white/70 flex items-center justify-center text-[10px] leading-none shrink-0">
                 {meta?.icon ?? "?"}
             </span>
             {label}
@@ -122,7 +121,7 @@ function TypeBadge({ typeName, label, muted = false }: { typeName: string; label
 function ReasonBadge({ reason }: { reason: TypeReason }) {
     return (
         <span
-            className="body-xs font-bold px-[8px] py-[5px] rounded-[8px] border inline-flex flex-col gap-[2px]"
+            className="reason-badge body-xs font-bold px-[8px] py-[5px] rounded-[8px] border inline-flex flex-col gap-[2px]"
             style={getTypeStyle(reason.defenseType.name)}
         >
             <span className="leading-none">{reason.defenseType.label}</span>
@@ -140,11 +139,10 @@ export default function TypeSearch({ pokemons, types }: { pokemons: PokemonName[
 
     const candidates = useMemo(() => {
         const query = keyword.trim()
-        if (!query) return pokemons.slice(0, CANDIDATE_LIMIT)
+        if (!query) return pokemons
 
         return pokemons
             .filter((pokemon) => pokemon.name.includes(query) || pokemon.pokemon_species_id === query)
-            .slice(0, CANDIDATE_LIMIT)
     }, [keyword, pokemons])
 
     const defenseRows = useMemo(() => {
@@ -173,6 +171,8 @@ export default function TypeSearch({ pokemons, types }: { pokemons: PokemonName[
 
     const weaknessRows = defenseRows.filter(({ multiplier }) => multiplier > 1)
     const resistanceRows = defenseRows.filter(({ multiplier }) => multiplier < 1)
+    const criticalWeaknessRows = weaknessRows.filter(({ multiplier }) => multiplier >= 4)
+    const regularWeaknessRows = weaknessRows.filter(({ multiplier }) => multiplier < 4)
 
     const attackRows = useMemo(() => {
         if (!selected) return []
@@ -233,7 +233,9 @@ export default function TypeSearch({ pokemons, types }: { pokemons: PokemonName[
             <section className="w-full bg-white border border-gray020 rounded-[8px] p-[16px] flex flex-col gap-[12px]">
                 <div className="flex flex-col gap-[4px]">
                     <p className="body-sm text-gray070 font-bold">포켓몬 이름 검색</p>
-                    <p className="body-xs text-gray040">한국어 이름이나 도감 번호로 타입 상성을 확인합니다.</p>
+                    <p className="body-xs text-gray040">
+                        전체 {pokemons.length}마리에서 한국어 이름이나 도감 번호로 타입 상성을 확인합니다.
+                    </p>
                 </div>
 
                 <div className="flex gap-[8px] mobile:flex-col">
@@ -257,18 +259,18 @@ export default function TypeSearch({ pokemons, types }: { pokemons: PokemonName[
 
                 <div className="flex items-center justify-between gap-[8px]">
                     <p className="body-xs text-gray040">
-                        {keyword.trim() ? "검색 결과" : "도감 순서"} {candidates.length}개 표시
+                        {keyword.trim() ? "검색 결과" : "전체 도감"} {candidates.length}마리
                     </p>
-                    <p className="body-xs text-gray035">최대 {CANDIDATE_LIMIT}개</p>
+                    <p className="body-xs text-gray035">스크롤해서 전체 탐색</p>
                 </div>
 
-                <div className="grid grid-cols-5 mobile:grid-cols-2 gap-[8px] max-h-[420px] overflow-y-auto pr-[4px]">
+                <div className="grid grid-cols-6 mobile:grid-cols-2 gap-[8px] max-h-[520px] overflow-y-auto pr-[4px]">
                     {candidates.map((pokemon) => (
                         <button
                             type="button"
                             key={pokemon.pokemon_species_id}
                             onClick={() => selectPokemon(pokemon)}
-                            className="h-[44px] px-[10px] rounded-[8px] border border-gray020 hover:border-blue030 hover:bg-blue005 text-left ease-out duration-[100ms] overflow-hidden flex flex-col justify-center"
+                            className="pokemon-option h-[44px] px-[10px] rounded-[8px] border border-gray020 hover:border-blue030 hover:bg-blue005 text-left ease-out duration-[100ms] overflow-hidden flex flex-col justify-center"
                         >
                             <span className="body-xs text-gray040">No.{pokemon.pokemon_species_id}</span>
                             <span className="body-sm text-gray070 font-bold truncate">{pokemon.name}</span>
@@ -281,12 +283,12 @@ export default function TypeSearch({ pokemons, types }: { pokemons: PokemonName[
             </section>
 
             {selected && (
-                <section className="w-full flex flex-col gap-[16px]">
-                    <div className="w-full bg-white border border-gray020 rounded-[8px] p-[16px] flex items-center gap-[16px] mobile:items-start">
+                <section className="result-enter w-full flex flex-col gap-[16px]">
+                    <div className="pokemon-summary w-full bg-white border border-gray020 rounded-[8px] p-[16px] flex items-center gap-[16px] mobile:items-start">
                         <img
                             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selected.id}.png`}
                             alt={selected.name}
-                            className="w-[72px] h-[72px] rounded-[8px] bg-gray005 border border-gray015"
+                            className="sprite-pop w-[72px] h-[72px] rounded-[8px] bg-gray005 border border-gray015"
                         />
                         <div className="flex flex-col gap-[6px]">
                             <p className="body-xs text-gray040">No.{selected.id.padStart(3, "0")}</p>
@@ -303,36 +305,71 @@ export default function TypeSearch({ pokemons, types }: { pokemons: PokemonName[
                     <div className="grid grid-cols-2 mobile:grid-cols-1 gap-[12px]">
                         <div className="bg-white border border-gray020 rounded-[8px] p-[16px] flex flex-col gap-[12px]">
                             <div className="flex items-center justify-between gap-[8px]">
-                                <p className="body-sm text-gray070 font-bold">약점 타입</p>
-                                <span className="body-xs text-gray040">방어 기준</span>
+                                <p className="body-sm text-gray070 font-bold">방어 리스크</p>
+                                <span className="body-xs text-gray040">상대 공격 기준</span>
                             </div>
+
+                            <div className="grid grid-cols-2 mobile:grid-cols-1 gap-[8px]">
+                                <div className={`risk-summary rounded-[8px] border px-[12px] py-[10px] flex flex-col gap-[8px] ${criticalWeaknessRows.length > 0 ? "is-critical bg-red005 border-red020" : "bg-gray005 border-gray015"}`}>
+                                    <div className="flex items-center justify-between gap-[8px]">
+                                        <p className={`body-xs font-bold ${criticalWeaknessRows.length > 0 ? "text-red050" : "text-gray050"}`}>4배 위험</p>
+                                        <span className={`body-xs font-bold px-[7px] py-[2px] rounded-full ${criticalWeaknessRows.length > 0 ? "bg-red050 text-white" : "bg-gray020 text-gray050"}`}>
+                                            {criticalWeaknessRows.length}
+                                        </span>
+                                    </div>
+                                    <div className="flex gap-[6px] flex-wrap">
+                                        {criticalWeaknessRows.length > 0 ? criticalWeaknessRows.map(({ type, multiplier }) => (
+                                            <TypeBadge key={type.name} typeName={type.name} label={`${type.label} x${formatMultiplier(multiplier)}`} />
+                                        )) : (
+                                            <span className="body-xs text-gray040">없음</span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="risk-summary rounded-[8px] border border-gray015 bg-gray005 px-[12px] py-[10px] flex flex-col gap-[8px]">
+                                    <div className="flex items-center justify-between gap-[8px]">
+                                        <p className="body-xs text-gray060 font-bold">2배 약점</p>
+                                        <span className="body-xs text-gray050 font-bold px-[7px] py-[2px] rounded-full bg-gray020">
+                                            {regularWeaknessRows.length}
+                                        </span>
+                                    </div>
+                                    <div className="flex gap-[6px] flex-wrap">
+                                        {regularWeaknessRows.length > 0 ? regularWeaknessRows.map(({ type, multiplier }) => (
+                                            <TypeBadge key={type.name} typeName={type.name} label={`${type.label} x${formatMultiplier(multiplier)}`} />
+                                        )) : (
+                                            <span className="body-xs text-gray040">없음</span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="flex flex-col gap-[10px]">
                                 {weaknessRows.length > 0 ? weaknessRows.map(({ type, multiplier, reasons }) => (
                                     <div
                                         key={type.name}
-                                        className={`grid grid-cols-[140px_1fr] mobile:grid-cols-1 gap-[12px] border rounded-[8px] px-[12px] py-[12px] ${multiplier >= 4 ? "border-red020 bg-red005" : "border-gray015 bg-white"}`}
+                                        className={`weakness-card grid grid-cols-[128px_96px_1fr] mobile:grid-cols-1 gap-[12px] border rounded-[8px] px-[12px] py-[12px] ${multiplier >= 4 ? "is-critical border-red020 bg-red005" : "border-gray015 bg-white"}`}
                                     >
                                         <div className="flex flex-col gap-[6px]">
-                                            <p className="body-xs text-gray040 font-bold">공격 타입</p>
+                                            <p className="body-xs text-gray040 font-bold">받는 공격</p>
                                             <TypeBadge typeName={type.name} label={type.label} />
                                         </div>
+                                        <div className="flex flex-col gap-[6px]">
+                                            <p className="body-xs text-gray040 font-bold">최종 피해</p>
+                                            <span className={`damage-pill w-fit body-sm font-bold px-[10px] py-[7px] rounded-[8px] ${multiplier >= 4 ? "is-critical bg-red050 text-white" : "bg-gray090 text-white"}`}>
+                                                x{formatMultiplier(multiplier)}
+                                            </span>
+                                        </div>
                                         <div className="flex flex-col gap-[8px]">
-                                            <div className="flex items-center justify-between gap-[8px]">
-                                                <p className="body-xs text-gray040 font-bold">최종 피해 배율</p>
-                                                <span className={`heading-md font-bold ${multiplier >= 4 ? "text-red050" : "text-gray080"}`}>
-                                                    x{formatMultiplier(multiplier)}
-                                                </span>
-                                            </div>
                                             <div className="flex flex-col gap-[6px] bg-white/60 border border-white rounded-[8px] px-[10px] py-[8px]">
-                                                <p className="body-xs text-gray050 font-bold">방어 타입 영향</p>
+                                                <p className="body-xs text-gray050 font-bold">왜 약점인가</p>
                                                 <div className="flex gap-[6px] flex-wrap items-center">
                                                     {reasons.map((reason, index) => (
                                                         <span key={`${type.name}-${reason.defenseType.name}`} className="inline-flex items-center gap-[6px]">
-                                                            {index > 0 && <span className="body-xs text-gray040 font-bold">x</span>}
+                                                            {index > 0 && <span className="calc-mark body-xs text-gray040 font-bold">x</span>}
                                                             <ReasonBadge reason={reason} />
                                                         </span>
                                                     ))}
-                                                    <span className="body-xs text-gray040 font-bold">=</span>
+                                                    <span className="calc-mark body-xs text-gray040 font-bold">=</span>
                                                     <span className={`body-xs font-bold px-[8px] py-[5px] rounded-[8px] ${multiplier >= 4 ? "bg-red050 text-white" : "bg-gray090 text-white"}`}>
                                                         x{formatMultiplier(multiplier)}
                                                     </span>
@@ -402,6 +439,153 @@ export default function TypeSearch({ pokemons, types }: { pokemons: PokemonName[
                     </div>
                 </section>
             )}
+            <style jsx>{`
+                .result-enter {
+                    animation: result-enter 260ms ease-out both;
+                }
+
+                .pokemon-summary {
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .pokemon-summary::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.62) 42%, transparent 72%);
+                    transform: translateX(-120%);
+                    animation: sheen 900ms ease-out 120ms both;
+                    pointer-events: none;
+                }
+
+                .sprite-pop {
+                    animation: sprite-pop 520ms cubic-bezier(0.2, 1.4, 0.28, 1) both;
+                }
+
+                .pokemon-option {
+                    transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+                }
+
+                .pokemon-option:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 18px rgba(36, 111, 248, 0.12);
+                }
+
+                .type-badge {
+                    transition: transform 140ms ease, box-shadow 140ms ease;
+                }
+
+                .type-badge:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+                }
+
+                .type-icon {
+                    animation: icon-float 2200ms ease-in-out infinite;
+                }
+
+                .risk-summary {
+                    animation: card-rise 260ms ease-out both;
+                }
+
+                .risk-summary.is-critical {
+                    animation: card-rise 260ms ease-out both, critical-glow 1600ms ease-in-out infinite;
+                }
+
+                .weakness-card {
+                    animation: card-rise 260ms ease-out both;
+                    transition: transform 140ms ease, box-shadow 140ms ease;
+                }
+
+                .weakness-card:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+                }
+
+                .weakness-card.is-critical {
+                    animation: card-rise 260ms ease-out both, critical-glow 1600ms ease-in-out infinite;
+                }
+
+                .damage-pill.is-critical {
+                    animation: damage-pop 1200ms ease-in-out infinite;
+                }
+
+                .reason-badge {
+                    animation: reason-in 220ms ease-out both;
+                }
+
+                .calc-mark {
+                    animation: calc-pop 700ms ease-in-out infinite;
+                }
+
+                @keyframes result-enter {
+                    from { opacity: 0; transform: translateY(8px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+
+                @keyframes sprite-pop {
+                    0% { opacity: 0; transform: scale(0.82) rotate(-4deg); }
+                    70% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+                    100% { opacity: 1; transform: scale(1) rotate(0); }
+                }
+
+                @keyframes sheen {
+                    to { transform: translateX(120%); }
+                }
+
+                @keyframes icon-float {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-1px); }
+                }
+
+                @keyframes card-rise {
+                    from { opacity: 0; transform: translateY(6px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+
+                @keyframes critical-glow {
+                    0%, 100% { box-shadow: 0 0 0 rgba(230, 61, 44, 0); }
+                    50% { box-shadow: 0 0 0 3px rgba(230, 61, 44, 0.08), 0 10px 24px rgba(230, 61, 44, 0.10); }
+                }
+
+                @keyframes damage-pop {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.06); }
+                }
+
+                @keyframes reason-in {
+                    from { opacity: 0; transform: scale(0.94); }
+                    to { opacity: 1; transform: scale(1); }
+                }
+
+                @keyframes calc-pop {
+                    0%, 100% { opacity: 0.55; transform: scale(1); }
+                    50% { opacity: 1; transform: scale(1.08); }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .result-enter,
+                    .pokemon-summary::after,
+                    .sprite-pop,
+                    .type-icon,
+                    .risk-summary,
+                    .risk-summary.is-critical,
+                    .weakness-card,
+                    .weakness-card.is-critical,
+                    .damage-pill.is-critical,
+                    .reason-badge,
+                    .calc-mark {
+                        animation: none;
+                    }
+
+                    .pokemon-option,
+                    .type-badge,
+                    .weakness-card {
+                        transition: none;
+                    }
+                }
+            `}</style>
         </div>
     )
 }
