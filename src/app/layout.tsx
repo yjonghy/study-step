@@ -5,6 +5,7 @@ import NavigationHeader from "@src/components/nav";
 import {RecoilRoot} from "recoil";
 import Toast from "@src/components/common/toast";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import GoogleAnalytics from "@src/components/analytics/google-analytics";
 
 export default function RootLayout({children}: any) {
     const pathName = usePathname()
@@ -15,6 +16,7 @@ export default function RootLayout({children}: any) {
                 <RecoilRoot>
                     <Toast/>
                     <body className="flex flex-col items-center relative bg-gray010">
+                    <GoogleAnalytics/>
                     {pathName.includes("three") ?
                         <main className="w-full h-full">
                             {children}
