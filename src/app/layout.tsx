@@ -9,6 +9,7 @@ import GoogleAnalytics from "@src/components/analytics/google-analytics";
 
 export default function RootLayout({children}: any) {
     const pathName = usePathname()
+    const isImmersivePage = pathName.startsWith("/three") || pathName.startsWith("/memory-quest")
     const queryClient = new QueryClient();
     return (
         <html lang="en">
@@ -17,7 +18,7 @@ export default function RootLayout({children}: any) {
                     <Toast/>
                     <body className="flex flex-col items-center relative bg-gray010">
                     <GoogleAnalytics/>
-                    {pathName.includes("three") ?
+                    {isImmersivePage ?
                         <main className="w-full h-full">
                             {children}
                         </main>
