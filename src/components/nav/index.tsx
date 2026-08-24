@@ -43,7 +43,7 @@ export default function NavigationHeader() {
     const pathName = usePathname()
     const router = useRouter()
     const [imgOpen, setImgOpen] = useState(false)
-    const [studyOpen, setStudyOpen] = useState(true)
+    const [studyOpen, setStudyOpen] = useState(false)
     const [magnifier, setMagnifier] = useState<MagnifierState>({
         show: false, clientX: 0, clientY: 0, imgX: 0, imgY: 0,
     })
@@ -165,8 +165,8 @@ export default function NavigationHeader() {
                             </span>
                         </button>
 
-                        {/* 스터디내용 토글 */}
-                        <button
+                        {/* 포트폴리오에서는 경력 정보에만 집중하고, 스터디 메뉴는 다른 경로에서만 노출 */}
+                        {!isActive("/portfolio") && <button
                             onClick={() => setStudyOpen((v) => !v)}
                             className={`w-full flex items-center justify-between px-[10px] py-[7px] rounded-[8px]
                                         text-left ease-out duration-[100ms] cursor-pointer
@@ -178,10 +178,10 @@ export default function NavigationHeader() {
                             <span className={`body-xs text-gray035 transition-transform duration-150 ${studyOpen ? "rotate-180" : ""}`}>
                                 ▾
                             </span>
-                        </button>
+                        </button>}
 
                         {/* 스터디 서브 메뉴 */}
-                        {studyOpen && (
+                        {!isActive("/portfolio") && studyOpen && (
                             <div className="flex flex-col gap-[2px] mt-[2px] pl-[6px]">
                                 <div className="border-l-[2px] border-gray020 pl-[8px] flex flex-col gap-[2px]">
                                     {studyItems.map(({ label, path, tag }) => (

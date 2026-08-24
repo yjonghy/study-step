@@ -61,6 +61,13 @@ type SubProject = {
     flow?: FlowStep[]
     layers: Layer[]
     techReasons: TechReason[]
+    showCoreCases?: boolean
+}
+
+type Highlight = {
+    title: string
+    summary: string
+    result: string
 }
 
 type Project = {
@@ -76,6 +83,7 @@ type Project = {
     flow?: FlowStep[]
     layers?: Layer[]
     techReasons?: TechReason[]
+    highlights?: Highlight[]
 }
 
 // ─── Style maps ──────────────────────────────────────────────────────────────
@@ -111,6 +119,18 @@ const projects: Project[] = [
         accentColor: "border-blue040",
         tagBg: "bg-blue005",
         tagText: "text-blue040",
+        highlights: [
+            {
+                title: "녹음 데이터 유실 방지",
+                summary: "Datadog RUM으로 업로드 실패 구간을 추적하고, 실패한 녹음 데이터를 IndexedDB에 보관한 뒤 연결 복구 시 생성 순서대로 재전송했습니다.",
+                result: "불안정한 네트워크 환경에서 약 170개 녹음 파일의 순서와 유실 여부를 검증",
+            },
+            {
+                title: "평가 진행 상태 모니터링",
+                summary: "면접관별 점수와 평가 진행 상태를 목록에서 함께 확인할 수 있도록 정보 구조를 재설계했습니다.",
+                result: "상세 화면을 반복해서 열지 않고 미입력 평가와 진행 상황을 목록에서 파악",
+            },
+        ],
         sharedInfra: [
             { name: "AWS S3", note: "파일·음성 스토리지" },
             { name: "CloudFront", note: "CDN 배포" },
@@ -124,10 +144,11 @@ const projects: Project[] = [
                 name: "면접 솔루션",
                 description: "지원자 음성 인터뷰와 면접관 점수 입력을 실시간으로 처리하는 B2B 면접 운영 플랫폼. 음성 데이터는 STT 변환 후 AI 스크립트·근거로 생성되고, 점수는 Socket으로 관리자에게 실시간 전파.",
                 stack: ["React", "Next.js", "NestJS", "Socket.io", "Web Worker", "VAD", "Azure STT SDK", "Redis", "MongoDB", "TanStack Query", "Zustand", "Framer Motion", "TypeScript", "Datadog RUM", "AWS S3/CloudFront"],
+                showCoreCases: true,
                 metrics: [
-                    { label: "소켓 재연결 복구", value: "< 2초", note: "connectionGeneration + Room Registry" },
-                    { label: "음성 업로드 재시도 성공률", value: "99%+", note: "Web Worker 오프라인 큐" },
-                    { label: "기관 추가 시 컴포넌트 수정", value: "0건", note: "DomainConfig 설정 파일만 추가" },
+                    { label: "재연결 시 기존 룸 재구독", value: "자동 복구", note: "connectionGeneration + Room Registry" },
+                    { label: "저장된 녹음 데이터 재전송", value: "생성 순서 보장", note: "IndexedDB 복구 큐 · 약 170개 파일 검증" },
+                    { label: "기관별 기능 확장", value: "설정 중심", note: "공통 컴포넌트 대신 DomainConfig 추가" },
                     { label: "무음 구간 STT 전송 제거", value: "VAD 적용", note: "인식 정확도 및 API 비용 개선" },
                 ],
                 troubleshooting: [
@@ -137,9 +158,14 @@ const projects: Project[] = [
                         techs: ["Socket.io", "Zustand"],
                     },
                     {
-                        problem: "음성 업로드 중 네트워크 단절 시 메인 스레드가 블로킹되어 면접 UI가 멈추는 현상",
-                        solution: "Web Worker 내부에 재시도 큐를 두어 업로드 로직을 메인 스레드에서 완전히 분리. 실패 청크를 임시 저장 후 순서대로 재전송하며 UI 흐름을 보장.",
-                        techs: ["Web Worker", "AWS S3"],
+                        problem: "네트워크 단절로 업로드에 실패한 녹음 데이터가 복구되지 않아 면접 기록이 유실될 수 있는 문제",
+                        solution: "Datadog RUM으로 업로드 실패 구간을 확인하고, 실패 데이터를 IndexedDB에 저장하는 복구 큐를 구성. 연결 복구 후 생성 순서대로 재전송하고 약 170개 파일로 순서와 유실 여부를 검증.",
+                        techs: ["Datadog RUM", "IndexedDB", "Web Worker", "AWS S3"],
+                    },
+                    {
+                        problem: "면접관별 점수 입력 여부와 평가 진행 상태가 상세 화면에 흩어져 운영자가 전체 현황을 빠르게 파악하기 어려운 문제",
+                        solution: "지원자 목록에 면접관별 점수와 진행 상태를 함께 표시하도록 정보 구조를 재설계. 미입력 상태를 구분해 후속 확인이 필요한 평가를 목록에서 바로 찾도록 개선.",
+                        techs: ["React", "TanStack Query", "Socket.io"],
                     },
                     {
                         problem: "무음 구간까지 Azure STT에 전송되어 인식 오류 및 불필요한 API 호출 발생",
@@ -162,7 +188,7 @@ const projects: Project[] = [
                         label: "면접 시작",
                         events: [
                             { text: "Socket.io로 N명 면접관에게 시작 신호 전파", techs: ["Socket.io"] },
-                            { text: "음성 녹음 시작 — Web Worker가 S3에 지속 업로드, 실패 시 재시도", techs: ["Web Worker", "S3"] },
+                            { text: "음성 녹음 시작 — 업로드 실패 데이터는 IndexedDB 복구 큐에 저장", techs: ["Web Worker", "IndexedDB", "S3"] },
                             { text: "Azure STT 스트리밍 시작 — 대화 로그 실시간 표시", techs: ["Azure STT SDK", "VAD"] },
                         ],
                     },
@@ -224,7 +250,7 @@ const projects: Project[] = [
                 ],
                 techReasons: [
                     { tech: "Socket.io & 재연결 상태머신", reason: "idle → bootstrapping → ready → reconnecting 5단계 상태머신으로 소켓 생명주기를 관리. connectionGeneration으로 stale ack를 차단하고, Room Registry로 재연결 시 룸 자동 복구를 구현해 점수 전파 무결성을 보장했습니다." },
-                    { tech: "Web Worker", reason: "음성 업로드 실패·재시도 로직을 메인 스레드 밖으로 완전히 분리. 네트워크 단절 시에도 UI가 멈추지 않고 면접이 지속되는 것이 핵심 요구사항이었습니다." },
+                    { tech: "IndexedDB & Web Worker", reason: "Datadog RUM으로 확인한 업로드 실패 지점을 기준으로 복구 구조를 설계했습니다. 실패한 녹음 데이터를 IndexedDB에 보관하고 연결 복구 후 생성 순서대로 재전송해 데이터 유실을 방지했습니다." },
                     { tech: "VAD", reason: "발화 구간만 선별적으로 Azure STT에 전달해 인식 정확도를 높이고 불필요한 API 요청을 제거. 무음 구간 전송 시 발생하던 오인식 문제를 근본적으로 해결했습니다." },
                     { tech: "Azure STT SDK", reason: "한국어 스트리밍 인식 정확도와 SDK 안정성을 비교 검토 후 선택. 변환된 텍스트를 AI API에 전달해 면접 스크립트와 평가 근거를 자동 생성하는 파이프라인에 연결했습니다." },
                     { tech: "멀티테넌트 아키텍처", reason: "단일 빌드물이 hostname 기반으로 기관별 평가 UI·로직을 런타임에 자동 선택. DomainConfig 패턴으로 분기를 한 곳에서 관리해 기관 추가 시 설정 파일만 추가하면 됩니다." },
@@ -843,7 +869,7 @@ function InterviewProcessFlow({ steps, layers }: { steps: ProcessStep[]; layers:
 function MetricsSection({ metrics }: { metrics: Metric[] }) {
     return (
         <div>
-            <p className="body-xs font-bold text-gray040 mb-[10px] tracking-widest uppercase">성과 · 지표</p>
+            <p className="body-xs font-bold text-gray040 mb-[10px] tracking-widest uppercase">구현 결과</p>
             <div className="grid grid-cols-2 gap-[8px] mobile:grid-cols-1">
                 {metrics.map((m) => (
                     <div key={m.label} className="bg-blue005 border border-blue015 rounded-[10px] px-[14px] py-[10px]">
@@ -886,11 +912,68 @@ function TroubleshootingSection({ items }: { items: Troubleshooting[] }) {
     )
 }
 
+function CoreCaseVisuals() {
+    const uploadSteps = [
+        ["1", "실패 감지", "Datadog RUM"],
+        ["2", "로컬 보관", "IndexedDB"],
+        ["3", "연결 복구", "네트워크 상태 확인"],
+        ["4", "순서 재전송", "생성 시각 기준"],
+    ]
+
+    return (
+        <div>
+            <p className="heading-sm text-gray080 mb-[12px]">핵심 구현 결과</p>
+            <div className="grid grid-cols-2 gap-[12px] mobile:grid-cols-1">
+                <div className="border border-blue015 bg-blue005 rounded-[12px] p-[16px]">
+                    <p className="body-sm font-bold text-blue040">녹음 업로드 복구 흐름</p>
+                    <p className="body-xs text-gray050 mt-[4px] mb-[14px]">실패 데이터를 버리지 않고 로컬에 보관해 연결 복구 후 다시 전송</p>
+                    <div className="grid grid-cols-4 gap-[6px] mobile:grid-cols-2">
+                        {uploadSteps.map(([order, title, note]) => (
+                            <div key={order} className="bg-white rounded-[9px] border border-blue015 px-[9px] py-[10px] min-w-0">
+                                <span className="body-xs font-bold text-blue040">{order}</span>
+                                <p className="body-xs font-bold text-gray080 mt-[3px]">{title}</p>
+                                <p className="body-xs text-gray040 mt-[2px] break-keep">{note}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="body-xs text-blue040 font-medium mt-[12px]">검증: 약 170개 녹음 파일의 순서 및 유실 여부 확인</p>
+                </div>
+
+                <div className="border border-green020 bg-green005 rounded-[12px] p-[16px]">
+                    <p className="body-sm font-bold text-green060">평가 모니터링 화면 개선</p>
+                    <p className="body-xs text-gray050 mt-[4px] mb-[14px]">상세 진입 중심 구조에서 목록 중심의 운영 화면으로 개선</p>
+                    <div className="grid grid-cols-[0.8fr_1.2fr] gap-[8px]">
+                        <div className="bg-white rounded-[9px] border border-gray020 p-[10px] opacity-70">
+                            <p className="body-xs font-bold text-gray040">Before</p>
+                            <div className="mt-[8px] h-[7px] bg-gray020 rounded-full" />
+                            <div className="mt-[6px] h-[7px] bg-gray020 rounded-full w-2/3" />
+                            <p className="body-xs text-gray040 mt-[12px]">상세 화면에서 개별 확인</p>
+                        </div>
+                        <div className="bg-white rounded-[9px] border border-green020 p-[10px]">
+                            <div className="flex items-center justify-between gap-[6px]">
+                                <p className="body-xs font-bold text-gray080">지원자 A</p>
+                                <span className="body-xs text-yellow060 bg-yellow010 rounded-full px-[6px] py-[1px]">평가 중</span>
+                            </div>
+                            <div className="flex gap-[4px] mt-[9px] flex-wrap">
+                                <span className="body-xs bg-green010 text-green060 rounded px-[5px] py-[2px]">면접관 1 · 완료</span>
+                                <span className="body-xs bg-red010 text-red050 rounded px-[5px] py-[2px]">면접관 2 · 미입력</span>
+                            </div>
+                            <p className="body-xs text-green060 mt-[9px]">목록에서 점수·진행 상태 확인</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function SubProjectDetail({ sub, tagText }: { sub: SubProject; tagText: string }) {
     return (
         <div className="flex flex-col gap-[20px]">
             {/* Description */}
             <p className="body-sm text-gray060 leading-relaxed">{sub.description}</p>
+
+            {sub.showCoreCases && <CoreCaseVisuals />}
 
             {/* Stack pills */}
             <div>
@@ -957,8 +1040,8 @@ function SharedInfraSection({ items }: { items: LayerItem[] }) {
     )
 }
 
-function ProjectCard({ project }: { project: Project }) {
-    const [open, setOpen] = useState(false)
+function ProjectCard({ project, defaultOpen = false }: { project: Project; defaultOpen?: boolean }) {
+    const [open, setOpen] = useState(defaultOpen)
     const [activeTab, setActiveTab] = useState(0)
 
     const hasSubProjects = !!project.subProjects?.length
@@ -1059,6 +1142,8 @@ const coreSkills = [
 ]
 
 function ProfileCard() {
+    const highlights = projects[0].highlights ?? []
+
     return (
         <div className="bg-white rounded-[16px] shadow-shadow15 px-[28px] py-[24px] flex flex-col gap-[16px]">
             <div className="flex items-start justify-between gap-[12px] flex-wrap">
@@ -1069,10 +1154,23 @@ function ProfileCard() {
                             6년+ · 2019.09 — 현재
                         </span>
                     </div>
-                    <p className="body-sm text-gray060">
-                        실시간 데이터 처리, 멀티테넌트 아키텍처, 레거시 마이그레이션까지 폭넓게 경험한 프론트엔드 개발자입니다.
-                        기술 선택의 이유를 항상 문서화하고, 구조 설계부터 운영 모니터링까지 제품 전반에 관여합니다.
+                    <p className="body-sm text-gray060 leading-relaxed">
+                        React와 TypeScript를 기반으로 B2B 운영 제품을 개발해 온 6년 차 프론트엔드 개발자입니다.
+                        Datadog RUM으로 운영 문제를 추적하고, Web Worker·IndexedDB 기반 업로드 복구 구조와 Socket.io 재연결 구조를 설계했습니다.
                     </p>
+                </div>
+            </div>
+
+            <div>
+                <p className="body-xs font-bold text-gray040 mb-[8px] tracking-widest uppercase">대표 문제 해결</p>
+                <div className="grid grid-cols-2 gap-[8px] mobile:grid-cols-1">
+                    {highlights.map((highlight) => (
+                        <div key={highlight.title} className="rounded-[10px] border border-blue015 bg-blue005 px-[14px] py-[11px]">
+                            <p className="body-xs font-bold text-blue040">{highlight.title}</p>
+                            <p className="body-xs text-gray060 leading-relaxed mt-[4px]">{highlight.summary}</p>
+                            <p className="body-xs font-medium text-gray080 leading-relaxed mt-[6px]">{highlight.result}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 
@@ -1115,8 +1213,8 @@ export default function Portfolio() {
 
             <div className="flex flex-col gap-[16px] mt-[24px]">
                 <ProfileCard />
-                {projects.map((project) => (
-                    <ProjectCard key={project.company} project={project} />
+                {projects.map((project, index) => (
+                    <ProjectCard key={project.company} project={project} defaultOpen={index === 0} />
                 ))}
             </div>
         </main>
