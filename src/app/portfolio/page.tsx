@@ -149,7 +149,7 @@ const projects: Project[] = [
                     { label: "재연결 시 기존 룸 재구독", value: "자동 복구", note: "connectionGeneration + Room Registry" },
                     { label: "저장된 녹음 데이터 재전송", value: "생성 순서 보장", note: "IndexedDB 복구 큐 · 약 170개 파일 검증" },
                     { label: "기관별 기능 확장", value: "설정 중심", note: "공통 컴포넌트 대신 DomainConfig 추가" },
-                    { label: "무음 구간 STT 전송 제거", value: "VAD 적용", note: "인식 정확도 및 API 비용 개선" },
+                    { label: "무음 구간 STT 전송 제거", value: "VAD 적용", note: "불필요한 STT API 호출 제외" },
                 ],
                 troubleshooting: [
                     {
@@ -169,7 +169,7 @@ const projects: Project[] = [
                     },
                     {
                         problem: "무음 구간까지 Azure STT에 전송되어 인식 오류 및 불필요한 API 호출 발생",
-                        solution: "VAD(Voice Activity Detection)로 발화 시작·종료 구간을 감지하여 실제 발화 구간만 STT에 전달. 무음 전송을 제거해 인식 정확도를 높이고 과금을 줄임.",
+                        solution: "VAD(Voice Activity Detection)로 발화 시작·종료 구간을 감지하여 실제 발화 구간만 전달. 무음 구간이 STT 요청에 포함되지 않도록 변경.",
                         techs: ["VAD", "Azure STT SDK"],
                     },
                     {
@@ -251,10 +251,10 @@ const projects: Project[] = [
                 techReasons: [
                     { tech: "Socket.io & 재연결 상태머신", reason: "idle → bootstrapping → ready → reconnecting 5단계 상태머신으로 소켓 생명주기를 관리. connectionGeneration으로 stale ack를 차단하고, Room Registry로 재연결 시 룸 자동 복구를 구현해 점수 전파 무결성을 보장했습니다." },
                     { tech: "IndexedDB & Web Worker", reason: "Datadog RUM으로 확인한 업로드 실패 지점을 기준으로 복구 구조를 설계했습니다. 실패한 녹음 데이터를 IndexedDB에 보관하고 연결 복구 후 생성 순서대로 재전송해 데이터 유실을 방지했습니다." },
-                    { tech: "VAD", reason: "발화 구간만 선별적으로 Azure STT에 전달해 인식 정확도를 높이고 불필요한 API 요청을 제거. 무음 구간 전송 시 발생하던 오인식 문제를 근본적으로 해결했습니다." },
+                    { tech: "VAD", reason: "발화 시작·종료 구간을 감지해 실제 발화 구간만 Azure STT에 전달했습니다. 무음 구간이 STT 요청에 포함되지 않도록 변경해 불필요한 API 호출을 제거했습니다." },
                     { tech: "Azure STT SDK", reason: "한국어 스트리밍 인식 정확도와 SDK 안정성을 비교 검토 후 선택. 변환된 텍스트를 AI API에 전달해 면접 스크립트와 평가 근거를 자동 생성하는 파이프라인에 연결했습니다." },
                     { tech: "멀티테넌트 아키텍처", reason: "단일 빌드물이 hostname 기반으로 기관별 평가 UI·로직을 런타임에 자동 선택. DomainConfig 패턴으로 분기를 한 곳에서 관리해 기관 추가 시 설정 파일만 추가하면 됩니다." },
-                    { tech: "Datadog RUM", reason: "면접 중 오류 발생 시 사용자 세션·스택 트레이스·성능 지표를 즉시 파악. 재현이 어려운 실서비스 버그의 원인 분석 시간을 크게 단축했습니다." },
+                    { tech: "Datadog RUM", reason: "면접 중 오류를 추적할 때 사용자 세션·행동 흐름·API 요청 결과를 같은 시점 기준으로 확인할 수 있도록 구성했습니다." },
                     { tech: "AWS S3/CloudFront & OIDC 배포", reason: "GitHub Actions OIDC로 장기 액세스 키 없이 임시 자격증명만으로 배포 자동화. index.html은 no-cache, 해시 파일은 immutable로 캐시 전략을 분리해 배포 즉시 반영을 보장했습니다." },
                 ],
             },
@@ -1155,7 +1155,7 @@ function ProfileCard() {
                         </span>
                     </div>
                     <p className="body-sm text-gray060 leading-relaxed">
-                        React와 TypeScript를 기반으로 B2B 운영 제품을 개발해 온 6년 차 프론트엔드 개발자입니다.
+                        6년 이상 React와 TypeScript 기반 프론트엔드 제품을 개발했으며, 현재 B2B AI 면접·평가 제품을 담당하고 있습니다.
                         Datadog RUM으로 운영 문제를 추적하고, Web Worker·IndexedDB 기반 업로드 복구 구조와 Socket.io 재연결 구조를 설계했습니다.
                     </p>
                 </div>
