@@ -68,7 +68,7 @@ export default function Portfolio() {
             </section>
 
             <section className={styles.archive} id="archive" aria-labelledby="archive-title">
-                <div className={styles.archiveHeading}><h2 id="archive-title">3개 도메인,<br />12개 프로젝트.</h2><p>AI 면접 운영에서 글로벌 장소 대여, 웹·앱 경계까지. 새 기능을 만드는 일과 오래된 구조를 바꾸는 일을 함께 해왔습니다.</p></div>
+                <div className={styles.archiveHeading}><h2 id="archive-title">3개 도메인에서 고른, 12개 주요 프로젝트.</h2><p>지금까지 수행한 업무 중 AI 면접 운영부터 글로벌 장소 대여와 웹·앱 경계까지, 제 역할과 기술적 판단이 잘 드러나는 사례를 선별했습니다.</p></div>
                 <ol className={styles.projectList}>{portfolioProjects.map(project=><li key={project.slug}><Link href={`/portfolio/projects/${project.slug}`}><strong>{project.title}</strong><p>{project.listNote}</p><ArrowIcon /></Link></li>)}</ol>
             </section>
             <section className={`${styles.principles}`} aria-labelledby="principles-title"><h2 id="principles-title">제가 만드는 것은 화면보다 오래 남는<br /><span>판단기준</span>입니다.</h2><div><p><b>관측 가능하게</b>운영 데이터로 재현 조건을 찾습니다.</p><p><b>복구 가능하게</b>단절과 실패를 정상 흐름에 포함합니다.</p><p><b>확장 가능하게</b>공통 흐름과 도메인 정책을 분리합니다.</p></div></section>
