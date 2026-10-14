@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "name": "Editorial Engineering Field",
+  "tokens": {
+    "color": {
+      "paper": "#f0efe9",
+      "ink": "#11110f",
+      "accent": "#b82e00",
+      "mutedPaper": "#616059",
+      "mutedInk": "#b5b4ac",
+      "ruleInk": "#5f5f59"
+    },
+    "type": {
+      "family": "SUIT",
+      "displayWeight": "700 800",
+      "bodyWeight": "400 700",
+      "trackingFloor": "-0.04em"
+    }
+  },
+  "surface": {
+    "mode": "experience",
+    "route": "/portfolio",
+    "signatureInteraction": "featured project replacement board"
+  }
+}
