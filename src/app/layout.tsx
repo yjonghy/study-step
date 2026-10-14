@@ -9,10 +9,10 @@ import GoogleAnalytics from "@src/components/analytics/google-analytics";
 
 export default function RootLayout({children}: any) {
     const pathName = usePathname()
-    const isImmersivePage = pathName.startsWith("/three") || pathName.startsWith("/memory-quest")
+    const isImmersivePage = pathName.startsWith("/three") || pathName.startsWith("/memory-quest") || pathName.startsWith("/portfolio") || pathName.startsWith("/im-not-ai")
     const queryClient = new QueryClient();
     return (
-        <html lang="en">
+        <html lang="ko">
             <QueryClientProvider client={queryClient}>
                 <RecoilRoot>
                     <Toast/>
