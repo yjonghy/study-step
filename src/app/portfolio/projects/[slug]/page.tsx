@@ -56,9 +56,20 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     <p className={styles.summary}>{project.summary}</p>
                 </section>
 
+                <section className={styles.overview} aria-labelledby="overview-title">
+                    <h2 id="overview-title">프로젝트 한눈에 보기</h2>
+                    <dl>
+                        <div><dt>무엇을 만들었나</dt><dd>{project.overview.product}</dd></div>
+                        <div><dt>어떤 과제였나</dt><dd>{project.overview.challenge}</dd></div>
+                        <div><dt>어떻게 기여했나</dt><dd>{project.overview.contribution}</dd></div>
+                    </dl>
+                </section>
+
                 <section className={styles.flowSection} aria-labelledby="flow-title">
                     <div className={styles.sectionLabel} id="flow-title">프로젝트 흐름</div>
-                    <div className={styles.flow}>{project.flow.map((step, index) => <div key={step}><b>{String(index + 1).padStart(2, "0")}</b><span>{step}</span></div>)}</div>
+                    <div className={styles.flow} aria-label={`프로젝트 진행 순서: ${project.flow.join(" → ")}`}>
+                        {project.flow.map((step, index) => <div key={step}><b>{String(index + 1).padStart(2, "0")}</b><span>{step}</span></div>)}
+                    </div>
                 </section>
 
                 <section className={styles.role} aria-labelledby="role-title">
@@ -68,7 +79,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
                 <section className={styles.usage} aria-labelledby="usage-title">
                     <div className={styles.usageIntro}>
-                        <span>Product journey</span>
                         <h2 id="usage-title">프로덕트 사용 흐름</h2>
                         <p>사용자가 프로덕트에 진입한 뒤 핵심 목적을 달성하기까지의 실제 흐름입니다.</p>
                     </div>
@@ -80,6 +90,30 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                                 <p>{step.description}</p>
                             </div>
                         </li>)}
+                    </ol>
+                </section>
+
+                <section className={styles.systemMap} aria-labelledby="system-map-title">
+                    <div className={styles.systemMapIntro}>
+                        <h2 id="system-map-title">구조와 책임 경계</h2>
+                        <p>화면에서 시작한 사용 흐름이 상태와 업무 규칙을 거쳐 어떤 기술 기반으로 이어지는지 정리했습니다.</p>
+                    </div>
+                    <ol aria-label="프로젝트 구조: 사용자 접점에서 기술 기반까지">
+                        <li>
+                            <span>사용자·운영 접점</span>
+                            <strong>{project.usageFlow.slice(0, 2).map(step => step.title).join(" · ")}</strong>
+                            <p>{project.overview.product}</p>
+                        </li>
+                        <li>
+                            <span>상태·업무 흐름</span>
+                            <strong>{project.flow.join(" → ")}</strong>
+                            <p>{project.overview.contribution}</p>
+                        </li>
+                        <li>
+                            <span>기술·데이터 경계</span>
+                            <strong>{project.stack.slice(0, 4).join(" · ")}</strong>
+                            <p>{project.techDetails[0].purpose}</p>
+                        </li>
                     </ol>
                 </section>
 
