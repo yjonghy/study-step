@@ -12,3 +12,82 @@
 @media(max-width:900px){.header{height:70px;padding:0 20px;grid-template-columns:1fr auto}.header nav{gap:18px}.header nav a:first-child,.header>span{display:none}.hero{padding:70px 20px 60px;grid-template-columns:1fr}.hero h1{font-size:clamp(3rem,12vw,5rem)}.meta{margin-top:46px}.summary{margin-top:60px}.flowSection{padding:32px 20px 52px}.flow{grid-template-columns:1fr 1fr}.flow div{min-height:130px}.flow div:nth-child(2){border-right:0}.flow div:nth-child(-n+2){border-bottom:1px solid #5f5f59}.flow div:nth-child(3){border-left:1px solid #5f5f59}.role{padding:80px 20px;grid-template-columns:1fr;gap:28px}.usage{padding:90px 20px;grid-template-columns:1fr;gap:52px}.usageIntro p{max-width:48ch}.story{grid-template-columns:1fr;padding:90px 20px 110px}.story aside{position:static}.story aside ul{display:flex;flex-wrap:wrap;border-top:0;gap:8px}.story aside li{padding:6px 10px;border:1px solid rgba(17,17,15,.3);font-size:12px}.narrative section+section{margin-top:80px}.outcomes{padding:50px 20px}.projectNav{grid-template-columns:1fr}.projectNav>a{min-height:190px;padding:32px 20px}.projectNav>a+a{border-left:0;border-top:1px solid #5f5f59}.footer{padding:30px 20px}}
 @media(max-width:520px){.hero h1{font-size:11vw}.summary{font-size:25px}.flow span{font-size:15px}.role p{font-size:25px}.usageIntro h2,.narrative h2{font-size:11vw}.usage li{grid-template-columns:36px minmax(0,1fr);gap:10px}.usage h3{font-size:19px}.usage li p{font-size:15px}.narrative li{grid-template-columns:36px 1fr;gap:10px}.narrative p{font-size:16px}.techDetails dl>div{grid-template-columns:1fr;gap:8px}.techDetails dt,.techDetails dd{font-size:15px}.projectNav strong{font-size:22px}.footer span{display:none}}
 @media(prefers-reduced-motion:reduce){.page *{scroll-behavior:auto!important;transition:none!important}}
+
+/* Plain-language summary uses the wider portfolio canvas before technical depth. */
+.overview{padding:0 4vw 110px}
+.overview>h2{margin:0 0 28px;color:var(--accent);font-size:13px}
+.overview dl{display:grid;grid-template-columns:repeat(3,1fr);margin:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink)}
+.overview dl>div{min-height:230px;padding:26px 30px 32px 0;display:flex;flex-direction:column;border-right:1px solid rgba(17,17,15,.28)}
+.overview dl>div+div{padding-left:30px}
+.overview dl>div:last-child{border-right:0}
+.overview dt{color:var(--accent);font-size:12px;font-weight:800}
+.overview dd{max-width:38ch;margin:auto 0 0;font-size:clamp(19px,1.65vw,25px);font-weight:750;line-height:1.55;letter-spacing:-.018em;word-break:keep-all}
+
+/* Project flow: a single progress trace makes the four-stage relationship explicit. */
+.flow{position:relative;overflow:hidden}
+.flow::after{content:"";position:absolute;z-index:3;left:0;right:0;top:5px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;animation:project-flow-trace .9s cubic-bezier(.16,1,.3,1) .15s both;pointer-events:none}
+.flow::before{content:"";position:absolute;z-index:4;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(184,46,0,.4);animation:project-flow-marker .9s cubic-bezier(.16,1,.3,1) .15s both;pointer-events:none}
+@keyframes project-flow-trace{to{transform:scaleX(1)}}
+@keyframes project-flow-marker{to{left:calc(100% - 11px)}}
+
+/* Usage journey: editorial columns connected by one animated route. */
+.usage ol{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:0;border-top:0}
+.usage ol::before,.usage ol::after{content:"";position:absolute;left:0;right:0;top:21px;height:1px;pointer-events:none}
+.usage ol::before{background:rgba(17,17,15,.28)}
+.usage ol::after{background:var(--accent);transform-origin:left}
+.usage li{position:relative;z-index:1;display:block;padding:0 28px 34px 0;border-bottom:1px solid rgba(17,17,15,.3)}
+.usage li+li{padding-left:28px}
+.usage li>span{width:42px;height:42px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(17,17,15,.38);border-radius:50%;background:var(--paper);color:var(--accent)}
+.usage li>div{padding-top:30px}
+.usage h3{min-height:2.9em}
+
+/* A code-native system map replaces unavailable product screenshots with evidence. */
+.systemMap{padding:120px 4vw;background:var(--ink);color:var(--paper)}
+.systemMapIntro{display:grid;grid-template-columns:minmax(240px,.65fr) minmax(0,1.35fr);gap:6vw;align-items:end;margin-bottom:54px}
+.systemMapIntro h2{max-width:520px;margin:0;font-size:clamp(2.4rem,4.8vw,5.4rem);line-height:1;letter-spacing:-.04em;word-break:keep-all}
+.systemMapIntro p{max-width:650px;margin:0;color:#b5b4ac;font-size:17px;line-height:1.9;word-break:keep-all}
+.systemMap ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);margin:0;padding:0;border-top:1px solid #5f5f59;border-bottom:1px solid #5f5f59}
+.systemMap li{position:relative;min-width:0;min-height:300px;padding:26px 38px 32px 0;display:flex;flex-direction:column;border-right:1px solid #5f5f59}
+.systemMap li+li{padding-left:38px}
+.systemMap li:last-child{border-right:0}
+.systemMap li:not(:last-child)::after{content:"";position:absolute;z-index:2;right:-10px;top:48%;width:18px;height:18px;border-top:1px solid var(--accent);border-right:1px solid var(--accent);background:var(--ink);transform:rotate(45deg)}
+.systemMap li>span{color:var(--accent);font-size:12px;font-weight:800}
+.systemMap strong{margin:auto 0 22px;font-size:clamp(20px,1.8vw,28px);line-height:1.45;letter-spacing:-.02em;word-break:keep-all}
+.systemMap li p{margin:0;color:#c7c6be;font-size:15px;line-height:1.85;word-break:keep-all}
+
+@supports (animation-timeline:view()){
+    .usage ol::after{animation:usage-route linear both;animation-timeline:view();animation-range:entry 12% cover 48%}
+    .usage li{animation:usage-step .55s cubic-bezier(.16,1,.3,1) both;animation-timeline:view();animation-range:entry 10% cover 28%}
+}
+@keyframes usage-route{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes usage-step{from{opacity:.45;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+@media(max-width:900px){
+    .overview{padding:0 20px 80px}
+    .overview dl{grid-template-columns:1fr}
+    .overview dl>div,.overview dl>div+div{min-height:auto;padding:24px 0 28px;border-right:0;border-bottom:1px solid rgba(17,17,15,.28)}
+    .overview dl>div:last-child{border-bottom:0}
+    .overview dd{max-width:60ch;margin:18px 0 0}
+    .usage ol{display:block}
+    .usage ol::before,.usage ol::after{top:0;bottom:0;left:21px;right:auto;width:1px;height:auto;transform-origin:top}
+    .usage li,.usage li+li{display:grid;grid-template-columns:58px minmax(0,1fr);gap:18px;padding:0 0 38px;border-bottom:0}
+    .usage li>div{padding-top:3px}
+    .usage h3{min-height:0}
+    .systemMap{padding:90px 20px}
+    .systemMapIntro{grid-template-columns:1fr;gap:24px;margin-bottom:44px}
+    .systemMap ol{grid-template-columns:1fr}
+    .systemMap li,.systemMap li+li{min-height:auto;padding:26px 0 34px;border-right:0;border-bottom:1px solid #5f5f59}
+    .systemMap li:last-child{border-bottom:0}
+    .systemMap li:not(:last-child)::after{right:auto;left:calc(50% - 9px);top:auto;bottom:-10px;transform:rotate(135deg)}
+    .systemMap strong{margin:34px 0 18px}
+    @supports (animation-timeline:view()){
+        .usage ol::after{animation-name:usage-route-mobile}
+    }
+}
+@keyframes usage-route-mobile{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@media(max-width:520px){.overview dd{font-size:19px}.usage li,.usage li+li{grid-template-columns:48px minmax(0,1fr);gap:12px}.usage li>span{width:42px;height:42px}.systemMapIntro h2{font-size:11vw}.systemMap strong{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.flow::after,.usage ol::after{transform:none;animation:none}.flow::before{display:none}.usage li{opacity:1;transform:none;animation:none}}
+
+/* Narrow Korean copy may otherwise become one unbreakable phrase. */
+.hero h1,.summary{overflow-wrap:anywhere}
+@media(max-width:520px){.header nav{gap:12px}.header nav a{font-size:12px}.summary{word-break:normal}}
