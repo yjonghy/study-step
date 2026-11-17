@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 function Workflow({ improved = false }: { improved?: boolean }) {
     const steps = improved
         ? [['리포트 선택', '웹에서 목록 조회'], ['미리보기 · 직접 수정', '검수자가 내용 반영'], ['최종 PDF 확인', '재산출 후 확인']]
-        : [['엑셀로 검수', 'DB 내용을 변환'], ['PDF 확인', '출력 후 오류 발견'], ['개발자에게 요청', 'DB 수정과 응답 대기'], ['PDF 다시 생성', '수정 결과 재확인']]
-    return <figure className={`${styles.workflow} ${improved ? styles.improved : ''}`}>
-        <figcaption>{improved ? '개선 후' : '개선 전'}<span>{improved ? '검수자가 직접 완료' : '수정할 때마다 개발자에게 인계'}</span></figcaption>
+        : [['면접 녹음 → STT 변환', '음성을 텍스트로 변환'], ['STT를 엑셀에 표시', '검수할 원문 준비'], ['STT 기반 AI 분석', '면접 피드백 레터 생성'], ['Python으로 PDF 생성', '분석부터 PDF까지 하나의 파이프라인'], ['결과물 PDF 검수', '피드백 내용과 출력물 확인'], ['문제가 있으면 STT 재검수', '엑셀의 STT와 PDF 결과를 오가며 확인'], ['개발자에게 재요청', '수정·재생성 요청 후 결과물 다시 검수']]
+    return <figure className={`${styles.workflow} ${improved ? styles.improved : styles.original}`}>
+        <figcaption>{improved ? '개선 후 · 웹 검수 흐름' : '개선 전 · 피드백 레터 전체 흐름'}<span>{improved ? '분석 결과를 웹으로 연결해 검수자가 직접 완료' : '엑셀과 PDF를 오가며 확인하고, 개발자에게 다시 요청'}</span></figcaption>
         <ol>{steps.map(([title, detail]) => <li key={title}><strong>{title}</strong><span>{detail}</span></li>)}</ol>
     </figure>
 }
@@ -30,8 +30,8 @@ export default function InterviewFeedbackPage() {
 
             <section className={styles.section} aria-labelledby="discovery">
                 <h2 id="discovery">대화에서 발견한 문제</h2>
-                <p>검수팀은 녹음 분석 결과를 엑셀로 확인하고 있었습니다. 실제 출력물은 Python 파이프라인에서 PDF를 생성한 뒤에야 볼 수 있었습니다.</p>
-                <p>PDF에서 오류를 발견하면 개발자에게 DB 수정을 요청했습니다. 개발자의 응답을 기다리고, PDF를 다시 생성한 뒤 확인하는 과정이 수정할 때마다 반복됐습니다.</p>
+                <p>기존에는 면접 녹음을 STT로 변환해 엑셀에 표시하고, STT를 토대로 AI가 면접 피드백 레터를 생성했습니다. <strong>Python 파이프라인이 분석부터 PDF 생성까지 담당</strong>했습니다.</p>
+                <p>검수팀은 완성된 PDF를 확인했습니다. 내용에 문제가 있으면 엑셀에 표시된 STT를 검수하고 PDF 결과를 다시 대조한 뒤, 개발자에게 수정을 재요청했습니다. <strong>원문 확인은 엑셀, 결과 확인은 PDF, 수정·재생성은 개발자 요청</strong>으로 나뉜 흐름이 반복됐습니다.</p>
                 <blockquote>내용을 가장 잘 아는 검수자가<br />직접 수정할 수 있으면 어떨까?</blockquote>
                 <p>기존 프로세스를 알게 된 뒤 먼저 개선을 건의하고 선개발을 시작했습니다. 검수팀과 수정 항목, 기능 우선순위, 실제 작업 순서를 함께 정리했습니다.</p>
                 <Workflow />
@@ -40,6 +40,7 @@ export default function InterviewFeedbackPage() {
             <section className={styles.section} aria-labelledby="implementation">
                 <h2 id="implementation">검수부터 최종 확인까지 한 흐름으로</h2>
                 <p>웹 검수 Admin에 <strong>리포트 목록, 출력 미리보기, 내용 수정</strong>을 연결했습니다. 검수자가 개발자에게 요청하지 않고 수정과 재산출을 완료하는 것이 목표였습니다.</p>
+                <p>분석과 PDF 생성이 묶여 있던 기존 구조에서 책임을 나눴습니다. <strong>Python은 녹음 분석과 DB 저장</strong>을 맡고, <strong>웹은 분석 결과 조회·검수·수정과 출력 확인</strong>을 맡도록 설계했습니다. 분석 결과를 저장한 뒤 웹에서 검수하고 최종 PDF를 확인하는 흐름으로 간소화했습니다.</p>
                 <Workflow improved />
                 <figure className={styles.mockup}>
                     <div className={styles.mockupBar}><strong>리포트 검수 Admin</strong><span>설명용 재구성</span></div>
@@ -60,7 +61,7 @@ export default function InterviewFeedbackPage() {
             <section className={styles.section} aria-labelledby="result">
                 <h2 id="result">실제 수정 업무에서 확인한 변화</h2>
                 <p>운영 회고상 전체 검수 대상의 약 <strong>10~20%에서 수정이 필요</strong>했습니다. 반복되던 개발자 요청과 PDF 재생성 흐름을 통합하면서 수정과 최종 확인에 걸리는 시간이 줄었습니다.</p>
-                <div className={styles.comparison}><div><span>이전</span><strong>약 1시간</strong><p>개발자 응답 대기<br />DB 수정 · PDF 재생성 · 확인</p></div><div><span>개선 후</span><strong>약 5~10분</strong><p>검수자가 직접 수정<br />최종 PDF 생성 · 확인</p></div></div>
+                <div className={styles.comparison}><div><span>이전</span><strong>약 1시간</strong><p>엑셀 STT · PDF 대조 후 개발자 재요청<br />수정 · 재생성 대기 · 결과 확인</p></div><div><span>개선 후</span><strong>약 5~10분</strong><p>웹에서 검수자가 직접 수정<br />최종 PDF 생성 · 확인</p></div></div>
                 <p className={styles.caption}>100건 기준 복수 리포트 수정 작업의 운영 회고입니다. 처리 건수에 따라 시간이 달라집니다. 동일 조건의 통제 실험 결과는 아닙니다.</p>
                 <p>시간 단축과 함께 달라진 점은 <strong>검수자가 직접 업무를 끝낼 수 있게 됐다</strong>는 것입니다. 개발자에게 수정 요청을 전달하고 기다리던 과정을 줄였습니다.</p>
             </section>
