@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 function Workflow({ improved = false }: { improved?: boolean }) {
     const steps = improved
-        ? [['리포트 선택', '웹에서 목록 조회'], ['미리보기 · 직접 수정', '검수자가 내용 반영'], ['최종 PDF 확인', '재산출 후 확인']]
+        ? [['면접 녹음 → STT 변환', '음성을 텍스트로 변환'], ['STT 기반 AI 분석 · DB 저장', 'Python에서 분석 결과 저장'], ['웹에서 리포트 조회', '목록에서 검수할 결과 선택'], ['미리보기 · 검수 · 직접 수정', '검수자가 웹에서 내용 확인·반영'], ['최종 PDF 생성 · 확인', '수정한 결과로 최종 출력물 확인']]
         : [['면접 녹음 → STT 변환', '음성을 텍스트로 변환'], ['STT를 엑셀에 표시', '검수할 원문 준비'], ['STT 기반 AI 분석', '면접 피드백 레터 생성'], ['Python으로 PDF 생성', '분석부터 PDF까지 하나의 파이프라인'], ['결과물 PDF 검수', '피드백 내용과 출력물 확인'], ['문제가 있으면 STT 재검수', '엑셀의 STT와 PDF 결과를 오가며 확인'], ['개발자에게 재요청', '수정·재생성 요청 후 결과물 다시 검수']]
-    return <figure className={`${styles.workflow} ${improved ? styles.improved : styles.original}`}>
-        <figcaption>{improved ? '개선 후 · 웹 검수 흐름' : '개선 전 · 피드백 레터 전체 흐름'}<span>{improved ? '분석 결과를 웹으로 연결해 검수자가 직접 완료' : '엑셀과 PDF를 오가며 확인하고, 개발자에게 다시 요청'}</span></figcaption>
-        <ol>{steps.map(([title, detail]) => <li key={title}><strong>{title}</strong><span>{detail}</span></li>)}</ol>
+    return <figure className={`${styles.workflow} ${styles.original} ${improved ? styles.improved : ''}`}>
+        <figcaption>{improved ? '개선 후 · 피드백 레터 전체 흐름' : '개선 전 · 피드백 레터 전체 흐름'}<span>{improved ? 'Python의 분석·저장 이후, 웹에서 검수부터 최종 확인까지 연결' : '엑셀과 PDF를 오가며 확인하고, 개발자에게 다시 요청'}</span></figcaption>
+        <ol>{steps.map(([title, detail], index) => <li key={title} className={improved && index >= 2 ? styles.webStep : undefined}><strong>{title}</strong><span>{detail}</span></li>)}</ol>
     </figure>
 }
 
@@ -25,7 +25,7 @@ export default function InterviewFeedbackPage() {
                 <p className={styles.context}>면접 피드백 리포트 시스템</p>
                 <h1>검수자가 직접 고칠 수 있게,<br />반복되는 요청을 줄였습니다.</h1>
                 <p className={styles.intro}>타부서 팀원과의 대화에서 불편한 검수 과정을 알게 됐습니다.<br className={styles.desktopBreak} /> 먼저 개선을 건의하고 선개발한 뒤, 실제 업무에서 결과를 확인했습니다.</p>
-                <div className={styles.outcome}><div><span>복수 리포트 수정·재산출 시간</span><p><span>약 1시간</span><b aria-label="에서">→</b><strong>약 5~10분</strong></p></div><p>100건 기준 운영 회고<br />처리 건수에 따라 소요 시간은 달라집니다.</p></div>
+                <div className={styles.outcome}><div><span>수정 대상 약 10~20건의 수정·재산출 시간</span><p><span>약 1시간</span><b aria-label="에서">→</b><strong>약 5~10분</strong></p></div><p>전체 리포트 100건 중 수정 대상 기준<br />운영 회고 · 처리 건수에 따라 변동</p></div>
             </header>
 
             <section className={styles.section} aria-labelledby="discovery">
@@ -40,7 +40,8 @@ export default function InterviewFeedbackPage() {
             <section className={styles.section} aria-labelledby="implementation">
                 <h2 id="implementation">검수부터 최종 확인까지 한 흐름으로</h2>
                 <p>웹 검수 Admin에 <strong>리포트 목록, 출력 미리보기, 내용 수정</strong>을 연결했습니다. 검수자가 개발자에게 요청하지 않고 수정과 재산출을 완료하는 것이 목표였습니다.</p>
-                <p>분석과 PDF 생성이 묶여 있던 기존 구조에서 책임을 나눴습니다. <strong>Python은 녹음 분석과 DB 저장</strong>을 맡고, <strong>웹은 분석 결과 조회·검수·수정과 출력 확인</strong>을 맡도록 설계했습니다. 분석 결과를 저장한 뒤 웹에서 검수하고 최종 PDF를 확인하는 흐름으로 간소화했습니다.</p>
+                <p>분석과 PDF 생성이 묶여 있던 기존 구조에서 책임을 나눴습니다. <strong>Python은 녹음 분석과 DB 저장</strong>을, <strong>웹은 결과 조회·검수·수정과 출력 확인</strong>을 맡도록 설계했습니다.</p>
+                <p>STT 변환과 AI 분석은 유지하면서, 그 이후의 검수 흐름을 바꿨습니다. <strong>검수팀이 내용을 직접 수정하고 최종 PDF까지 확인</strong>할 수 있도록 연결했습니다.</p>
                 <Workflow improved />
                 <figure className={styles.mockup}>
                     <div className={styles.mockupBar}><strong>리포트 검수 Admin</strong><span>설명용 재구성</span></div>
@@ -60,9 +61,9 @@ export default function InterviewFeedbackPage() {
 
             <section className={styles.section} aria-labelledby="result">
                 <h2 id="result">실제 수정 업무에서 확인한 변화</h2>
-                <p>운영 회고상 전체 검수 대상의 약 <strong>10~20%에서 수정이 필요</strong>했습니다. 반복되던 개발자 요청과 PDF 재생성 흐름을 통합하면서 수정과 최종 확인에 걸리는 시간이 줄었습니다.</p>
+                <p>운영 회고상 전체 검수 대상의 약 <strong>10~20%에서 수정이 필요</strong>했습니다. 전체 리포트 100건 중 수정 대상 약 10~20건을 처리할 때, 개발자 응답과 재생성 대기를 포함해 약 1시간 걸리던 작업을 웹에서 직접 수정하고 최종 PDF를 확인하는 약 5~10분의 흐름으로 줄였습니다.</p>
                 <div className={styles.comparison}><div><span>이전</span><strong>약 1시간</strong><p>엑셀 STT · PDF 대조 후 개발자 재요청<br />수정 · 재생성 대기 · 결과 확인</p></div><div><span>개선 후</span><strong>약 5~10분</strong><p>웹에서 검수자가 직접 수정<br />최종 PDF 생성 · 확인</p></div></div>
-                <p className={styles.caption}>100건 기준 복수 리포트 수정 작업의 운영 회고입니다. 처리 건수에 따라 시간이 달라집니다. 동일 조건의 통제 실험 결과는 아닙니다.</p>
+                <p className={styles.caption}>전체 리포트 100건 중 수정이 필요한 약 10~20건의 수정·재산출·최종 확인에 걸린 시간입니다. 전체 100건의 검수 시간과는 구분되며, 운영 회고 기준으로 처리 건수에 따라 달라집니다. 동일 조건의 통제 실험 결과는 아닙니다.</p>
                 <p>시간 단축과 함께 달라진 점은 <strong>검수자가 직접 업무를 끝낼 수 있게 됐다</strong>는 것입니다. 개발자에게 수정 요청을 전달하고 기다리던 과정을 줄였습니다.</p>
             </section>
 
